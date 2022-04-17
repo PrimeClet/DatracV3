@@ -36,10 +36,10 @@ class LoginController extends Controller
           case 'SuperAdmin':
             return '/dashboard/superadmin';
             break;
-          /*case 'Superadmin':
-            return '/dashboard/superadmin';
+          case 'AdminEtablissement':
+            return '/dashboard/adminetablissement';
             break;
-          case 'Admin':
+          /*case 'Admin':
             return '/dashboard/admin';
             break;
           case 'Operateur':
@@ -47,7 +47,7 @@ class LoginController extends Controller
             break;
           case 'Client':
             return '/dashboard/client';
-             break;*/ 
+             break;*/
 
           default:
             return '/'; 

@@ -27,9 +27,9 @@ class RedirectIfAuthenticated
                 // Redirection
                 return redirect()->route('dashSuperAdmin');
                 break;
-              //case 'Superadmin':
+              case 'AdminEtablissement':
                 // Redirection
-                //return redirect()->route('dashSuperAdmin');
+                return redirect()->route('dashAdminEtablissement');
                 //break;
               //case 'Admin':
                 // Redirection

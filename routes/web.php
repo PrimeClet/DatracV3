@@ -71,6 +71,30 @@ Route::middleware(['auth'])->group(function() {
 
 
 
+    Route::get('dashboard/superadmin/nos-examens', 'SuperAdminController@dashSuperAdminExamens')->name('dashSuperAdminExamens');
+    Route::post('dashboard/superadmin/nouvel-examen', 'SuperAdminController@newExamenSuperAdmin')->name('newExamenSuperAdmin');
+    Route::get('dashboard/superadmin/show-examen/{id}', 'SuperAdminController@showExamenSuperAdmin')->name('showExamenSuperAdmin');
+    Route::get('dashboard/superadmin/edit-examen/{id}', 'SuperAdminController@editExamenSuperAdmin')->name('editExamenSuperAdmin');
+    Route::post('dashboard/superadmin/update-examen', 'SuperAdminController@updateExamenSuperAdmin')->name('updateExamenSuperAdmin');
+
+    Route::get('dashboard/superadmin/nos-prestations', 'SuperAdminController@dashSuperAdminPrestations')->name('dashSuperAdminPrestations');
+    Route::post('dashboard/superadmin/nouvel-prestation', 'SuperAdminController@newPrestationSuperAdmin')->name('newPrestationSuperAdmin');
+    Route::get('dashboard/superadmin/show-prestation/{id}', 'SuperAdminController@showPrestationSuperAdmin')->name('showPrestationSuperAdmin');
+    Route::get('dashboard/superadmin/edit-prestation/{id}', 'SuperAdminController@editPrestationSuperAdmin')->name('editPrestationSuperAdmin');
+    Route::post('dashboard/superadmin/update-prestation', 'SuperAdminController@updatePrestationSuperAdmin')->name('updatePrestationSuperAdmin');
+
+    Route::get('dashboard/superadmin/nos-villes', 'SuperAdminController@dashSuperAdminVilles')->name('dashSuperAdminVilles');
+    Route::post('dashboard/superadmin/nouvel-ville', 'SuperAdminController@newVilleSuperAdmin')->name('newVilleSuperAdmin');
+    Route::get('dashboard/superadmin/show-ville/{id}', 'SuperAdminController@showVilleSuperAdmin')->name('showVilleSuperAdmin');
+    Route::get('dashboard/superadmin/edit-ville/{id}', 'SuperAdminController@editVilleSuperAdmin')->name('editVilleSuperAdmin');
+    Route::post('dashboard/superadmin/update-ville', 'SuperAdminController@updateVilleSuperAdmin')->name('updateVilleSuperAdmin');
+
+    Route::get('dashboard/superadmin/nos-specialites', 'SuperAdminController@dashSuperAdminSpecialites')->name('dashSuperAdminSpecialites');
+    Route::post('dashboard/superadmin/nouvel-specialite', 'SuperAdminController@newSpecialiteSuperAdmin')->name('newSpecialiteSuperAdmin');
+    Route::get('dashboard/superadmin/show-specialite/{id}', 'SuperAdminController@showSpecialiteSuperAdmin')->name('showSpecialiteSuperAdmin');
+    Route::get('dashboard/superadmin/edit-specialite/{id}', 'SuperAdminController@editSpecialiteSuperAdmin')->name('editSpecialiteSuperAdmin');
+    Route::post('dashboard/superadmin/update-specialite', 'SuperAdminController@updateSpecialiteSuperAdmin')->name('updateSpecialiteSuperAdmin');
+
     /* End Routing for SuperAdmin's User */
 
     ##############################################################################################
@@ -79,6 +103,22 @@ Route::middleware(['auth'])->group(function() {
     #                                                                                            #
     ##############################################################################################
 
+    ##############################################################################################
+    #                                                                                            #
+    #                                  AdminEtablissement ROUTING                                #
+    #                                                                                            #
+    ##############################################################################################
+
+    /* Start Routing for SuperAdmin's User */
+    Route::get('dashboard/adminetablissement', 'AdminEtablissementController@dashAdminEtablissement')->name('dashAdminEtablissement');
+
+    /* End Routing for SuperAdmin's User */
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  AdminEtablissement ROUTING                                #
+    #                                                                                            #
+    ##############################################################################################
 
 });
 
