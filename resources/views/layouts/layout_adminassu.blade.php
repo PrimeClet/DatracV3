@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Dashboard - DATRAC</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -159,7 +159,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('dashAdminEtablissement') }}">
+        <a class="nav-link " href="{{ route('dashAdminAssurance') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -172,44 +172,61 @@
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="">
-              <i class="bi bi-circle"></i><span>Agents Etablissemnts</span>
+              <i class="bi bi-circle"></i><span>Agents Assurances</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>Assurés</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>Ayant-Droit</span>
             </a>
           </li>
         </ul>
       </li><!-- End Components Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceActes') }}">
           <i class="bi bi-person"></i>
-          <span>Emploi du Temps</span>
+          <span>Actes</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceAffections') }}">
+          <i class="bi bi-person"></i>
+          <span>Affections</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementAppareillages') }}">
+        <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceAppareillages') }}">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Appareillages</span>
         </a>
       </li><!-- End Login Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementMedicaments') }}">
+        <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceMedicaments') }}">
           <i class="bi bi-dash-circle"></i>
           <span>Médicaments</span>
         </a>
       </li><!-- End Error 404 Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementExamens') }}">
+        <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceExamens') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Examens</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementPrestations') }}">
+        <a class="nav-link collapsed" href="{{ route('dashAdminAssurancePrestations') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Prestations</span>
         </a>

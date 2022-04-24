@@ -49,10 +49,10 @@ class RegisterController extends Controller
           case 'AdminEtablissement':
             return '/dashboard/adminetablissement';
             break;
-          /*case 'Admin':
-            return '/dashboard/admin';
+          case 'AdminAssurance':
+            return '/dashboard/adminassurance';
             break;
-          case 'Operateur':
+          /*case 'Operateur':
             return '/dashboard/operateur';
             break;
           case 'Client':

@@ -192,21 +192,21 @@
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('dashSuperAdminActes') }}">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminActe') }}">
           <i class="bi bi-envelope"></i>
           <span>Actes</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminAffection') }}">
           <i class="bi bi-card-list"></i>
           <span>Affections</span>
         </a>
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminAppareillage') }}">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Appareillages</span>
         </a>
@@ -220,28 +220,28 @@
       </li><!-- End Error 404 Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminExamen') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Examens</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminPrestation') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Prestations</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminVille') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Villes</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminSpecialite') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Spécialités</span>
         </a>

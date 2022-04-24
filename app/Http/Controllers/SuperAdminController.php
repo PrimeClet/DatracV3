@@ -401,7 +401,7 @@ class SuperAdminController extends Controller
     {
 
     	$ville_id = $request->input('ville_id');
-    	$new_ville = Prestations::find($ville_id);
+    	$new_ville = Villes::find($ville_id);
 
     	// Get new data 
         $new_ville->libelle = $request->input('libelle');
