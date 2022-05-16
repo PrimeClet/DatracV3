@@ -22,6 +22,8 @@ Route::get('/', function () {
 });
 /* Fin routage vers accueil */
 
+/* Lien pour se déconnecter */
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 /* route du site */
 
@@ -32,6 +34,50 @@ Route::post('deconnexion/', 'SiteController@logout')->name('logout');
 
 
 Route::middleware(['auth'])->group(function() {
+
+    	/* Les routes du système seront enumérés ici ! */
+
+	/* Les routes du root seront enumérés ici ! */
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  ROOT ROUTING                                              #
+    #                                                                                            #
+    ##############################################################################################
+	
+    /* Start Routing for Root's User */
+    Route::get('dashboard/superadmin', 'SuperAdminController@dashboardSuperAdmin')->name('dashboardSuperAdmin');
+
+    // Gestion du compte
+    Route::get('dashboard/superadmin/profil', 'SuperAdminController@profilSuperAdmin')->name('profilSuperAdmin');
+    Route::post('dashboard/superadmin/modifier-profil', 'SuperAdminController@updateProfilSuperAdmin')->name('updateProfilSuperAdmin');
+    Route::post('dashboard/superadmin/modifier-mot-de-passe', 'SuperAdminController@updateMotDePasseSuperAdmin')->name('updateMotDePasseSuperAdmin');
+
+
+     // Gestion des Super Administrateurs
+    Route::get('dashboard/superadmin/superadmins', 'SuperAdminController@dashSuperAdminSuper')->name('dashSuperAdminSuper');
+    Route::post('dashboard/superadmin/update-superadmin/', 'SuperAdminController@updateSuperAdminSuper')->name('updateSuperAdminSuper');
+    Route::post('dashboard/superadmin/nouvel-superadmin', 'SuperAdminController@newSuperAdminSuper')->name('newSuperAdminSuper');
+    Route::get('dashboard/superadmin/show-superadmin/{id}', 'SuperAdminController@showSuperSuperAdmin')->name('showSuperSuperAdmin');
+    Route::get('dashboard/superadmin/edit-superadmin/{id}', 'SuperAdminController@editSuperSuperAdmin')->name('editSuperSuperAdmin');
+    Route::post('dashboard/superadmin/delete-superadmin/{id}', 'SuperAdminController@deleteSuperSuperAdmin')->name('deleteSuperSuperAdmin');
+
+    // Gestion des Administrateurs Etablissement
+    Route::get('dashboard/superadmin/adminetablissements', 'SuperAdminController@dashSuperAdminEtab')->name('dashSuperAdminEtab');
+    Route::post('dashboard/superadmin/update-adminetablissement/', 'SuperAdminController@updateSuperAdminEtab')->name('updateSuperAdminEtab');
+    Route::post('dashboard/superadmin/nouvel-adminetablissement', 'SuperAdminController@newSuperAdminEtab')->name('newSuperAdminEtab');
+    Route::get('dashboard/superadmin/show-adminetablissement/{id}', 'SuperAdminController@showEtabSuperAdmin')->name('showEtabSuperAdmin');
+    Route::get('dashboard/superadmin/edit-adminetablissement/{id}', 'SuperAdminController@editEtabSuperAdmin')->name('editEtabSuperAdmin');
+    Route::post('dashboard/superadmin/delete-adminetablissement/{id}', 'SuperAdminController@deleteEtabSuperAdmin')->name('deleteEtabSuperAdmin');
+
+    // Gestion des Administrateurs Assurance
+    Route::get('dashboard/superadmin/adminassurances', 'SuperAdminController@dashSuperAdminAssu')->name('dashSuperAdminAssu');
+    Route::post('dashboard/superadmin/update-adminassurance/', 'SuperAdminController@updateSuperAdminAssu')->name('updateSuperAdminAssu');
+    Route::post('dashboard/superadmin/nouvel-adminassurance', 'SuperAdminController@newSuperAdminAssu')->name('newSuperAdminAssu');
+    Route::get('dashboard/superadmin/show-adminassurance/{id}', 'SuperAdminController@showAssuSuperAdmin')->name('showAssuSuperAdmin');
+    Route::get('dashboard/superadmin/edit-adminassurance/{id}', 'SuperAdminController@editAssuSuperAdmin')->name('editEtabSuperAdmin');
+    Route::post('dashboard/superadmin/delete-adminassurance/{id}', 'SuperAdminController@deleteAssuSuperAdmin')->name('deleteAssuSuperAdmin');
+
 
     ##############################################################################################
     #                                                                                            #
@@ -77,13 +123,6 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/superadmin/edit-examen/{id}', 'SuperAdminController@editExamenSuperAdmin')->name('editExamenSuperAdmin');
     Route::post('dashboard/superadmin/update-examen', 'SuperAdminController@updateExamenSuperAdmin')->name('updateExamenSuperAdmin');
 
-    /* CRUD Prestations */
-    Route::get('dashboard/superadmin/nos-prestations', 'SuperAdminController@dashSuperAdminPrestations')->name('dashSuperAdminPrestations');
-    Route::post('dashboard/superadmin/nouvel-prestation', 'SuperAdminController@newPrestationSuperAdmin')->name('newPrestationSuperAdmin');
-    Route::get('dashboard/superadmin/show-prestation/{id}', 'SuperAdminController@showPrestationSuperAdmin')->name('showPrestationSuperAdmin');
-    Route::get('dashboard/superadmin/edit-prestation/{id}', 'SuperAdminController@editPrestationSuperAdmin')->name('editPrestationSuperAdmin');
-    Route::post('dashboard/superadmin/update-prestation', 'SuperAdminController@updatePrestationSuperAdmin')->name('updatePrestationSuperAdmin');
-
     /* CRUD Villes */
     Route::get('dashboard/superadmin/nos-villes', 'SuperAdminController@dashSuperAdminVilles')->name('dashSuperAdminVilles');
     Route::post('dashboard/superadmin/nouvel-ville', 'SuperAdminController@newVilleSuperAdmin')->name('newVilleSuperAdmin');
@@ -97,6 +136,27 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/superadmin/show-specialite/{id}', 'SuperAdminController@showSpecialiteSuperAdmin')->name('showSpecialiteSuperAdmin');
     Route::get('dashboard/superadmin/edit-specialite/{id}', 'SuperAdminController@editSpecialiteSuperAdmin')->name('editSpecialiteSuperAdmin');
     Route::post('dashboard/superadmin/update-specialite', 'SuperAdminController@updateSpecialiteSuperAdmin')->name('updateSpecialiteSuperAdmin');
+
+     /* CRUD Affections */
+     Route::get('dashboard/superadmin/nos-affections', 'SuperAdminController@dashSuperAdminAffections')->name('dashSuperAdminAffections');
+     Route::post('dashboard/superadmin/nouvel-affection', 'SuperAdminController@newAffectionSuperAdmin')->name('newAffectionSuperAdmin');
+     Route::get('dashboard/superadmin/show-affection/{id}', 'SuperAdminController@showAffectionSuperAdmin')->name('showAffectionSuperAdmin');
+     Route::get('dashboard/superadmin/edit-affection/{id}', 'SuperAdminController@editAffectionSuperAdmin')->name('editAffectionSuperAdmin');
+     Route::post('dashboard/superadmin/update-affection', 'SuperAdminController@updateAffectionSuperAdmin')->name('updateAffectionSuperAdmin');
+
+     /* CRUD Appareillages */
+     Route::get('dashboard/superadmin/nos-appareillages', 'SuperAdminController@dashSuperAdminAppareillages')->name('dashSuperAdminAppareillages');
+     Route::post('dashboard/superadmin/nouvel-appareillage', 'SuperAdminController@newAppareillageSuperAdmin')->name('newAppareillageSuperAdmin');
+     Route::get('dashboard/superadmin/show-appareillage/{id}', 'SuperAdminController@showAppareillageSuperAdmin')->name('showAppareillageSuperAdmin');
+     Route::get('dashboard/superadmin/edit-appareillage/{id}', 'SuperAdminController@editAppareillageSuperAdmin')->name('editAppareillageSuperAdmin');
+     Route::post('dashboard/superadmin/update-appareillage', 'SuperAdminController@updateAppareillageSuperAdmin')->name('updateAppareillageSuperAdmin');
+
+      /* CRUD Affections */
+      Route::get('dashboard/superadmin/nos-affections', 'SuperAdminController@dashSuperAdminAffections')->name('dashSuperAdminAffections');
+      Route::post('dashboard/superadmin/nouvel-affection', 'SuperAdminController@newAffectionSuperAdmin')->name('newAffectionSuperAdmin');
+      Route::get('dashboard/superadmin/show-affection/{id}', 'SuperAdminController@showAffectionSuperAdmin')->name('showAffectionSuperAdmin');
+      Route::get('dashboard/superadmin/edit-affection/{id}', 'SuperAdminController@editAffectionSuperAdmin')->name('editAffectionSuperAdmin');
+      Route::post('dashboard/superadmin/update-affection', 'SuperAdminController@updateAffectionSuperAdmin')->name('updateAffectionSuperAdmin');
 
     /* End Routing for SuperAdmin's User */
 
@@ -114,6 +174,20 @@ Route::middleware(['auth'])->group(function() {
 
     /* Start Routing for AdminEtablissement's User */
     Route::get('dashboard/adminetablissement', 'AdminEtablissementController@dashAdminEtablissement')->name('dashAdminEtablissement');
+
+    /* CRUD Agents */
+    Route::get('dashboard/adminetablissement/nos-agents', 'AdminEtablissementController@dashAdminEtablissementAgents')->name('dashAdminEtablissementAgents');
+    Route::post('dashboard/adminetablissement/nouvel-agent', 'AdminEtablissementController@newAgentAdminEtablissement')->name('newAgentAdminEtablissement');
+    Route::get('dashboard/adminetablissement/show-agent/{id}', 'AdminEtablissementController@showAgentAdminEtablissement')->name('showAgentAdminEtablissement');
+    Route::get('dashboard/adminetablissement/edit-agent/{id}', 'AdminEtablissementController@editAgentAdminEtablissement')->name('editAgentAdminEtablissement');
+    Route::post('dashboard/adminetablissement/update-agent', 'AdminEtablissementController@updateAgentAdminEtablissement')->name('updateAgentAdminEtablissement');
+
+    /* CRUD Praticiens */
+    Route::get('dashboard/adminetablissement/nos-praticiens', 'AdminEtablissementController@dashAdminEtablissementPraticiens')->name('dashAdminEtablissementPraticiens');
+    Route::post('dashboard/adminetablissement/nouvel-praticien', 'AdminEtablissementController@newPraticienAdminEtablissement')->name('newPraticienAdminEtablissement');
+    Route::get('dashboard/adminetablissement/show-praticien/{id}', 'AdminEtablissementController@showPraticienAdminEtablissement')->name('showPraticienAdminEtablissement');
+    Route::get('dashboard/adminetablissement/edit-praticien/{id}', 'AdminEtablissementController@editPraticienAdminEtablissement')->name('editPraticienAdminEtablissement');
+    Route::post('dashboard/adminetablissement/update-praticien', 'AdminEtablissementController@updatePraticienAdminEtablissement')->name('updatePraticienAdminEtablissement');
 
     /* CRUD Medicaments */
     Route::get('dashboard/adminetablissement/nos-medicaments', 'AdminEtablissementController@dashAdminEtablissementMedicaments')->name('dashAdminEtablissementMedicaments');

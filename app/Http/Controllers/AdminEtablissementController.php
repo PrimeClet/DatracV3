@@ -12,6 +12,7 @@ use App\Models\Etablissements;
 use App\Models\Medicament;
 use App\Models\Examens;
 use App\Models\Appareillages;
+use App\Models\Specialites;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,13 +35,107 @@ class AdminEtablissementController extends Controller
 
     	$page_title = "Tableau de bord";
 
-    	$adminetablissement_id = Auth::user()->id;
-    	$adminetablissement = User::find($adminetablissement_id);
+    	$user_id = Auth::user()->id;
+        $adminetablissement_id = Auth::user()->etablissement_id;
+    	$adminetablissement = User::find($user_id);
+        $adminetab = Etablissements::find($adminetablissement_id);
 
-	    return view('backend.adminetablissement.dashAdminEtablissement', compact('page_title'));
+        // Count users
+        $count_users = User::where('role', 'ManagerEtablissement')
+        ->orWhere('role', 'ComptableEtablissement')
+        ->orWhere('role', 'TiersPayantEtablissement')
+        ->orWhere('role', 'CaisseEtablissement')
+        ->orWhere('role', 'PharmacienEtablissement')
+        ->orWhere('role', 'PraticienEtablissement')
+        ->orWhere('role', 'InfirmierEtablissement')
+        ->orWhere('role', 'LaborantinEtablissement')
+        ->get()->count();
+
+        // Count examens
+        $count_examens = ExamenEtablissements::all()->count();
+
+        // Count prestations
+        $count_prestations = PrestationEtablissements::all()->count();
+
+        // Count appareillages
+        $count_appareillages = AppareillageEtablissements::all()->count();
+
+        // Count affections
+        $count_medicaments = MedicamentEtablissements::all()->count();
+
+	    return view('backend.adminetablissement.dashAdminEtablissement', compact('page_title', 'count_users', 'adminetab', 'count_examens', 'count_appareillages', 'count_medicaments', 'count_prestations'));
 
     }
 
+         /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkIfExistsEmail($email)
+    {
+
+        // Chercher l'utilisateur' correspondant à cet email
+        $email_exists = User::where('email', $email)->first();
+
+        // Retourner le resultat
+        return $email_exists;
+
+    }
+
+
+        	/* Les routes du root seront enumérés ici ! */
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  DASH ROUTING                                              #
+    #                                                                                            #
+    ##############################################################################################
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashAdminEtablissementAgents(Request $request)
+    {
+
+    	$page_title = "Nos Agents";
+
+    	$users = User::where('etablissement_id', Auth::user()->etablissement_id)
+                        ->Where(function ($query) {
+                            $query->where('role', 'ManagerEtablissement')
+                            ->orWhere('role', 'ComptableEtablissement')
+                            ->orWhere('role', 'TiersPayantEtablissement')
+                            ->orWhere('role', 'CaisseEtablissement');
+                        })->get();
+
+       // dd($users); 
+        $etablissements = Etablissements::all();
+
+        return view('backend.adminetablissement.dashAdminEtablissementAgents', compact('page_title', 'users', 'etablissements'));
+
+    }
+
+    public function dashAdminEtablissementPraticiens(Request $request)
+    {
+
+    	$page_title = "Nos Praticiens";
+
+    	$users = User::where('etablissement_id', Auth::user()->etablissement_id)
+                        ->Where(function ($query) {
+                            $query->where('role', 'PharmacienEtablissement')
+                            ->orWhere('role', 'PraticienEtablissement')
+                            ->orWhere('role', 'InfirmierEtablissement')
+                            ->orWhere('role', 'LaborantinEtablissement');
+                        })->get();
+
+        $etablissements = Etablissements::all();
+        $specialites = Specialites::all();
+
+        return view('backend.adminetablissement.dashAdminEtablissementAgents', compact('page_title', 'users', 'etablissements', 'specialites'));
+
+    }
 
      /**
      * Display a listing of the resource.
@@ -93,6 +188,125 @@ class AdminEtablissementController extends Controller
 
         return view('backend.adminetablissement.dashAdminEtablissementAppareillages', compact('page_title', 'appareillageEtablissements','appareillages'));
 
+    }
+
+    
+    	/* Les routes du root seront enumérés ici ! */
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  NEW ROUTING                                              #
+    #                                                                                            #
+    ##############################################################################################
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function newAgentAdminEtablissement(Request $request)
+    {
+        // Verifier si les mots de passe sont identiques
+         if($request->input('password') == $request->input('confirm_password')){    
+
+            $new_user = new User();
+
+            // Verification email
+            if($this->checkIfExistsEmail($request->input('email')) && $request->input('email') != $new_user->email){
+
+                // Redirection
+                return redirect()->back()->with('failed', 'Cet email existe déjà dans la base de données !');
+
+            }
+
+            // Get new data 
+            $new_user->name = $request->input('name');
+            $new_user->codeAgent = $request->input('codeAgent');
+            $new_user->email = $request->input('email'); 
+            $new_user->telephone = $request->input('telephone');
+            $new_user->adresse = $request->input('adresse');
+            $new_user->role = $request->input('role');
+            $new_user->etablissement_id = Auth::user()->etablissement_id;    
+            $new_user->password = Hash::make($request->input('password'));
+            $new_user->api_token = Str::random(100);
+            $new_user->active = 1;
+
+            if ($request->file('file') !== null) {
+                $file = $request->file('photo_url');
+    
+                if ($request->hasFile('photo_url')) {
+                    $path = public_path('assets/photos/agents/');
+                    // foreach ($files as $file) {
+                    $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
+    
+                    $location = '/photos/agents/'. $filename;
+                    $file->move($path, $filename);
+                    $new_user->photo_url = $location;
+                }
+            }
+
+            if($new_user->save()){
+
+                // Redirection
+                return redirect()->back()->with('success', 'Nouveau compte crée avec succès !');
+            }
+
+            // Redirection
+            return redirect()->back()->with('failed', 'Impossible de créer ce nouveau compte !');
+         }
+    }
+
+    public function newPraticienAdminEtablissement(Request $request)
+    {
+        // Verifier si les mots de passe sont identiques
+         if($request->input('password') == $request->input('confirm_password')){    
+
+            $new_user = new User();
+
+            // Verification email
+            if($this->checkIfExistsEmail($request->input('email')) && $request->input('email') != $new_user->email){
+
+                // Redirection
+                return redirect()->back()->with('failed', 'Cet email existe déjà dans la base de données !');
+
+            }
+
+            // Get new data 
+            $new_user->name = $request->input('name');
+            $new_user->codeAgent = $request->input('codeAgent');
+            $new_user->email = $request->input('email'); 
+            $new_user->telephone = $request->input('telephone');
+            $new_user->adresse = $request->input('adresse');
+            $new_user->role = $request->input('role');
+            $new_user->specialite_id = $request->input('specialite_id');
+            $new_user->etablissement_id = Auth::user()->etablissement_id;    
+            $new_user->password = Hash::make($request->input('password'));
+            $new_user->api_token = Str::random(100);
+            $new_user->active = 1;
+
+            if ($request->file('photo_url') !== null) {
+                $file = $request->file('photo_url');
+    
+                if ($request->hasFile('photo_url')) {
+                    $path = public_path('assets/photos/agents/');
+                    // foreach ($files as $file) {
+                    $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
+    
+                    $location = '/photos/agents/'. $filename;
+                    $file->move($path, $filename);
+                    $new_user->photo_url = $location;
+                }
+            }
+
+            if($new_user->save()){
+
+                // Redirection
+                return redirect()->back()->with('success', 'Nouveau compte crée avec succès !');
+            }
+
+            // Redirection
+            return redirect()->back()->with('failed', 'Impossible de créer ce nouveau compte !');
+         }
     }
 
 
@@ -181,6 +395,13 @@ class AdminEtablissementController extends Controller
 
     }
 
+            	/* Les routes du root seront enumérés ici ! */
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  UPDATE ROUTING                                              #
+    #                                                                                            #
+    ##############################################################################################
 
     /**
      * Display a listing of the resource.
@@ -231,6 +452,13 @@ class AdminEtablissementController extends Controller
 
     }
 
+            	/* Les routes du root seront enumérés ici ! */
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  UPDATE ROUTING                                              #
+    #                                                                                            #
+    ##############################################################################################
 
     /**
      * Display a listing of the resource.
@@ -281,13 +509,114 @@ class AdminEtablissementController extends Controller
 
     }
 
+            	/* Les routes du root seront enumérés ici ! */
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  UPDATE ROUTING                                              #
+    #                                                                                            #
+    ##############################################################################################
+
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateMedicamentAdminEtablissement(Request $request)
+    
+    public function updateAgentAdminEtablissement(Request $request)
+    {
+        // Recuperer l'utilisateur correspondante
+        $utilisateur = User::find($request->input('id'));
+
+        // Verification email
+        if($request->input('password') != $request->input('confirm_password')){
+
+            // Redirection
+            return redirect()->back()->with('failed', 'Les mots de passe ne sont pas identiques !');
+
+        }
+
+        // Préparer la requete
+        $utilisateur->name = $request->input('name');
+        $utilisateur->codeAgent = $request->input('codeAgent');
+        $utilisateur->telephone = $request->input('telephone');
+        $utilisateur->role = $request->input('role');
+        $utilisateur->adresse = $request->input('adresse');
+        $utilisateur->etablissement_id = Auth::user()->etablissement_id;
+        $utilisateur->password = Hash::make($request->input('password'));
+
+        if ($request->file('photo_url') !== null) {
+            $file = $request->file('photo_url');
+
+            if ($request->hasFile('photo_url')) {
+                $path = public_path('assets/photos/agents/');
+                // foreach ($files as $file) {
+                $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
+
+                $location = '/photos/agents/'. $filename;
+                $file->move($path, $filename);
+                $utilisateur->photo_url = $location;
+            }
+        }
+
+        // Sauvegarde
+        if($utilisateur->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Utilisateur modifié avec succès !');
+        }
+        return redirect()->back()->with('failed', 'Impossible de modifier cet utilisateur !');
+    }
+    
+        
+    public function updatePraticienAdminEtablissement(Request $request)
+    {
+        // Recuperer l'utilisateur correspondante
+        $utilisateur = User::find($request->input('id'));
+
+        // Verification email
+        if($request->input('password') != $request->input('confirm_password')){
+
+            // Redirection
+            return redirect()->back()->with('failed', 'Les mots de passe ne sont pas identiques !');
+
+        }
+
+        // Préparer la requete
+        $utilisateur->name = $request->input('name');
+        $utilisateur->codeAgent = $request->input('codeAgent');
+        $utilisateur->telephone = $request->input('telephone');
+        $utilisateur->role = $request->input('role');
+        $utilisateur->specialite_id = $request->input('specialite_id');
+        $utilisateur->adresse = $request->input('adresse');
+        $utilisateur->etablissement_id = Auth::user()->etablissement_id;
+        $utilisateur->password = Hash::make($request->input('password'));
+
+        if ($request->file('photo_url') !== null) {
+            $file = $request->file('photo_url');
+
+            if ($request->hasFile('photo_url')) {
+                $path = public_path('assets/photos/agents/');
+                // foreach ($files as $file) {
+                $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
+
+                $location = '/photos/agents/'. $filename;
+                $file->move($path, $filename);
+                $utilisateur->photo_url = $location;
+            }
+        }
+
+        // Sauvegarde
+        if($utilisateur->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Utilisateur modifié avec succès !');
+        }
+        return redirect()->back()->with('failed', 'Impossible de modifier cet utilisateur !');
+    }
+
+     public function updateMedicamentAdminEtablissement(Request $request)
     {
 
     	$medicamentEtablissement_id = $request->input('medicamentEtablissement_id');

@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{ route('dashSuperAdmin') }}" class="logo d-flex align-items-center">
+      <a href="{{ route('dashAdminEtablissement') }}" class="logo d-flex align-items-center">
         <img src="{{ URL::to('assets/img/logo.png') }}" alt="">
         <span class="d-none d-lg-block">DATRAC</span>
       </a>
@@ -171,12 +171,24 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="">
-              <i class="bi bi-circle"></i><span>Agents Etablissemnts</span>
+            <a href="{{ route('dashAdminEtablissementAgents') }}">
+              <i class="bi bi-circle"></i><span> Agents </span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('dashAdminEtablissementPraticiens') }}">
+              <i class="bi bi-circle"></i><span> Praticiens </span>
             </a>
           </li>
         </ul>
       </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="">
+          <i class="bi bi-person"></i>
+          <span>Assurance</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="">

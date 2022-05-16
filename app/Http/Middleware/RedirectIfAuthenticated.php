@@ -27,14 +27,49 @@ class RedirectIfAuthenticated
                 // Redirection
                 return redirect()->route('dashSuperAdmin');
                 break;
+              
               case 'AdminEtablissement':
                 // Redirection
                 return redirect()->route('dashAdminEtablissement');
                 //break;
-              //case 'Admin':
+              case 'ManagerEtablissement':
                 // Redirection
-                //return redirect()->route('dashAdmin');
+                return redirect()->route('dashManagerEtablissement');
                 //break;
+              case 'ComptableEtablissement':
+                // Redirection
+                return redirect()->route('dashComptableEtablissement');
+                //break;
+              case 'TiersPayantEtablissement':
+                // Redirection
+                return redirect()->route('dashTiersPayantEtablissement');
+                //break;
+              case 'CaisseEtablissement':
+                // Redirection
+                return redirect()->route('dashCaisseEtablissement');
+                //break;
+              case 'PharmacienEtablissement':
+                // Redirection
+                return redirect()->route('dashPharmacienEtablissement');
+                //break;
+              case 'PraticienEtablissement':
+                // Redirection
+                return redirect()->route('dashPraticienEtablissement');
+                //break;
+              case 'InfirmierEtablissement':
+                // Redirection
+                return redirect()->route('dashInfirmierEtablissement');
+                //break;
+              case 'LaborantinEtablissement':
+                // Redirection
+                return redirect()->route('dashLaborantinEtablissement');
+                //break;
+
+              case 'AdminAssurance':
+                // Redirection
+                return redirect()->route('dashAdminAssurance');
+                //break;
+
               //case 'Operateur':
                 // Redirection
                 //return redirect()->route('dashOperateur');

@@ -25,8 +25,13 @@
 	                  <tr>
 
 	                    <th scope="col">Id</th>
-						<th scope="col">Tarif structure</th>
-						<th scope="col">Prestation</th>
+						<th scope="col">Date Prestation</th>
+						<th scope="col">Visite à Domicile</th>
+						<th scope="col">Affection</th>
+						<th scope="col">Acte</th>
+						<th scope="col">Ticket Moderateur</th>
+						<th scope="col">Forfait Deplacement</th>
+						<th scope="col">Montant à Payer</th>
 						<th scope="col">Actions</th>
 
 	                  </tr>
@@ -37,8 +42,13 @@
                     	@foreach($prestationEtablissements as $prestationEtablissement)
                         <tr>
 							<td>{{ $prestationEtablissement->id }}</td>
-							<td>{{ $prestationEtablissement->tarif_structure }}</td>
-                            <td>{{ $prestationEtablissement->prestation_id }}</td>
+							<td>{{ $prestationEtablissement->datePrestation }}</td>
+                            <td>{{ $prestationEtablissement->visiteDomicile }}</td>
+							<td>{{ $prestationEtablissement->affectionAssurance_id }}</td>
+							<td>{{ $prestationEtablissement->acteAssurance_id }}</td>
+							<td>{{ $prestationEtablissement->ticketModerateur }}</td>
+							<td>{{ $prestationEtablissement->forfaitDeplacement }}</td>
+							<td>{{ $prestationEtablissement->montantPayer }}</td>
 							<td class="text-center">
 								<button class="btn btn-xs btn-primary">
 									<a href="{{ URL::to('dashboard/adminetablissement/show-prestation') }}/{{ $PrestationEtablissement->id }}">

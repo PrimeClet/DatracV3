@@ -84,7 +84,7 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">Libelle</label>
-											<input type="text" class="form-control" placeholder="cotation" name="libelle">
+											<input type="text" class="form-control" placeholder="libelle" name="libelle">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
