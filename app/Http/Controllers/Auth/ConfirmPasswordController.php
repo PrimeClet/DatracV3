@@ -65,19 +65,31 @@ class ConfirmPasswordController extends Controller
               return '/dashboard/laborantinetablissement';
               break;
 
-          case 'AdminAssurance':
-            return '/dashboard/adminassurance';
-            break;
-          /*case 'Operateur':
-            return '/dashboard/operateur';
-            break;
-          case 'Client':
-            return '/dashboard/client';
-             break;*/ 
+            case 'AdminAssurance':
+              return '/dashboard/adminassurance';
+              break;
+            case 'ManagerAssurance':
+              return '/dashboard/managerassurance';
+              break;
+            case 'ComptableAssurance':
+              return '/dashboard/comptableassurance';
+              break;
+            case 'TiersPayantAssurance':
+              return '/dashboard/tierspayantassurance';
+              break;
+            case 'AdminAssurance':
+              return '/dashboard/medecinassurance';
+              break;
+            /*case 'Operateur':
+              return '/dashboard/operateur';
+              break;
+            case 'Client':
+              return '/dashboard/client';
+              break;*/ 
 
-          default:
-            return '/'; 
-            break;
+            default:
+              return '/'; 
+              break;
         }
     }
 

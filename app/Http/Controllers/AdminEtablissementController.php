@@ -9,9 +9,11 @@ use App\Models\PrestationEtablissements;
 use App\Models\AppareillageEtablissements;
 use App\Models\Prestations;
 use App\Models\Etablissements;
+use App\Models\EtablissementAssurances;
 use App\Models\Medicament;
 use App\Models\Examens;
 use App\Models\Appareillages;
+use App\Models\Assurance;
 use App\Models\Specialites;
 
 use Illuminate\Http\Request;
@@ -63,7 +65,11 @@ class AdminEtablissementController extends Controller
         // Count affections
         $count_medicaments = MedicamentEtablissements::all()->count();
 
-	    return view('backend.adminetablissement.dashAdminEtablissement', compact('page_title', 'count_users', 'adminetab', 'count_examens', 'count_appareillages', 'count_medicaments', 'count_prestations'));
+        // Count affections
+        $count_assurances = EtablissementAssurances::all()->count();
+
+	    return view('backend.adminetablissement.dashAdminEtablissement', compact('page_title', 'count_users', 'adminetab', 'count_examens', 'count_appareillages', 
+        'count_medicaments', 'count_prestations', 'count_assurances'));
 
     }
 
@@ -133,7 +139,7 @@ class AdminEtablissementController extends Controller
         $etablissements = Etablissements::all();
         $specialites = Specialites::all();
 
-        return view('backend.adminetablissement.dashAdminEtablissementAgents', compact('page_title', 'users', 'etablissements', 'specialites'));
+        return view('backend.adminetablissement.dashAdminEtablissementPraticiens', compact('page_title', 'users', 'etablissements', 'specialites'));
 
     }
 
@@ -142,6 +148,20 @@ class AdminEtablissementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function dashAdminEtablissementAssurances(Request $request)
+    {
+
+    	$page_title = "Nos Assurances";
+
+    	$etablissementAssurances = EtablissementAssurances::all();
+        $assurances = Assurance::all();
+        $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
+
+        return view('backend.adminetablissement.dashAdminEtablissementAssurances', compact('page_title', 'etablissementAssurances','assurances', 'etablissements'));
+
+    }
+
     public function dashAdminEtablissementMedicaments(Request $request)
     {
 
@@ -149,8 +169,9 @@ class AdminEtablissementController extends Controller
 
     	$medicamentEtablissements = MedicamentEtablissements::all();
         $medicaments = Medicament::all();
+        $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
 
-        return view('backend.adminetablissement.dashAdminEtablissementMedicaments', compact('page_title', 'medicamentEtablissements','medicaments'));
+        return view('backend.adminetablissement.dashAdminEtablissementMedicaments', compact('page_title', 'medicamentEtablissements','medicaments', 'etablissements'));
 
     }
 
@@ -161,8 +182,9 @@ class AdminEtablissementController extends Controller
 
     	$prestationEtablissements = PrestationEtablissements::all();
         $prestations = Prestations::all();
+        $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
 
-        return view('backend.adminetablissement.dashAdminEtablissementPrestations', compact('page_title', 'prestationEtablissements','prestations'));
+        return view('backend.adminetablissement.dashAdminEtablissementPrestations', compact('page_title', 'prestationEtablissements','prestations', 'etablissements'));
 
     }
 
@@ -173,8 +195,9 @@ class AdminEtablissementController extends Controller
 
     	$examenEtablissements = ExamenEtablissements::all();
         $examens = Examens::all();
+        $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
 
-        return view('backend.adminetablissement.dashAdminEtablissementExamens', compact('page_title', 'examenEtablissements','examens'));
+        return view('backend.adminetablissement.dashAdminEtablissementExamens', compact('page_title', 'examenEtablissements','examens', 'etablissements'));
 
     }
 
@@ -185,8 +208,9 @@ class AdminEtablissementController extends Controller
 
     	$appareillageEtablissements = AppareillageEtablissements::all();
         $appareillages = Appareillages::all();
+        $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
 
-        return view('backend.adminetablissement.dashAdminEtablissementAppareillages', compact('page_title', 'appareillageEtablissements','appareillages'));
+        return view('backend.adminetablissement.dashAdminEtablissementAppareillages', compact('page_title', 'appareillageEtablissements','appareillages', 'etablissements'));
 
     }
 
@@ -315,6 +339,28 @@ class AdminEtablissementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function newAssuranceAdminEtablissement(Request $request)
+    {
+
+        $new_assurance = new EtablissementAssurances();
+
+    	// Get new data 
+        $new_assurance->assurance_id = $request->input('assurance_id');
+        $new_assurance->etablissement_id = Auth::user()->etablissement_id;
+        $new_assurance->date_debut = $request->input('date_debut');
+        $new_assurance->date_fin = $request->input('date_fin');
+
+        if($new_assurance->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Nouvel Medicament crée avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de créer cet Medicament !');
+
+    }
+    
     public function newMedicamentAdminEtablissement(Request $request)
     {
 
@@ -323,6 +369,7 @@ class AdminEtablissementController extends Controller
     	// Get new data 
         $new_medicament->tarif_structure = $request->input('tarif_structure');
         $new_medicament->medicament_id = $request->input('medicament_id');
+        $new_medicament->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_medicament->save()){
 
@@ -343,6 +390,7 @@ class AdminEtablissementController extends Controller
     	// Get new data 
         $new_prestation->tarif_structure = $request->input('tarif_structure');
         $new_prestation->prestation_id = $request->input('prestation_id');
+        $new_prestation->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_prestation->save()){
 
@@ -363,6 +411,7 @@ class AdminEtablissementController extends Controller
     	// Get new data 
         $new_examen->tarif_structure = $request->input('tarif_structure');
         $new_examen->examen_id = $request->input('examen_id');
+        $new_examen->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_examen->save()){
 
@@ -383,6 +432,7 @@ class AdminEtablissementController extends Controller
     	// Get new data 
         $new_appareillage->tarif_structure = $request->input('tarif_structure');
         $new_appareillage->appareillage_id = $request->input('appareillage_id');
+        $new_appareillage->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_appareillage->save()){
 
@@ -616,6 +666,29 @@ class AdminEtablissementController extends Controller
         return redirect()->back()->with('failed', 'Impossible de modifier cet utilisateur !');
     }
 
+    public function updateAssuranceAdminEtablissement(Request $request)
+    {
+
+    	$etablissementAssurance_id = $request->input('etablissementAssurance_id');
+    	$new_assurance = EtablissementAssurances::find($etablissementAssurance_id);
+
+    	// Get new data 
+        $new_assurance->assurance_id = $request->input('assurance_id');
+        $new_assurance->etablissement_id = Auth::user()->etablissement_id;
+        $new_assurance->date_debut = $request->input('date_debut');
+        $new_assurance->date_fin = $request->input('date_fin');
+
+        if($new_assurance->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Medicament modifié avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de modifier cet Medicament !');
+
+    }
+
      public function updateMedicamentAdminEtablissement(Request $request)
     {
 
@@ -625,6 +698,7 @@ class AdminEtablissementController extends Controller
     	// Get new data 
         $new_medicament->tarif_structure = $request->input('tarif_structure');
         $new_medicament->medicament_id = $request->input('medicament_id');
+        $new_medicament->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_medicament->save()){
 
@@ -646,6 +720,7 @@ class AdminEtablissementController extends Controller
     	// Get new data 
         $new_prestation->tarif_structure = $request->input('tarif_structure');
         $new_prestation->medicament_id = $request->input('prestation_id');
+        $new_prestation->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_prestation->save()){
 
@@ -667,6 +742,7 @@ class AdminEtablissementController extends Controller
     	// Get new data 
         $new_examen->tarif_structure = $request->input('tarif_structure');
         $new_examen->medicament_id = $request->input('examen_id');
+        $new_examen->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_examen->save()){
 
@@ -688,6 +764,7 @@ class AdminEtablissementController extends Controller
     	// Get new data 
         $new_appareillage->tarif_structure = $request->input('tarif_structure');
         $new_appareillage->medicament_id = $request->input('appareillage_id');
+        $new_appareillage->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_appareillage->save()){
 

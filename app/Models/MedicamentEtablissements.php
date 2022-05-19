@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MedicamentEtablissements extends Model
 {
-    public function medicament(){
+    public function medicaments(){
         return $this->hasOne('App\Models\Medicament', 'id', 'medicament_id');
     }
 }

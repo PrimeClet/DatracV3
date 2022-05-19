@@ -1,4 +1,4 @@
-@extends('layouts.layout_adminets')
+@extends('layouts.layout_adminassu')
 
 @section('page-content')
 
@@ -8,15 +8,15 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Gestion des Praticiens</h5>
+              <h5 class="card-title">Gestion des Agents</h5>
 
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Listing des Praticiens</button>
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Listing des Agents</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Ajouter Praticien</button>
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Ajouter Agent</button>
                 </li>
               </ul>
               <div class="tab-content pt-2" id="borderedTabContent">
@@ -29,7 +29,6 @@
 						<th scope="col" class="align-middle">Photo</th>
 						<th scope="col" class="align-middle">Nom</th>
 						<th scope="col" class="align-middle">Email</th>
-                        <th scope="col" class="align-middle">Spécialité</th>
 						<th scope="col" class="align-middle">Telephone</th>
 						<th scope="col" class="align-middle">Actions</th>
 
@@ -43,7 +42,6 @@
 							<td class=""><img src="/assets/photos/agents{{ $user->photo_url }}" alt="" style="width: 60px; height: 40px; border-radius: 5px"> </td>
 							<td class="align-middle fw-bolder">{{ $user->name }}</td>
 							<td class="align-middle text-sm-center" style="font-size: 12px">{{ $user->email }}</td>
-                            <td class="align-middle fw-bolder">{{ $user->specialite_id }}</td>
 							<td class="fw-bolder align-middle">{{ $user->telephone }}</td>
 							<td class="text-center align-middle">
                                 <button type="button" class="btn p-0 px-1 btn-outline-success" data-bs-toggle="modal" data-bs-target="#{{ $user->id }}">
@@ -60,7 +58,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title fw-bolder" id="">Praticien #{{ $user->id }}</h5>
+                                            <h5 class="modal-title fw-bolder" id="">Admin #{{ $user->id }}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -69,14 +67,11 @@
                                                     <img src="/assets/photos/roots{{ $user->photo_url }}" class="img-fluid" alt="" width="" height="">
                                                 </div>
                                                 <div class="col-md-6 d-flex flex-column align-content-between">
-                                                    <label class="form-label fw-bolder">Code Praticien</label>
+                                                    <label class="form-label fw-bolder">Code Agent</label>
                                                     <input type="text" class="form-control mb-1" value="{{ $user->codeAgent }}" disabled>
 
                                                     <label class="form-label fw-bolder">Nom</label>
                                                     <input type="text" class="form-control mb-1" value="{{ $user->name }}" disabled>
-
-                                                    <label class="form-label fw-bolder">Spécialité</label>
-                                                    <input type="text" class="form-control mb-1" value="{{ $user->specialite_id }}" disabled>
 
                                                     <label class="form-label fw-bolder">Telephone</label>
                                                     <input type="text" class="form-control mb-1" value="{{ $user->telephone }}" disabled>
@@ -98,11 +93,11 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title fw-bolder" id="">Editer Praticien #{{ $user->id }}</h5>
+                                            <h5 class="modal-title fw-bolder" id="">Editer Agent #{{ $user->id }}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST" enctype="multipart/form-data" action="{{ route('updatePraticienAdminEtablissement') }}">
+                                            <form method="POST" enctype="multipart/form-data" action="{{ route('updateAgentAdminAssurance') }}">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 d-flex flex-column align-content-between">
@@ -110,21 +105,8 @@
                                                         <input class="form-control" type="file" id="formFile" name="photo_url">
                                                     </div>
                                                     <div class="col-md-12 d-flex flex-column align-content-between">
-                                                        <label class="form-label fw-bolder">Nom Praticien</label>
+                                                        <label class="form-label fw-bolder">Nom Agent</label>
                                                         <input type="text" class="form-control mb-1" value="{{ $user->name }}" name="name">
-
-                                                        <label class="form-label fw-bolder">Spécialité</label>
-                                                        <select class="form-control" name="specialite_id">
-                                                            @if(count($specialites) !=0)
-                                                                @foreach ($specialites as $specialite)
-                                                                    <option value="{{ $specialite->id}}">
-                                                                        {{ $specialite->libelle }}
-                                                                    </option>
-                                                                @endforeach
-                                                            @else
-                                                                <option value="">Aucune Specialite</option>
-                                                            @endif
-                                                        </select>
 
                                                         <label class="form-label fw-bolder">Telephone</label>
                                                         <input type="text" class="form-control mb-1" value="{{ $user->telephone }}" name="telephone">
@@ -142,10 +124,10 @@
                                                     <div class="col-md-12 d-flex flex-column align-content-between">
 														<label class="text-black font-w500">Niveau d'accès</label>
 														<select name="role" class="form-control">
-															<option value="PharmacienEtablissement"> Pharmacien </option>
-                                                            <option value="PraticienEtablissement"> Praticien </option>
-                                                            <option value="InfirmierEtablissement"> Infirmier </option>
-                                                            <option value="LaborantinEtablissement"> Laborantin </option>
+															<option value="ManagerAssurance"> Manager </option>
+                                                            <option value="ComptableAssurance"> Comptable </option>
+                                                            <option value="TiersPayantAssurance"> Service Tiers-Payant </option>
+                                                            <option value="MedecinAssurance"> Médecin Référent </option>
 														</select>
                                                     </div>
 													<div class="col-md-12 d-flex flex-column align-content-between">
@@ -171,7 +153,6 @@
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
 						<td>Aucune donnée</td>
-                        <td>Aucune donnée</td>
                     </tr>
                     @endif
 
@@ -181,7 +162,7 @@
 	              </table>
                 </div>
                 <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-					<form method="POST" enctype="multipart/form-data" action="{{ route('newPraticienAdminEtablissement') }}">
+					<form method="POST" enctype="multipart/form-data" action="{{ route('newAgentAdminAssurance') }}">
 						@csrf
 						<div class="card border-0 shadow-none mb-0">
 							<div class="card-body">
@@ -193,10 +174,10 @@
                                     <div class="col-md-12 d-flex flex-column align-content-between">
 										<label class="text-black font-w500">Niveau d'accès</label>
 										<select name="role" value="{{old('role')}}" class="form-control">
-                                        <option value="PharmacienEtablissement"> Pharmacien </option>
-                                        <option value="PraticienEtablissement"> Praticien </option>
-                                        <option value="InfirmierEtablissement"> Infirmier </option>
-                                        <option value="LaborantinEtablissement"> Laborantin </option>
+                                            <option value="ManagerAssurance"> Manager </option>
+                                            <option value="ComptableAssurance"> Comptable </option>
+                                            <option value="TiersPayantAssurance"> Service Tiers-Payant </option>
+                                            <option value="MedecinAssurance"> Médecin Référent </option>
 										</select>
 									</div>
                                     <div class="col-md-12 d-flex flex-column align-content-between">
@@ -206,19 +187,6 @@
 
                                         <label class="form-label fw-bolder">Code Agent</label>
                                         <input type="text" class="form-control mb-1" value="{{old('codeAgent')}}" name="codeAgent" required>
-
-                                        <label class="form-label fw-bolder">Spécialité</label>
-                                        <select class="form-control" name="specialite_id">
-                                            @if(count($specialites) !=0)
-                                                @foreach ($specialites as $specialite)
-                                                    <option value="{{ $specialite->id}}">
-                                                        {{ $specialite->libelle }}
-                                                    </option>
-                                                @endforeach
-                                            @else
-                                                <option value="">Aucune Specialite</option>
-                                            @endif
-                                        </select>
 
                                         <label class="form-label fw-bolder">Telephone</label>
                                         <input type="text" class="form-control mb-1" value="{{old('telephone')}}" name="telephone" required>

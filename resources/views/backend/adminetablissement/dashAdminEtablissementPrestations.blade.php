@@ -73,7 +73,9 @@
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>	
-                        <td>Aucune donnée</td>											
+                        <td>Aucune donnée</td>
+						<td>Aucune donnée</td>
+						<td>Aucune donnée</td>											
                     </tr>
                     @endif
 
@@ -91,8 +93,8 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">Tarif structure</label>
-											<input type="text" class="form-control" placeholder="Tarif structure" name="tarif_structure">
+											<label class="form-label">Date Prestation</label>
+											<input type="date" class="form-control" name="datePrestation">
 										</div>
 									</div>
                                     <div class="col-sm-6 col-md-6">

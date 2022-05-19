@@ -27,6 +27,7 @@
 	                    <th scope="col">Id</th>
 						<th scope="col">Tarif structure</th>
 						<th scope="col">Medicament</th>
+						<th scope="col">Etablissement</th>
 						<th scope="col">Actions</th>
 
 	                  </tr>
@@ -39,6 +40,7 @@
 							<td>{{ $medicamentEtablissement->id }}</td>
 							<td>{{ $medicamentEtablissement->tarif_structure }}</td>
                             <td>{{ $medicamentEtablissement->medicament_id }}</td>
+							<td>{{ $medicamentEtablissement->etablissement_id }}</td>
 							<td class="text-center">
 								<button class="btn btn-xs btn-primary">
 									<a href="{{ URL::to('dashboard/adminetablissement/show-medicament') }}/{{ $medicamentEtablissement->id }}">

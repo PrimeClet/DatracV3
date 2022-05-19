@@ -25,7 +25,6 @@
 	                  <tr>
 
 	                    <th scope="col">Id</th>
-						<th scope="col">Tarif conventionne</th>
 						<th scope="col">affection</th>
 						<th scope="col">Actions</th>
 
@@ -37,7 +36,6 @@
                     	@foreach($affectionAssurances as $affectionAssurance)
                         <tr>
 							<td>{{ $affectionAssurance->id }}</td>
-							<td>{{ $affectionAssurance->tarif_conventionne }}</td>
                             <td>{{ $affectionAssurance->affection_id }}</td>
 							<td class="text-center">
 								<button class="btn btn-xs btn-primary">
@@ -62,7 +60,6 @@
                     <tr>
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
-                        <td>Aucune donnée</td>	
                         <td>Aucune donnée</td>											
                     </tr>
                     @endif
@@ -79,12 +76,6 @@
 						<div class="card border-0 shadow-none mb-0">
 							<div class="card-body">
 								<div class="row">
-									<div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="form-label">Tarif conventionne</label>
-											<input type="text" class="form-control" placeholder="Tarif conventionne" name="tarif_conventionne">
-										</div>
-									</div>
                                     <div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">affection</label>

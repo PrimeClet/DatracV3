@@ -151,12 +151,12 @@ Route::middleware(['auth'])->group(function() {
      Route::get('dashboard/superadmin/edit-appareillage/{id}', 'SuperAdminController@editAppareillageSuperAdmin')->name('editAppareillageSuperAdmin');
      Route::post('dashboard/superadmin/update-appareillage', 'SuperAdminController@updateAppareillageSuperAdmin')->name('updateAppareillageSuperAdmin');
 
-      /* CRUD Affections */
-      Route::get('dashboard/superadmin/nos-affections', 'SuperAdminController@dashSuperAdminAffections')->name('dashSuperAdminAffections');
-      Route::post('dashboard/superadmin/nouvel-affection', 'SuperAdminController@newAffectionSuperAdmin')->name('newAffectionSuperAdmin');
-      Route::get('dashboard/superadmin/show-affection/{id}', 'SuperAdminController@showAffectionSuperAdmin')->name('showAffectionSuperAdmin');
-      Route::get('dashboard/superadmin/edit-affection/{id}', 'SuperAdminController@editAffectionSuperAdmin')->name('editAffectionSuperAdmin');
-      Route::post('dashboard/superadmin/update-affection', 'SuperAdminController@updateAffectionSuperAdmin')->name('updateAffectionSuperAdmin');
+      /* CRUD Prestations */
+      Route::get('dashboard/superadmin/nos-prestations', 'SuperAdminController@dashSuperAdminPrestations')->name('dashSuperAdminPrestations');
+      Route::post('dashboard/superadmin/nouvel-prestation', 'SuperAdminController@newPrestationSuperAdmin')->name('newPrestationSuperAdmin');
+      Route::get('dashboard/superadmin/show-prestation/{id}', 'SuperAdminController@showPrestationSuperAdmin')->name('showPrestationSuperAdmin');
+      Route::get('dashboard/superadmin/edit-prestation/{id}', 'SuperAdminController@editPrestationSuperAdmin')->name('editPrestationSuperAdmin');
+      Route::post('dashboard/superadmin/update-prestation', 'SuperAdminController@updatePrestationSuperAdmin')->name('updatePrestationSuperAdmin');
 
     /* End Routing for SuperAdmin's User */
 
@@ -188,6 +188,13 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/adminetablissement/show-praticien/{id}', 'AdminEtablissementController@showPraticienAdminEtablissement')->name('showPraticienAdminEtablissement');
     Route::get('dashboard/adminetablissement/edit-praticien/{id}', 'AdminEtablissementController@editPraticienAdminEtablissement')->name('editPraticienAdminEtablissement');
     Route::post('dashboard/adminetablissement/update-praticien', 'AdminEtablissementController@updatePraticienAdminEtablissement')->name('updatePraticienAdminEtablissement');
+
+    /* CRUD Assurances */
+    Route::get('dashboard/adminetablissement/nos-assurances', 'AdminEtablissementController@dashAdminEtablissementAssurances')->name('dashAdminEtablissementAssurances');
+    Route::post('dashboard/adminetablissement/nouvel-assurance', 'AdminEtablissementController@newAssuranceAdminEtablissement')->name('newAssuranceAdminEtablissement');
+    Route::get('dashboard/adminetablissement/show-assurance/{id}', 'AdminEtablissementController@showAssuranceAdminEtablissement')->name('showAssuranceAdminEtablissement');
+    Route::get('dashboard/adminetablissement/edit-assurance/{id}', 'AdminEtablissementController@editAssuranceAdminEtablissement')->name('editAssuranceAdminEtablissement');
+    Route::post('dashboard/adminetablissement/update-assurance', 'AdminEtablissementController@updateAssuranceAdminEtablissement')->name('updateAssuranceAdminEtablissement');
 
     /* CRUD Medicaments */
     Route::get('dashboard/adminetablissement/nos-medicaments', 'AdminEtablissementController@dashAdminEtablissementMedicaments')->name('dashAdminEtablissementMedicaments');
@@ -234,47 +241,54 @@ Route::middleware(['auth'])->group(function() {
      /* Start Routing for AdminEtablissement's User */
      Route::get('dashboard/adminassurance', 'AdminAssuranceController@dashAdminAssurance')->name('dashAdminAssurance');
 
+    /* CRUD Agents */
+    Route::get('dashboard/adminassurance/nos-agents', 'AdminAssuranceController@dashAdminAssuranceAgents')->name('dashAdminAssuranceAgents');
+    Route::post('dashboard/adminassurance/nouvel-agent', 'AdminAssuranceController@newAgentAdminAssurance')->name('newAgentAdminAssurance');
+    Route::get('dashboard/adminassurance/show-agent/{id}', 'AdminAssuranceController@showAgentAdminAssurance')->name('showAgentAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-agent/{id}', 'AdminAssuranceController@editAgentAdminAssurance')->name('editAgentAdminAssurance');
+    Route::post('dashboard/adminassurance/update-agent', 'AdminAssuranceController@updateAgentAdminAssurance')->name('updateAgentAdminAssurance');
+
      /* CRUD Actes */
-     Route::get('dashboard/adminassurance/nos-actes', 'AdminAssuranceController@dashAdminAssuranceActes')->name('dashAdminAssuranceActes');
-     Route::post('dashboard/adminassurance/nouvel-acte', 'AdminAssuranceController@newActeAdminAssurance')->name('newActeAdminAssurance');
-     Route::get('dashboard/adminassurance/show-acte/{id}', 'AdminAssuranceController@showActeAdminAssurance')->name('showActeAdminAssurance');
-     Route::get('dashboard/adminassurance/edit-acte/{id}', 'AdminAssuranceController@editActeAdminAssurance')->name('editActeAdminAssurance');
-     Route::post('dashboard/adminassurance/update-acte', 'AdminAssuranceController@updateActeAdminAssurance')->name('updateActeAdminAssurance');
+    Route::get('dashboard/adminassurance/nos-actes', 'AdminAssuranceController@dashAdminAssuranceActes')->name('dashAdminAssuranceActes');
+    Route::post('dashboard/adminassurance/nouvel-acte', 'AdminAssuranceController@newActeAdminAssurance')->name('newActeAdminAssurance');
+    Route::get('dashboard/adminassurance/show-acte/{id}', 'AdminAssuranceController@showActeAdminAssurance')->name('showActeAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-acte/{id}', 'AdminAssuranceController@editActeAdminAssurance')->name('editActeAdminAssurance');
+    Route::post('dashboard/adminassurance/update-acte', 'AdminAssuranceController@updateActeAdminAssurance')->name('updateActeAdminAssurance');
 
-      /* CRUD Affections */
-      Route::get('dashboard/adminassurance/nos-affections', 'AdminAssuranceController@dashAdminAssuranceAffections')->name('dashAdminAssuranceAffections');
-      Route::post('dashboard/adminassurance/nouvel-affection', 'AdminAssuranceController@newAffectionAdminAssurance')->name('newAffectionAdminAssurance');
-      Route::get('dashboard/adminassurance/show-affection/{id}', 'AdminAssuranceController@showAffectionAdminAssurance')->name('showAffectionAdminAssurance');
-      Route::get('dashboard/adminassurance/edit-affection/{id}', 'AdminAssuranceController@editAffectionAdminAssurance')->name('editAffectionAdminAssurance');
-      Route::post('dashboard/adminassurance/update-affection', 'AdminAssuranceController@updateAffectionAdminAssurance')->name('updateAffectionAdminAssurance');
+    /* CRUD Affections */
+    Route::get('dashboard/adminassurance/nos-affections', 'AdminAssuranceController@dashAdminAssuranceAffections')->name('dashAdminAssuranceAffections');
+    Route::post('dashboard/adminassurance/nouvel-affection', 'AdminAssuranceController@newAffectionAdminAssurance')->name('newAffectionAdminAssurance');
+    Route::get('dashboard/adminassurance/show-affection/{id}', 'AdminAssuranceController@showAffectionAdminAssurance')->name('showAffectionAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-affection/{id}', 'AdminAssuranceController@editAffectionAdminAssurance')->name('editAffectionAdminAssurance');
+    Route::post('dashboard/adminassurance/update-affection', 'AdminAssuranceController@updateAffectionAdminAssurance')->name('updateAffectionAdminAssurance');
 
-       /* CRUD Appareillages */
-       Route::get('dashboard/adminassurance/nos-appareillages', 'AdminAssuranceController@dashAdminAssuranceAppareillages')->name('dashAdminAssuranceAppareillages');
-       Route::post('dashboard/adminassurance/nouvel-appareillage', 'AdminAssuranceController@newAppareillageAdminAssurance')->name('newAppareillageAdminAssurance');
-       Route::get('dashboard/adminassurance/show-appareillage/{id}', 'AdminAssuranceController@showAppareillageAdminAssurance')->name('showAppareillageAdminAssurance');
-       Route::get('dashboard/adminassurance/edit-appareillage/{id}', 'AdminAssuranceController@editAppareillageAdminAssurance')->name('editAppareillageAdminAssurance');
-       Route::post('dashboard/adminassurance/update-appareillage', 'AdminAssuranceController@updateAppareillageAdminAssurance')->name('updateAppareillageAdminAssurance');
+    /* CRUD Appareillages */
+    Route::get('dashboard/adminassurance/nos-appareillages', 'AdminAssuranceController@dashAdminAssuranceAppareillages')->name('dashAdminAssuranceAppareillages');
+    Route::post('dashboard/adminassurance/nouvel-appareillage', 'AdminAssuranceController@newAppareillageAdminAssurance')->name('newAppareillageAdminAssurance');
+    Route::get('dashboard/adminassurance/show-appareillage/{id}', 'AdminAssuranceController@showAppareillageAdminAssurance')->name('showAppareillageAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-appareillage/{id}', 'AdminAssuranceController@editAppareillageAdminAssurance')->name('editAppareillageAdminAssurance');
+    Route::post('dashboard/adminassurance/update-appareillage', 'AdminAssuranceController@updateAppareillageAdminAssurance')->name('updateAppareillageAdminAssurance');
 
-        /* CRUD Medicaments */
-        Route::get('dashboard/adminassurance/nos-medicaments', 'AdminAssuranceController@dashAdminAssuranceMedicaments')->name('dashAdminAssuranceMedicaments');
-        Route::post('dashboard/adminassurance/nouvel-medicament', 'AdminAssuranceController@newMedicamentAdminAssurance')->name('newMedicamentAdminAssurance');
-        Route::get('dashboard/adminassurance/show-medicament/{id}', 'AdminAssuranceController@showMedicamentAdminAssurance')->name('showMedicamentAdminAssurance');
-        Route::get('dashboard/adminassurance/edit-medicament/{id}', 'AdminAssuranceController@editMedicamentAdminAssurance')->name('editMedicamentAdminAssurance');
-        Route::post('dashboard/adminassurance/update-medicament', 'AdminAssuranceController@updateMedicamentAdminAssurance')->name('updateMedicamentAdminAssurance');
+    /* CRUD Medicaments */
+    Route::get('dashboard/adminassurance/nos-medicaments', 'AdminAssuranceController@dashAdminAssuranceMedicaments')->name('dashAdminAssuranceMedicaments');
+    Route::post('dashboard/adminassurance/nouvel-medicament', 'AdminAssuranceController@newMedicamentAdminAssurance')->name('newMedicamentAdminAssurance');
+    Route::get('dashboard/adminassurance/show-medicament/{id}', 'AdminAssuranceController@showMedicamentAdminAssurance')->name('showMedicamentAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-medicament/{id}', 'AdminAssuranceController@editMedicamentAdminAssurance')->name('editMedicamentAdminAssurance');
+    Route::post('dashboard/adminassurance/update-medicament', 'AdminAssuranceController@updateMedicamentAdminAssurance')->name('updateMedicamentAdminAssurance');
 
-        /* CRUD Examens */
-        Route::get('dashboard/adminassurance/nos-examens', 'AdminAssuranceController@dashAdminAssuranceExamens')->name('dashAdminAssuranceExamens');
-        Route::post('dashboard/adminassurance/nouvel-examen', 'AdminAssuranceController@newExamenAdminAssurance')->name('newExamenAdminAssurance');
-        Route::get('dashboard/adminassurance/show-examen/{id}', 'AdminAssuranceController@showExamenAdminAssurance')->name('showExamenAdminAssurance');
-        Route::get('dashboard/adminassurance/edit-examen/{id}', 'AdminAssuranceController@editExamenAdminAssurance')->name('editExamenAdminAssurance');
-        Route::post('dashboard/adminassurance/update-examen', 'AdminAssuranceController@updateExamenAdminAssurance')->name('updateExamenAdminAssurance');
+    /* CRUD Examens */
+    Route::get('dashboard/adminassurance/nos-examens', 'AdminAssuranceController@dashAdminAssuranceExamens')->name('dashAdminAssuranceExamens');
+    Route::post('dashboard/adminassurance/nouvel-examen', 'AdminAssuranceController@newExamenAdminAssurance')->name('newExamenAdminAssurance');
+    Route::get('dashboard/adminassurance/show-examen/{id}', 'AdminAssuranceController@showExamenAdminAssurance')->name('showExamenAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-examen/{id}', 'AdminAssuranceController@editExamenAdminAssurance')->name('editExamenAdminAssurance');
+    Route::post('dashboard/adminassurance/update-examen', 'AdminAssuranceController@updateExamenAdminAssurance')->name('updateExamenAdminAssurance');
 
-         /* CRUD Prestations */
-         Route::get('dashboard/adminassurance/nos-prestations', 'AdminAssuranceController@dashAdminAssurancePrestations')->name('dashAdminAssurancePrestations');
-         Route::post('dashboard/adminassurance/nouvel-prestation', 'AdminAssuranceController@newPrestationAdminAssurance')->name('newPrestationAdminAssurance');
-         Route::get('dashboard/adminassurance/show-prestation/{id}', 'AdminAssuranceController@showPrestationAdminAssurance')->name('showPrestationAdminAssurance');
-         Route::get('dashboard/adminassurance/edit-prestation/{id}', 'AdminAssuranceController@editPrestationAdminAssurance')->name('editPrestationAdminAssurance');
-         Route::post('dashboard/adminassurance/update-prestation', 'AdminAssuranceController@updatePrestationAdminAssurance')->name('updatePrestationAdminAssurance');
+        /* CRUD Prestations */
+        Route::get('dashboard/adminassurance/nos-prestations', 'AdminAssuranceController@dashAdminAssurancePrestations')->name('dashAdminAssurancePrestations');
+        Route::post('dashboard/adminassurance/nouvel-prestation', 'AdminAssuranceController@newPrestationAdminAssurance')->name('newPrestationAdminAssurance');
+        Route::get('dashboard/adminassurance/show-prestation/{id}', 'AdminAssuranceController@showPrestationAdminAssurance')->name('showPrestationAdminAssurance');
+        Route::get('dashboard/adminassurance/edit-prestation/{id}', 'AdminAssuranceController@editPrestationAdminAssurance')->name('editPrestationAdminAssurance');
+        Route::post('dashboard/adminassurance/update-prestation', 'AdminAssuranceController@updatePrestationAdminAssurance')->name('updatePrestationAdminAssurance');
 
 
 });

@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{ route('dashSuperAdmin') }}" class="logo d-flex align-items-center">
+      <a href="{{ route('dashAdminAssurance') }}" class="logo d-flex align-items-center">
         <img src="{{ URL::to('assets/img/logo.png') }}" alt="">
         <span class="d-none d-lg-block">DATRAC</span>
       </a>
@@ -171,7 +171,7 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="">
+            <a href="{{ route('dashAdminAssuranceAgents') }}">
               <i class="bi bi-circle"></i><span>Agents Assurances</span>
             </a>
           </li>
@@ -222,13 +222,6 @@
         <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceExamens') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Examens</span>
-        </a>
-      </li><!-- End Blank Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('dashAdminAssurancePrestations') }}">
-          <i class="bi bi-file-earmark"></i>
-          <span>Prestations</span>
         </a>
       </li><!-- End Blank Page Nav -->
 

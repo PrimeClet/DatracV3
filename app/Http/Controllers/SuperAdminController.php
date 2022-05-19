@@ -11,6 +11,7 @@ use App\Models\Provinces;
 use App\Models\Specialites;
 use App\Models\Appareillages;
 use App\Models\Affections;
+use App\Models\Prestations;
 use App\Models\Etablissements;
 use App\Models\Assurance;
 
@@ -48,6 +49,9 @@ class SuperAdminController extends Controller
         // Count actes
         $count_actes = Actes::all()->count();
 
+        // Count actes
+        $count_prestations = Prestations::all()->count();
+
         // Count assurances
         $count_assurances = Assurance::all()->count();
 
@@ -69,7 +73,7 @@ class SuperAdminController extends Controller
         // Count affections
         $count_affections = Affections::all()->count();
 
-	    return view('backend.superadmin.dashSuperAdmin', compact('page_title', 'count_users', 'count_actes', 'count_examens', 
+	    return view('backend.superadmin.dashSuperAdmin', compact('page_title', 'count_users', 'count_actes', 'count_examens', 'count_prestations', 
         'count_villes', 'count_specialites', 'count_appareillages', 'count_affections', 'count_assurances', 'count_etablissements'));
 
     }
@@ -220,6 +224,16 @@ class SuperAdminController extends Controller
 
         $affections = Affections::all();
         return view('backend.superadmin.dashSuperAdminAffections', compact('page_title', 'affections'));
+
+    }
+
+    public function dashSuperAdminPrestations(Request $request)
+    {
+
+    	$page_title = "Nos Prestations";
+
+        $prestations = Prestations::all();
+        return view('backend.superadmin.dashSuperAdminAffections', compact('page_title', 'prestations'));
 
     }
 
@@ -513,6 +527,26 @@ class SuperAdminController extends Controller
 
     }
 
+    public function newPrestationSuperAdmin(Request $request)
+    {
+
+        $new_prestation = new Prestations();
+
+    	// Get new data 
+        $new_prestation->code = $request->input('code');
+        $new_prestation->titre = $request->input('libelle');
+
+        if($new_prestation->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Nouvelle affection crée avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de créer cette affection !');
+
+    }
+
         	/* Les routes du root seront enumérés ici ! */
 
     ##############################################################################################
@@ -592,6 +626,17 @@ class SuperAdminController extends Controller
 
     }
 
+    public function showPrestationSuperAdmin(Request $request, $id)
+    {
+
+    	$page_title = "Détails Prestation";
+
+    	$prestation = Prestations::find($id);
+
+        return view('backend.superadmin.showPrestationSuperAdmin', compact('prestation', 'page_title'));
+
+    }
+
         	/* Les routes du root seront enumérés ici ! */
 
     ##############################################################################################
@@ -668,6 +713,18 @@ class SuperAdminController extends Controller
     	$affection = Affections::find($id);
 
         return view('backend.superadmin.editAffectionSuperAdmin', compact('affection', 'page_title'));
+
+    }
+
+    
+    public function editPrestationSuperAdmin(Request $request, $id)
+    {
+
+    	$page_title = "Editer Prestation";
+
+    	$prestation = Prestations::find($id);
+
+        return view('backend.superadmin.editAffectionSuperAdmin', compact('prestation', 'page_title'));
 
     }
 
@@ -942,6 +999,26 @@ class SuperAdminController extends Controller
     }
 
 
+    public function updatePrestationSuperAdmin(Request $request)
+    {
+
+    	$prestation_id = $request->input('prestation_id');
+    	$new_prestation = Prestations::find($prestation_id);
+
+    	// Get new data 
+        $new_prestation->code = $request->input('code');
+        $new_prestation->titre = $request->input('libelle');
+
+        if($new_prestation->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'affection modifié avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de modifier cette affection !');
+
+    }
 
 
 

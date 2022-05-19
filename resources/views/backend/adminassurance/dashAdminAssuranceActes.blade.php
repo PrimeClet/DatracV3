@@ -25,7 +25,6 @@
 	                  <tr>
 
 	                    <th scope="col">Id</th>
-						<th scope="col">Tarif conventionne</th>
 						<th scope="col">Acte</th>
 						<th scope="col">Actions</th>
 
@@ -37,7 +36,6 @@
                     	@foreach($acteAssurances as $acteAssurance)
                         <tr>
 							<td>{{ $acteAssurance->id }}</td>
-							<td>{{ $acteAssurance->tarif_conventionne }}</td>
                             <td>{{ $acteAssurance->acte_id }}</td>
 							<td class="text-center">
 								<button class="btn btn-xs btn-primary">
@@ -62,7 +60,6 @@
                     <tr>
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
-                        <td>Aucune donnée</td>	
                         <td>Aucune donnée</td>											
                     </tr>
                     @endif
@@ -79,20 +76,14 @@
 						<div class="card border-0 shadow-none mb-0">
 							<div class="card-body">
 								<div class="row">
-									<div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="form-label">Tarif conventionne</label>
-											<input type="text" class="form-control" placeholder="Tarif conventionne" name="tarif_conventionne">
-										</div>
-									</div>
                                     <div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">Acte</label>
-											<select class="form-control" name="Acte_id">
+											<select class="form-control" name="acte_id">
                                                 @if(count($actes) !=0)
                                                     @foreach ($actes as $acte)
 														<option value="{{ $acte->id}}">
-															{{ $acte->libelle }}
+															{{ $acte->designation }}
 														</option>
                                                     @endforeach
                                                 @else
