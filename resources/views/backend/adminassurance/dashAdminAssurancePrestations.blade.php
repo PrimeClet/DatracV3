@@ -25,21 +25,19 @@
 	                  <tr>
 
 	                    <th scope="col">Id</th>
-						<th scope="col">prestation</th>
-                        <th scope="col">Ticket Moderateur</th>
+						<th scope="col">Tarif conventionné</th>
+                        <th scope="col">Prestation</th>
 						<th scope="col">Actions</th>
 
 	                  </tr>
 	                </thead>
 	                <tbody>
-
 	                  @if(count($prestationAssurances) != 0)
                     	@foreach($prestationAssurances as $prestationAssurance)
                         <tr>
 							<td>{{ $prestationAssurance->id }}</td>
 							<td>{{ $prestationAssurance->tarif_conventionne }}</td>
                             <td>{{ $prestationAssurance->prestation_id }}</td>
-                            <td>{{ $prestationAssurance->ticketModerateur }}</td>
 							<td class="text-center">
 								<button class="btn btn-xs btn-primary">
 									<a href="{{ URL::to('dashboard/adminAssurance/show-prestation') }}/{{ $prestationAssurance->id }}">
@@ -64,8 +62,7 @@
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>	
-                        <td>Aucune donnée</td>
-						<td>Aucune donnée</td>												
+                        <td>Aucune donnée</td>											
                     </tr>
                     @endif
 
@@ -101,12 +98,6 @@
                                                     <option value="">Aucun prestation</option>
                                                 @endif
                                             </select>
-										</div>
-									</div>
-                                    <div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="form-label">Ticket Moderateur</label>
-											<input type="text" class="form-control" placeholder="Ticket Moderateur" name="ticketModerateur">
 										</div>
 									</div>
 								</div>

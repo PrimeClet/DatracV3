@@ -1,22 +1,21 @@
-@extends('layouts.layout_superadmin')
+@extends('layouts.layout_adminassu');
 
 @section('page-content')
-
 	<!--User Dashboard-->
 
-        <div class="col-lg-12">
+        <!-- <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Gestion des Prestations</h5>
+              <h5 class="card-title">Gestion des typeassures</h5>
 
-              <!-- Bordered Tabs -->
+              <!- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Listing des Prestations</button>
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Listing des Type Assurés</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Nouvel Prestation</button>
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Nouvel Type Assuré</button>
                 </li>
               </ul>
               <div class="tab-content pt-2" id="borderedTabContent">
@@ -26,35 +25,34 @@
 	                  <tr>
 
 	                    <th scope="col">Id</th>
-						<th scope="col">Code</th>
-						<th scope="col">Désignation</th>
+						<th scope="col">Libelle</th>
+						<th scope="col">Sigle</th>
 						<th scope="col">Actions</th>
 
 	                  </tr>
 	                </thead>
 	                <tbody>
 
-
-	                  @if(count($prestations) != 0)
-                    	@foreach($prestations as $prestation)
+	                  @if(count($typeassures) != 0)
+                    	@foreach($typeassures as $typeassure)
                         <tr>
-							<td>{{ $prestation->id }}</td>
-							<td>{{ $prestation->code }}</td>
-							<td>{{ $prestation->libelle }}</td>
+							<td>{{ $typeassure->id }}</td>
+							<td>{{ $typeassure->libelle }}</td>
+                            <td>{{ $typeassure->abbreviation }}</td>
 							<td class="text-center">
 								<button class="btn btn-xs btn-primary">
-									<a href="{{ URL::to('dashboard/root/show-prestation') }}/{{ $prestation->id }}">
+									<a href="{{ URL::to('dashboard/adminAssurance/show-typeassure') }}/{{ $typeassure->id }}">
 										Voir
 									</a>
 								</button>
 
-								<a href="{{ URL::to('dashboard/root/show-prestation') }}/{{ $prestation->id }}">
+								<a href="{{ URL::to('dashboard/adminAssurance/edit-typeassure') }}/{{ $typeassure->id }}">
 									<button type="button" class="btn btn-warning">
 										Voir
 									</button>
 								</a>
 								
-								<a href="{{ URL::to('dashboard/root/edit-prestation') }}/{{ $prestation->id }}" class="btn"><i class="bi brush-fillt"></i></a>
+								<a href="{{ URL::to('dashboard/adminAssurance/edit-typeassure') }}/{{ $typeassure->id }}" class="btn"><i class="bi brush-fillt"></i></a>
 
 								
 							</td>
@@ -65,7 +63,7 @@
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>	
-                        <td>Aucune donnée</td>												
+                        <td>Aucune donnée</td>											
                     </tr>
                     @endif
 
@@ -75,7 +73,7 @@
 	              </table>
                 </div>
                 <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-					<form method="POST" action="{{ route('newPrestationSuperAdmin') }}">
+					<form method="POST" action="{{ route('newTypeAssureAdminAssurance') }}">
 
 						@csrf
 						<div class="card border-0 shadow-none mb-0">
@@ -83,14 +81,14 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">Code</label>
-											<input type="text" class="form-control" placeholder="Code" name="code">
+											<label class="form-label">Libelle</label>
+											<input type="text" class="form-control" placeholder="Libelle" name="libelle">
 										</div>
 									</div>
-									<div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="form-label">Designation</label>
-											<input type="text" class="form-control" placeholder="libelle" name="libelle">
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+											<label class="form-label">Sigle</label>
+											<input type="text" class="form-control" placeholder="Abbreviation" name="abbreviation">
 										</div>
 									</div>
 								</div>
@@ -108,7 +106,7 @@
           </div>
 
 
-        </div>
+        </div> -->
 
 	<!--/User Dashboard-->
 

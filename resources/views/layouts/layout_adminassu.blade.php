@@ -197,7 +197,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceAffections') }}">
-          <i class="bi bi-person"></i>
+          <i class="bi bi-pencil"></i>
           <span>Affections</span>
         </a>
       </li><!-- End Profile Page Nav -->
@@ -222,6 +222,20 @@
         <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceExamens') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Examens</span>
+        </a>
+      </li><!-- End Blank Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('dashAdminAssurancePrestations') }}">
+          <i class="bi bi-house"></i>
+          <span>Prestations</span>
+        </a>
+      </li><!-- End Blank Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceTypeAssures') }}">
+          <i class="bi bi-person"></i>
+          <span>Type Assure</span>
         </a>
       </li><!-- End Blank Page Nav -->
 

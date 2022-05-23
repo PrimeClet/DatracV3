@@ -17,6 +17,7 @@ use App\Models\Appareillages;
 use App\Models\Actes;
 use App\Models\Affections;
 use App\Models\Assurance;
+use App\Models\TypeAssures;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -65,12 +66,15 @@ class AdminAssuranceController extends Controller
         // Count affections
         $count_medicaments = MedicamentAssurances::all()->count();
 
+        // Count typeassures
+        $count_typeassures = TypeAssures::all()->count();
+
         // Count actes
         $count_actes = ActeAssurances::all()->count();
         // dd($count_actes);
 
 	    return view('backend.adminassurance.dashAdminAssurance', compact('page_title', 'count_users', 'count_examens',
-    'count_prestations', 'count_appareillages', 'count_medicaments', 'count_actes', 'adminassu'));
+    'count_prestations', 'count_appareillages', 'count_medicaments', 'count_actes', 'adminassu', 'count_typeassures'));
 
     }
 
@@ -190,6 +194,31 @@ class AdminAssuranceController extends Controller
         $assurances = Assurance::where('id', Auth::user()->assurance_id);
 
         return view('backend.adminassurance.dashAdminAssuranceAffections', compact('page_title', 'affectionAssurances', 'affections', 'assurances'));
+
+    }
+
+    public function dashAdminAssurancePrestations(Request $request)
+    {
+
+    	$page_title = "Nos Prestations";
+
+    	$prestationAssurances = PrestationAssurances::all();
+        $prestations = Prestations::all();
+        $assurances = Assurance::where('id', Auth::user()->assurance_id);
+
+        return view('backend.adminassurance.dashAdminAssurancePrestations', compact('page_title', 'prestationAssurances', 'prestations', 'assurances'));
+
+    }
+
+    public function dashAdminAssuranceTypeAssures(Request $request)
+    {
+
+    	$page_title = "Nos Type Assurés";
+
+        $typeassures = TypeAssures::all();
+        $assurances = Assurance::where('id', Auth::user()->assurance_id);
+
+        return view('backend.adminassurance.dashAdminAssuranceTypeAssures', compact('page_title', 'typeassures', 'assurances'));
 
     }
 
@@ -368,6 +397,57 @@ class AdminAssuranceController extends Controller
 
     }
 
+    public function newPrestationAdminAssurance(Request $request)
+    {
+
+        $new_prestation = new PrestationAssurances();
+
+    	// Get new data 
+        $new_prestation->tarif_conventionne = $request->input('tarif_conventionne');
+        $new_prestation->prestation_id = $request->input('prestation_id');
+
+        $new_prestation->assurance_id = Auth::user()->assurance_id;
+
+        if($new_prestation->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Nouvel Prestation crée avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de créer cet Prestation !');
+
+    }
+
+    
+    public function newTypeAssureAdminAssurance(Request $request)
+    {
+
+        $new_typeassure = new TypeAssures();
+
+    	// Get new data 
+        $new_typeassure->libelle = $request->input('libelle');
+        $new_typeassure->abbreviation = $request->input('abbreviation');
+
+        $new_typeassure->assurance_id = Auth::user()->assurance_id;
+
+        if($new_typeassure->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Nouvel Prestation crée avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de créer cet Prestation !');
+
+    }
+
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  NEW ROUTING                                               #
+    #                                                                                            #
+    ##############################################################################################
 
     /**
      * Display a listing of the resource.
@@ -429,6 +509,37 @@ class AdminAssuranceController extends Controller
 
     }
 
+    public function showPrestationAdminAssurance(Request $request, $id)
+    {
+
+    	$page_title = "Détails Prestation";
+
+    	$prestationAssurance = PrestationAssurances::find($id);
+
+        return view('backend.adminAssurance.showPrestationAdminAssurance', compact('prestationAssurance', 'page_title'));
+
+    }
+
+    
+    public function showTypeAssureAdminAssurance(Request $request, $id)
+    {
+
+    	$page_title = "Détails Type Assure";
+
+    	$typeassure = TypeAssures::find($id);
+
+        return view('backend.adminAssurance.showTypeAssureAdminAssurance', compact('typeassure', 'page_title'));
+
+    }
+
+
+    
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  NEW ROUTING                                               #
+    #                                                                                            #
+    ##############################################################################################
 
     /**
      * Display a listing of the resource.
@@ -487,6 +598,28 @@ class AdminAssuranceController extends Controller
     	$affectionAssurance = AffectionAssurances::find($id);
 
         return view('backend.adminAssurance.editAffectionAdminAssurance', compact('affectionAssurance', 'page_title'));
+
+    }
+
+    public function editPrestationAdminAssurance(Request $request, $id)
+    {
+
+    	$page_title = "Editer Prestation";
+
+    	$prestationAssurance = PrestationAssurances::find($id);
+
+        return view('backend.adminAssurance.editPrestationAdminAssurance', compact('prestationAssurance', 'page_title'));
+
+    }
+    
+    public function editTypeAssureAdminAssurance(Request $request, $id)
+    {
+
+    	$page_title = "Editer Type Assure";
+
+    	$typeassure = TypeAssures::find($id);
+
+        return view('backend.adminAssurance.editTypeAssureAdminAssurance', compact('typeassure', 'page_title'));
 
     }
 
@@ -562,7 +695,7 @@ class AdminAssuranceController extends Controller
     	$new_medicament = MedicamentAssurances::find($medicamentAssurance_id);
 
     	// Get new data 
-        $new_medicament->tarif_structure = $request->input('tarif_conventionne');
+        $new_medicament->tarif_conventionne = $request->input('tarif_conventionne');
         $new_medicament->medicament_id = $request->input('medicament_id');
 
         $new_medicament->assurance_id = Auth::user()->assurance_id;
@@ -585,7 +718,7 @@ class AdminAssuranceController extends Controller
     	$new_examen = ExamenAssurances::find($examenAssurance_id);
 
     	// Get new data 
-        $new_examen->tarif_structure = $request->input('tarif_conventionne');
+        $new_examen->tarif_conventionne = $request->input('tarif_conventionne');
         $new_examen->medicament_id = $request->input('examen_id');
 
         $new_examen->assurance_id = Auth::user()->assurance_id;
@@ -667,6 +800,53 @@ class AdminAssuranceController extends Controller
         return redirect()->back()->with('failed', 'Impossible de modifier cette affection !');
 
     }
+
+    public function updatePrestationAdminAssurance(Request $request)
+    {
+
+    	$prestationAssurance_id = $request->input('prestationAssurance_id');
+    	$new_prestation = PrestationAssurances::find($prestationAssurance_id);
+
+    	// Get new data 
+        $new_prestation->tarif_conventionne = $request->input('tarif_conventionne');
+        $new_prestation->prestation_id = $request->input('prestation_id');
+
+        $new_prestation->assurance_id = Auth::user()->assurance_id;
+
+        if($new_prestation->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'examen modifié avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de modifier cet examen !');
+
+    }
+  
+    public function updateTypeAssureAdminAssurance(Request $request)
+    {
+
+    	$typeassure_id = $request->input('typeassure_id');
+    	$new_typeassure = TypeAssures::find($typeassure_id);
+
+    	// Get new data 
+        $new_typeassure->libelle = $request->input('libelle');
+        $new_typeassure->abbreviation = $request->input('abbreviation');
+
+        $new_typeassure->assurance_id = Auth::user()->assurance_id;
+
+        if($new_typeassure->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'examen modifié avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de modifier cet examen !');
+
+    }
+
 
 
 

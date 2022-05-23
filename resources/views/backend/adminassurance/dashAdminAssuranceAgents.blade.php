@@ -28,6 +28,7 @@
 	                    <th scope="col" class="align-middle">Code Agent</th>
 						<th scope="col" class="align-middle">Photo</th>
 						<th scope="col" class="align-middle">Nom</th>
+                        <th scope="col" class="align-middle">Rôle</th>
 						<th scope="col" class="align-middle">Email</th>
 						<th scope="col" class="align-middle">Telephone</th>
 						<th scope="col" class="align-middle">Actions</th>
@@ -41,6 +42,7 @@
 							<td class="fw-bolder align-middle">{{ $user->codeAgent }}</td>
 							<td class=""><img src="/assets/photos/agents{{ $user->photo_url }}" alt="" style="width: 60px; height: 40px; border-radius: 5px"> </td>
 							<td class="align-middle fw-bolder">{{ $user->name }}</td>
+                            <td class="align-middle fw-bolder">{{ $user->role }}</td>
 							<td class="align-middle text-sm-center" style="font-size: 12px">{{ $user->email }}</td>
 							<td class="fw-bolder align-middle">{{ $user->telephone }}</td>
 							<td class="text-center align-middle">

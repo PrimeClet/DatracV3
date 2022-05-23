@@ -209,6 +209,13 @@
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminPrestations') }}">
+          <i class="bi bi-basket"></i>
+          <span>Prestations</span>
+        </a>
+      </li><!-- End Contact Page Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashSuperAdminAffections') }}">
           <i class="bi bi-card-list"></i>
           <span>Affections</span>
@@ -224,28 +231,28 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashSuperAdminMedicament') }}">
-            <i class="bx bxs-capsule"></i>
+            <i class="bi bi-book"></i>
           <span>Médicaments</span>
         </a>
       </li><!-- End Error 404 Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashSuperAdminExamens') }}">
-          <i class="bi bi-file-earmark"></i>
+          <i class="bi bi-layers"></i>
           <span>Examens</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashSuperAdminVilles') }}">
-          <i class="bi bi-file-earmark"></i>
+          <i class="bi bi-globe"></i>
           <span>Villes</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashSuperAdminSpecialites') }}">
-          <i class="bi bi-file-earmark"></i>
+          <i class="bi bi-briefcase"></i>
           <span>Spécialités</span>
         </a>
       </li><!-- End Blank Page Nav -->

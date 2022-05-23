@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>DATRAC 2.0</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -185,14 +185,14 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementAssurances') }}">
-          <i class="bi bi-person"></i>
+          <i class="bi bi-building"></i>
           <span>Assurance</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="">
-          <i class="bi bi-person"></i>
+          <i class="bi bi-calendar"></i>
           <span>Emploi du Temps</span>
         </a>
       </li><!-- End Profile Page Nav -->
@@ -201,28 +201,28 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementAppareillages') }}">
-          <i class="bi bi-box-arrow-in-right"></i>
+          <i class="bi bi-globe"></i>
           <span>Appareillages</span>
         </a>
       </li><!-- End Login Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementMedicaments') }}">
-          <i class="bi bi-dash-circle"></i>
+          <i class="bi bi-drug"></i>
           <span>Médicaments</span>
         </a>
       </li><!-- End Error 404 Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementExamens') }}">
-          <i class="bi bi-file-earmark"></i>
+          <i class="bi bi-book"></i>
           <span>Examens</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementPrestations') }}">
-          <i class="bi bi-file-earmark"></i>
+          <i class="bi bi-book"></i>
           <span>Prestations</span>
         </a>
       </li><!-- End Blank Page Nav -->
