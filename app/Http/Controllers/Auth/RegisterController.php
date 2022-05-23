@@ -46,13 +46,39 @@ class RegisterController extends Controller
           case 'SuperAdmin':
             return '/dashboard/superadmin';
             break;
+
           case 'AdminEtablissement':
             return '/dashboard/adminetablissement';
             break;
-          /*case 'Admin':
-            return '/dashboard/admin';
+          case 'ManagerEtablissement':
+            return '/dashboard/manageretablissement';
             break;
-          case 'Operateur':
+          case 'ComptableEtablissement':
+            return '/dashboard/comptableetablissement';
+            break;
+          case 'TiersPayantEtablissement':
+            return '/dashboard/tierspayantetablissement';
+            break;
+          case 'CaisseEtablissement':
+            return '/dashboard/caisseetablissement';
+            break;
+          case 'PharmacienEtablissement':
+            return '/dashboard/caisseetablissement';
+            break;
+          case 'PraticienEtablissement':
+            return '/dashboard/praticienetablissement';
+            break;
+          case 'InfirmierEtablissement':
+            return '/dashboard/infirmieretablissement';
+            break;
+          case 'LaborantinEtablissement':
+            return '/dashboard/laborantinetablissement';
+            break;
+
+          case 'AdminAssurance':
+            return '/dashboard/adminassurance';
+            break;
+          /*case 'Operateur':
             return '/dashboard/operateur';
             break;
           case 'Client':

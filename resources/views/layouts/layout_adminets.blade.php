@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{ route('dashSuperAdmin') }}" class="logo d-flex align-items-center">
+      <a href="{{ route('dashAdminEtablissement') }}" class="logo d-flex align-items-center">
         <img src="{{ URL::to('assets/img/logo.png') }}" alt="">
         <span class="d-none d-lg-block">DATRAC</span>
       </a>
@@ -159,7 +159,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('dashSuperAdmin') }}">
+        <a class="nav-link " href="{{ route('dashAdminEtablissement') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -171,80 +171,59 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Utilisateurs</span>
+            <a href="{{ route('dashAdminEtablissementAgents') }}">
+              <i class="bi bi-circle"></i><span> Agents </span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('dashAdminEtablissementPraticiens') }}">
+              <i class="bi bi-circle"></i><span> Praticiens </span>
             </a>
           </li>
         </ul>
       </li><!-- End Components Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementAssurances') }}">
           <i class="bi bi-person"></i>
-          <span>Etablissements</span>
+          <span>Assurance</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
-          <i class="bi bi-question-circle"></i>
-          <span>Assurances</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-
-      <li class="nav-item">
         <a class="nav-link collapsed" href="">
-          <i class="bi bi-envelope"></i>
-          <span>Actes</span>
+          <i class="bi bi-person"></i>
+          <span>Emploi du Temps</span>
         </a>
-      </li><!-- End Contact Page Nav -->
+      </li><!-- End Profile Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Affections</span>
-        </a>
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementAppareillages') }}">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Appareillages</span>
         </a>
       </li><!-- End Login Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-error-404.html">
+        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementMedicaments') }}">
           <i class="bi bi-dash-circle"></i>
           <span>Médicaments</span>
         </a>
       </li><!-- End Error 404 Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementExamens') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Examens</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementPrestations') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Prestations</span>
-        </a>
-      </li><!-- End Blank Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="">
-          <i class="bi bi-file-earmark"></i>
-          <span>Villes</span>
-        </a>
-      </li><!-- End Blank Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="">
-          <i class="bi bi-file-earmark"></i>
-          <span>Spécialités</span>
         </a>
       </li><!-- End Blank Page Nav -->
 

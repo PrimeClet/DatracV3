@@ -35,7 +35,7 @@
 	                <tbody>
 
 	                  @if(count($examens) != 0)
-                    	@foreach($examens as $xamen)
+                    	@foreach($examens as $examen)
                         <tr>
 							<td>{{ $examen->id }}</td>
 							<td>{{ $examen->designation }}</td>

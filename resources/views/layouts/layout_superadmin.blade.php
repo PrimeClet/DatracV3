@@ -170,8 +170,18 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Utilisateurs</span>
+            <a href="{{ route('dashSuperAdminSuper') }}">
+              <i class="bi bi-circle"></i><span> Super Admin</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('dashSuperAdminEtab') }}">
+              <i class="bi bi-circle"></i><span> Admin Etablissement </span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('dashSuperAdminAssu') }}">
+              <i class="bi bi-circle"></i><span> Admin Assurance </span>
             </a>
           </li>
         </ul>
@@ -199,14 +209,14 @@
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminAffections') }}">
           <i class="bi bi-card-list"></i>
           <span>Affections</span>
         </a>
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminAppareillages') }}">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Appareillages</span>
         </a>
@@ -220,28 +230,21 @@
       </li><!-- End Error 404 Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminExamens') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Examens</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
-          <i class="bi bi-file-earmark"></i>
-          <span>Prestations</span>
-        </a>
-      </li><!-- End Blank Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminVilles') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Villes</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="{{ route('dashSuperAdminSpecialites') }}">
           <i class="bi bi-file-earmark"></i>
           <span>Spécialités</span>
         </a>
@@ -281,7 +284,7 @@
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://licabo.com/">LICABO</a>
+      Designed by <a href="https://tinsid.com/">TINSID</a>
     </div>
   </footer><!-- End Footer -->
 

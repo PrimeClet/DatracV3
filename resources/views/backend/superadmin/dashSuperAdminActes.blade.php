@@ -26,8 +26,8 @@
 	                  <tr>
 
 	                    <th scope="col">Id</th>
-						<th scope="col">Libellé</th>
-						<th scope="col">Quotation</th>
+						<th scope="col">Code</th>
+						<th scope="col">Désignation</th>
 						<th scope="col">Actions</th>
 
 	                  </tr>
@@ -39,8 +39,8 @@
                     	@foreach($actes as $acte)
                         <tr>
 							<td>{{ $acte->id }}</td>
-							<td>{{ $acte->libelle }}</td>
-							<td>{{ $acte->quotation }}</td>
+							<td>{{ $acte->code }}</td>
+							<td>{{ $acte->designation }}</td>
 							<td class="text-center">
 								<button class="btn btn-xs btn-primary">
 									<a href="{{ URL::to('dashboard/root/show-acte') }}/{{ $acte->id }}">
@@ -84,14 +84,14 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">Quotation</label>
-											<input type="text" class="form-control" placeholder="Quotation" name="quotation">
+											<label class="form-label">Code</label>
+											<input type="text" class="form-control" placeholder="Code" name="code">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">Libellé</label>
-											<input type="text" class="form-control" placeholder="Libellé" name="libelle">
+											<label class="form-label">Designation</label>
+											<input type="text" class="form-control" placeholder="designation" name="designation">
 										</div>
 									</div>
 								</div>

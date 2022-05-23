@@ -89,7 +89,7 @@
                                     <div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">Province</label>
-											<select class="form-control" name="acte_id">
+											<select class="form-control" name="province_id">
                                                 @if(count($provinces) !=0)
                                                     @foreach ($provinces as $province)
 														<option value="{{ $province->id}}">
