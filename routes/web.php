@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function() {
     #                                  ROOT ROUTING                                              #
     #                                                                                            #
     ##############################################################################################
-	
+
     /* Start Routing for Root's User */
     Route::get('dashboard/superadmin', 'SuperAdminController@dashboardSuperAdmin')->name('dashboardSuperAdmin');
 
@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function() {
 
     ##############################################################################################
     #                                                                                            #
-    #                                  SuperAdmin ROUTING                                              #
+    #                                  SuperAdmin ROUTING                                        #
     #                                                                                            #
     ##############################################################################################
 
@@ -290,8 +290,17 @@ Route::middleware(['auth'])->group(function() {
         Route::get('dashboard/adminassurance/edit-prestation/{id}', 'AdminAssuranceController@editPrestationAdminAssurance')->name('editPrestationAdminAssurance');
         Route::post('dashboard/adminassurance/update-prestation', 'AdminAssuranceController@updatePrestationAdminAssurance')->name('updatePrestationAdminAssurance');
 
+    ##############################################################################################
+    #                                                                                            #
+    #                           GENERERATION FEUILLE DE SOINS                                    #
+    #                                                                                            #
+    ##############################################################################################
+
 
 });
+
+Route::get('/feuille-de-soin', 'feuilleController@feuilleSoins')->name('feuilleSoin');
+Route::get('/feuille-de-soin/download', 'feuilleController@getPostPdf')->name('feuilleSoinDownload');
 
 //Clear Cache facade value:
 Route::get('/clear-cache', function() {
