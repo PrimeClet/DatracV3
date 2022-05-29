@@ -25,13 +25,8 @@
 	                  <tr>
 
 	                    <th scope="col">Id</th>
-						<th scope="col">Date Prestation</th>
-						<th scope="col">Visite à Domicile</th>
-						<th scope="col">Affection</th>
-						<th scope="col">Acte</th>
-						<th scope="col">Ticket Moderateur</th>
-						<th scope="col">Forfait Deplacement</th>
-						<th scope="col">Montant à Payer</th>
+						<th scope="col">Tarif Structure</th>
+						<th scope="col">Prestation</th>
 						<th scope="col">Actions</th>
 
 	                  </tr>
@@ -42,27 +37,22 @@
                     	@foreach($prestationEtablissements as $prestationEtablissement)
                         <tr>
 							<td>{{ $prestationEtablissement->id }}</td>
-							<td>{{ $prestationEtablissement->datePrestation }}</td>
-                            <td>{{ $prestationEtablissement->visiteDomicile }}</td>
-							<td>{{ $prestationEtablissement->affectionAssurance_id }}</td>
-							<td>{{ $prestationEtablissement->acteAssurance_id }}</td>
-							<td>{{ $prestationEtablissement->ticketModerateur }}</td>
-							<td>{{ $prestationEtablissement->forfaitDeplacement }}</td>
-							<td>{{ $prestationEtablissement->montantPayer }}</td>
+							<td>{{ $prestationEtablissement->tarif_structure }}</td>
+                            <td>{{ $prestationEtablissement->prestation_id }}</td>
 							<td class="text-center">
 								<button class="btn btn-xs btn-primary">
-									<a href="{{ URL::to('dashboard/adminetablissement/show-prestation') }}/{{ $PrestationEtablissement->id }}">
+									<a href="{{ URL::to('dashboard/adminetablissement/show-prestation') }}/{{ $prestationEtablissement->id }}">
 										Voir
 									</a>
 								</button>
 
-								<a href="{{ URL::to('dashboard/adminetablissement/show-prestation') }}/{{ $PrestationEtablissement->id }}">
+								<a href="{{ URL::to('dashboard/adminetablissement/show-prestation') }}/{{ $prestationEtablissement->id }}">
 									<button type="button" class="btn btn-warning">
 										Voir
 									</button>
 								</a>
 								
-								<a href="{{ URL::to('dashboard/adminetablissement/edit-prestation') }}/{{ $PrestationEtablissement->id }}" class="btn"><i class="bi brush-fillt"></i></a>
+								<a href="{{ URL::to('dashboard/adminetablissement/edit-prestation') }}/{{ $prestationEtablissement->id }}" class="btn"><i class="bi brush-fillt"></i></a>
 
 								
 							</td>
@@ -72,10 +62,7 @@
                     <tr>
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
-                        <td>Aucune donnée</td>	
-                        <td>Aucune donnée</td>
-						<td>Aucune donnée</td>
-						<td>Aucune donnée</td>											
+                        <td>Aucune donnée</td>												
                     </tr>
                     @endif
 
@@ -93,8 +80,8 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">Date Prestation</label>
-											<input type="date" class="form-control" name="datePrestation">
+											<label class="form-label">Tarif structure</label>
+											<input type="text" class="form-control" name="tarif_structure">
 										</div>
 									</div>
                                     <div class="col-sm-6 col-md-6">

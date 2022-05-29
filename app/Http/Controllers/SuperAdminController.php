@@ -233,7 +233,7 @@ class SuperAdminController extends Controller
     	$page_title = "Nos Prestations";
 
         $prestations = Prestations::all();
-        return view('backend.superadmin.dashSuperAdminAffections', compact('page_title', 'prestations'));
+        return view('backend.superadmin.dashSuperAdminPrestations ', compact('page_title', 'prestations'));
 
     }
 
@@ -534,7 +534,7 @@ class SuperAdminController extends Controller
 
     	// Get new data 
         $new_prestation->code = $request->input('code');
-        $new_prestation->titre = $request->input('libelle');
+        $new_prestation->libelle = $request->input('libelle');
 
         if($new_prestation->save()){
 
@@ -1007,7 +1007,7 @@ class SuperAdminController extends Controller
 
     	// Get new data 
         $new_prestation->code = $request->input('code');
-        $new_prestation->titre = $request->input('libelle');
+        $new_prestation->libelle = $request->input('libelle');
 
         if($new_prestation->save()){
 
