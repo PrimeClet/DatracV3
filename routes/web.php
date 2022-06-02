@@ -248,6 +248,13 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/adminassurance/edit-agent/{id}', 'AdminAssuranceController@editAgentAdminAssurance')->name('editAgentAdminAssurance');
     Route::post('dashboard/adminassurance/update-agent', 'AdminAssuranceController@updateAgentAdminAssurance')->name('updateAgentAdminAssurance');
 
+    /* CRUD Assures */
+    Route::get('dashboard/adminassurance/nos-assures', 'AdminAssuranceController@dashAdminAssuranceAssures')->name('dashAdminAssuranceAssures');
+    Route::post('dashboard/adminassurance/nouvel-assure', 'AdminAssuranceController@newAssureAdminAssurance')->name('newAssureAdminAssurance');
+    Route::get('dashboard/adminassurance/show-assure/{id}', 'AdminAssuranceController@showAssureAdminAssurance')->name('showAssureAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-assure/{id}', 'AdminAssuranceController@editAssureAdminAssurance')->name('editAssureAdminAssurance');
+    Route::post('dashboard/adminassurance/update-assure', 'AdminAssuranceController@updateAssureAdminAssurance')->name('updateAssureAdminAssurance');
+
      /* CRUD Actes */
     Route::get('dashboard/adminassurance/nos-actes', 'AdminAssuranceController@dashAdminAssuranceActes')->name('dashAdminAssuranceActes');
     Route::post('dashboard/adminassurance/nouvel-acte', 'AdminAssuranceController@newActeAdminAssurance')->name('newActeAdminAssurance');

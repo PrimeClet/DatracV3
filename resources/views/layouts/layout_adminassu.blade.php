@@ -176,7 +176,7 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{{ route('dashAdminAssuranceAssures') }}">
               <i class="bi bi-circle"></i><span>Assurés</span>
             </a>
           </li>

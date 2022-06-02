@@ -18,7 +18,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'codeAgent', 'email', 'password', 'role', 'telephone', 'matricule', 'assurance_id', 'etablissement_id',
         'codeAgent','poste', 'adresse', 'ville', 'photo_url', 'api_token', 'code_secret', 'active', 'remember_token',
-        'code_praticien', 'type_assure_id',
+        'code_praticien', 'type_assure_id', 'datenaiss', 'numero_patient', 'numero_assure', 'nom_assure', 'situation_patient',
+        'signature_patient',
     ];
 
     /**

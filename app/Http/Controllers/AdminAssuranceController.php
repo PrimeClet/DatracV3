@@ -18,6 +18,7 @@ use App\Models\Actes;
 use App\Models\Affections;
 use App\Models\Assurance;
 use App\Models\TypeAssures;
+use App\Models\Assures;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -69,12 +70,16 @@ class AdminAssuranceController extends Controller
         // Count typeassures
         $count_typeassures = TypeAssures::all()->count();
 
+        // Count assures
+        $count_assures = Assures::all()->count();
+
         // Count actes
         $count_actes = ActeAssurances::all()->count();
         // dd($count_actes);
 
 	    return view('backend.adminassurance.dashAdminAssurance', compact('page_title', 'count_users', 'count_examens',
-    'count_prestations', 'count_appareillages', 'count_medicaments', 'count_actes', 'adminassu', 'count_typeassures'));
+    'count_prestations', 'count_appareillages', 'count_medicaments', 'count_actes', 'adminassu', 
+    'count_assures','count_typeassures'));
 
     }
 
@@ -124,6 +129,20 @@ class AdminAssuranceController extends Controller
         $assurances = Assurance::where('id', Auth::user()->assurance_id);
 
         return view('backend.adminassurance.dashAdminAssuranceAgents', compact('page_title', 'users', 'assurances'));
+
+    }
+
+    public function dashAdminAssuranceAssures(Request $request)
+    {
+
+    	$page_title = "Nos Assurés";
+
+        $assures = Assures::all();
+        $typeassures = TypeAssures::all();
+
+        $assurances = Assurance::where('id', Auth::user()->assurance_id);
+
+        return view('backend.adminassurance.dashAdminAssuranceMedicaments', compact('page_title', 'assures', 'typeassures', 'assurances'));
 
     }
 
@@ -284,6 +303,76 @@ class AdminAssuranceController extends Controller
             return redirect()->back()->with('failed', 'Impossible de créer ce nouveau compte !');
          }
     }
+
+    public function newAssureAdminAssurance(Request $request)
+    {
+        // Verifier si les mots de passe sont identiques
+         if($request->input('password') == $request->input('confirm_password')){    
+
+            $new_user = new User();
+
+            // Verification email
+            if($this->checkIfExistsEmail($request->input('email')) && $request->input('email') != $new_user->email){
+
+                // Redirection
+                return redirect()->back()->with('failed', 'Cet email existe déjà dans la base de données !');
+
+            }
+
+            // Get new data 
+            $new_user->name = $request->input('name');
+            $new_user->type_assure_id = $request->input('type_assure_id');
+            $new_user->email = $request->input('email');
+            $new_user->datenaiss = $request->input('datenaiss');
+            $new_user->numero_assure = $request->input('numero_assure'); 
+            $new_user->numero_patient = $request->input('numero_patient'); 
+            $new_user->situation_patient = $request->input('situation_patient'); 
+            $new_user->telephone = $request->input('telephone');
+            $new_user->adresse = $request->input('adresse');
+            $new_user->assurance_id = Auth::user()->assurance_id;    
+            $new_user->password = Hash::make($request->input('password'));
+            $new_user->api_token = Str::random(100);
+            $new_user->active = 1;
+
+            if ($request->file('file') !== null) {
+                $file = $request->file('photo_url');
+    
+                if ($request->hasFile('photo_url')) {
+                    $path = public_path('assets/photos/agents/');
+                    // foreach ($files as $file) {
+                    $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
+    
+                    $location = '/photos/agents/'. $filename;
+                    $file->move($path, $filename);
+                    $new_user->photo_url = $location;
+                }
+            }
+            
+            if ($request->file('signature_patient') !== null) {
+                $file = $request->file('signature_patient');
+
+                if ($request->hasFile('signature_patient')) {
+                    $path = public_path('assets/photos/signature/');
+                    // foreach ($files as $file) {
+                    $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
+
+                    $location = '/photos/signature/'. $filename;
+                    $file->move($path, $filename);
+                    $new_user->signature_patient = $location;
+                }
+            }
+
+            if($new_user->save()){
+
+                // Redirection
+                return redirect()->back()->with('success', 'Nouveau compte crée avec succès !');
+            }
+
+            // Redirection
+            return redirect()->back()->with('failed', 'Impossible de créer ce nouveau compte !');
+         }
+    }
+
      /**
      * Display a listing of the resource.
      *
@@ -671,6 +760,68 @@ class AdminAssuranceController extends Controller
                 $location = '/photos/agents/'. $filename;
                 $file->move($path, $filename);
                 $utilisateur->photo_url = $location;
+            }
+        }
+
+        // Sauvegarde
+        if($utilisateur->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Utilisateur modifié avec succès !');
+        }
+        return redirect()->back()->with('failed', 'Impossible de modifier cet utilisateur !');
+    }
+
+    public function updateAssureAdminAssurance(Request $request)
+    {
+        // Recuperer l'utilisateur correspondante
+        $utilisateur = User::find($request->input('id'));
+
+        // Verification email
+        if($request->input('password') != $request->input('confirm_password')){
+
+            // Redirection
+            return redirect()->back()->with('failed', 'Les mots de passe ne sont pas identiques !');
+
+        }
+
+        // Préparer la requete
+        $utilisateur->name = $request->input('name');
+        $utilisateur->type_assure_id = $request->input('type_assure_id');
+        $utilisateur->email = $request->input('email');
+        $utilisateur->datenaiss = $request->input('datenaiss');
+        $utilisateur->numero_assure = $request->input('numero_assure');  
+        $utilisateur->situation_patient = $request->input('situation_patient');   
+        $utilisateur->telephone = $request->input('telephone');
+        $utilisateur->adresse = $request->input('adresse');
+        $utilisateur->assurance_id = Auth::user()->assurance_id;    
+        $utilisateur->password = Hash::make($request->input('password'));
+
+        if ($request->file('photo_url') !== null) {
+            $file = $request->file('photo_url');
+
+            if ($request->hasFile('photo_url')) {
+                $path = public_path('assets/photos/agents/');
+                // foreach ($files as $file) {
+                $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
+
+                $location = '/photos/agents/'. $filename;
+                $file->move($path, $filename);
+                $utilisateur->photo_url = $location;
+            }
+        }
+
+        if ($request->file('signature_patient') !== null) {
+            $file = $request->file('signature_patient');
+
+            if ($request->hasFile('signature_patient')) {
+                $path = public_path('assets/photos/signature/');
+                // foreach ($files as $file) {
+                $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
+
+                $location = '/photos/signature/'. $filename;
+                $file->move($path, $filename);
+                $utilisateur->signature_patient = $location;
             }
         }
 
