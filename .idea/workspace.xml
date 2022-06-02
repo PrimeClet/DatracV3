@@ -2,54 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63a6dfcf-102d-4168-a291-f39717ebb98d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminEtablissementController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ProvinceController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Examens.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Prestations.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Provinces.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Specialites.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Villes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/adminetablissement/dashAdminEtablissement.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/superadmin/dashSuperAdminExamens.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/superadmin/dashSuperAdminPrestations.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/superadmin/dashSuperAdminSpecialites.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/superadmin/dashSuperAdminVilles.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/layout_adminets.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/img/images/assurance/cnamgspic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/feuilleSoin/fileHealth.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DatracV3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DatracV3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ConfirmPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ConfirmPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SiteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckForMaintenanceMode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckForMaintenanceMode.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TrimStrings.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/TrimStrings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Actes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Actes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Affections.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Affections.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Appareillages.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Appareillages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/broadcasting.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/broadcasting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/cache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/cors.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/cors.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/hashing.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/hashing.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/logging.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/logging.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/queue.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/queue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/superadmin/dashSuperAdminActes.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/superadmin/dashSuperAdminActes.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_04_17_141853_create_specialites.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +18,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -165,6 +126,11 @@
       <path value="$PROJECT_DIR$/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
+      <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
     </include_path>
   </component>
   <component name="ProjectId" id="27jnE56DvxUWhHMrfxfNICWnKKZ" />
@@ -187,16 +153,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="G:\BOULOT\CNAMGS\DatracV3\public\assets\img\assets\images" />
-      <recent name="G:\BOULOT\CNAMGS\DatracV3\public\assets\img\images\assurance" />
-      <recent name="G:\BOULOT\CNAMGS\DatracV3\app\Models" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\BOULOT\CNAMGS\DatracV3\public\assets\img\images\assurance" />
       <recent name="G:\BOULOT\CNAMGS\DatracV3\resources\views\layouts" />
       <recent name="G:\BOULOT\CNAMGS\DatracV3\resources\views\backend\superadmin" />
       <recent name="G:\BOULOT\CNAMGS\DatracV3\resources\views\backend" />
       <recent name="G:\BOULOT\CNAMGS\DatracV3\config" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\BOULOT\CNAMGS\DatracV3\public\assets\img\assets\images" />
+      <recent name="G:\BOULOT\CNAMGS\DatracV3\public\assets\img\images\assurance" />
       <recent name="G:\BOULOT\CNAMGS\DatracV3\app\Models" />
     </key>
   </component>
@@ -214,7 +180,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649842280517</updated>
-      <workItem from="1649842283977" duration="37813000" />
+      <workItem from="1649842283977" duration="45920000" />
+      <workItem from="1650227241420" duration="2183000" />
+      <workItem from="1650453282790" duration="1190000" />
+      <workItem from="1653303585250" duration="6796000" />
+      <workItem from="1653363839506" duration="33076000" />
+      <workItem from="1653598494969" duration="18373000" />
     </task>
     <servers />
   </component>
@@ -226,9 +197,29 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="530" y="204" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.900@0.0.1600.900" timestamp="1650019430565" />
+    <state x="392" y="182" key="Vcs.Push.Dialog.v2" timestamp="1650170060820">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="392" y="182" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1650170060820" />
+    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1653329217208">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1653329217208" />
+    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900@0.0.1600.900" timestamp="1650169997771" />
     <state x="456" y="205" key="run.anything.popup" timestamp="1650020858116">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="456" y="205" key="run.anything.popup/0.0.1600.900@0.0.1600.900" timestamp="1650020858116" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/feuilleSoin/fileHealth.blade.php</url>
+          <line>174</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

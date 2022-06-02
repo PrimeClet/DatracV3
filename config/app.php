@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        // Service Provider DomPDF
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -226,7 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+         // Façade DomPDF
+        "PDF" => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
