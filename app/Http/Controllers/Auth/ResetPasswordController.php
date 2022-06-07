@@ -65,9 +65,17 @@ class ResetPasswordController extends Controller
             return '/dashboard/laborantinetablissement';
             break;
         
-            case 'AdminAssurance':
-              return '/dashboard/adminassurance';
-              break;
+          case 'AdminAssurance':
+            return '/dashboard/adminassurance';
+            break;
+
+          
+          case 'Assure':
+            return '/dashboard/assure';
+            break;
+          case 'AyantDroit':
+            return '/dashboard/ayantdroit';
+            break;
           /*case 'Operateur':
             return '/dashboard/operateur';
             break;

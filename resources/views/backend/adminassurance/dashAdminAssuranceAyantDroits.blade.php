@@ -8,15 +8,15 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Gestion des Assurés</h5>
+              <h5 class="card-title">Gestion des Ayant-droits</h5>
 
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Listing des Assurés</button>
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Listing des Ayant-droits</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Ajouter Assuré</button>
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Ajouter Ayant-droit</button>
                 </li>
               </ul>
               <div class="tab-content pt-2" id="borderedTabContent">
@@ -28,10 +28,8 @@
 	                    <th scope="col" class="align-middle">Numero assure</th>
 						<th scope="col" class="align-middle">Photo</th>
 						<th scope="col" class="align-middle">Nom</th>
-                        <th scope="col" class="align-middle">Date</th>
-                        <th scope="col" class="align-middle">Numero</th>
-						<th scope="col" class="align-middle">Email</th>
-                        <th scope="col" class="align-middle">Signature</th>
+                        <th scope="col" class="align-middle">Date Naissance</th>
+                        <th scope="col" class="align-middle">Numero patient</th>
 						<th scope="col" class="align-middle">Telephone</th>
 						<th scope="col" class="align-middle">Actions</th>
 
@@ -45,9 +43,7 @@
 							<td class=""><img src="/assets/photos/agents{{ $user->photo_url }}" alt="" style="width: 60px; height: 40px; border-radius: 5px"> </td>
 							<td class="align-middle fw-bolder">{{ $user->name }}</td>
                             <td class="align-middle fw-bolder">{{ $user->datenaiss }}</td>
-                            <td class="align-middle fw-bolder">{{ $user->numero_assure }}</td>
-							<td class="align-middle text-sm-center" style="font-size: 12px">{{ $user->email }}</td>
-                            <td class=""><img src="/assets/photos/agents{{ $user->signature_patient }}" alt="" style="width: 60px; height: 40px; border-radius: 5px"> </td>
+                            <td class="align-middle fw-bolder">{{ $user->numero_patient }}</td>
 							<td class="fw-bolder align-middle">{{ $user->telephone }}</td>
 							<td class="text-center align-middle">
                                 <button type="button" class="btn p-0 px-1 btn-outline-success" data-bs-toggle="modal" data-bs-target="#{{ $user->id }}">
@@ -73,8 +69,8 @@
                                                     <img src="/assets/photos/roots{{ $user->photo_url }}" class="img-fluid" alt="" width="" height="">
                                                 </div>
                                                 <div class="col-md-6 d-flex flex-column align-content-between">
-                                                    <label class="form-label fw-bolder">Numéro Assure</label>
-                                                    <input type="text" class="form-control mb-1" value="{{ $user->numero_assure }}" disabled>
+                                                    <label class="form-label fw-bolder">Numéro Patient</label>
+                                                    <input type="text" class="form-control mb-1" value="{{ $user->numero_patient }}" disabled>
 
                                                     <label class="form-label fw-bolder">Nom</label>
                                                     <input type="text" class="form-control mb-1" value="{{ $user->name }}" disabled>
@@ -84,9 +80,6 @@
 
                                                     <label class="form-label fw-bolder">Telephone</label>
                                                     <input type="text" class="form-control mb-1" value="{{ $user->telephone }}" disabled>
-                                                </div>
-                                                <div class="col-md-6 d-flex flex-column align-content-between justify-content-center">
-                                                    <img src="/assets/photos/roots{{ $user->signature_patient }}" class="img-fluid" alt="" width="" height="">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -109,7 +102,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST" enctype="multipart/form-data" action="{{ route('updateAssureAdminAssurance') }}">
+                                            <form method="POST" enctype="multipart/form-data" action="{{ route('updateAyantDroitAdminAssurance') }}">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 d-flex flex-column align-content-between">
@@ -120,8 +113,8 @@
                                                         <label class="form-label fw-bolder">Nom Assuré</label>
                                                         <input type="text" class="form-control mb-1" value="{{ $user->name }}" name="name">
 
-                                                        <label class="form-label fw-bolder">Numéro Assuré</label>
-                                                        <input type="text" class="form-control mb-1" value="{{ $user->numero_assure }}" name="numero_assure">
+                                                        <label class="form-label fw-bolder">Numéro Patient</label>
+                                                        <input type="text" class="form-control mb-1" value="{{ $user->numero_patient }}" name="numero_assure">
 
                                                         <label class="form-label fw-bolder">Date Naissance</label>
                                                         <input type="date" class="form-control mb-1" value="{{ $user->datenaiss }}" name="datenaiss">
@@ -130,23 +123,6 @@
                                                         <input type="text" class="form-control mb-1" value="{{ $user->telephone }}" name="telephone">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 d-flex flex-column align-content-between">
-                                                        <label class="form-label fw-bolder">Signature</label>
-                                                        <input class="form-control" type="file" id="formFile" name="signature_patient">
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 d-flex flex-column align-content-between">
-                                                        <label class="form-label fw-bolder">Mot de Passe</label>
-                                                        <input type="text" class="form-control mb-1" value="{{ $user->password }}" name="password">
-                                                    </div>
-													<div class="form-group col-md-6">
-														<label class="text-black font-w500">Confirmez mot de passe</label>
-														<input type="password" name="confirm_password" class="form-control">
-													</div>
-													<div class="col-md-12 d-flex flex-column align-content-between">
-                                                        <label class="form-label fw-bolder">Adresse</label>
-                                                        <input type="text" class="form-control mb-1" value="{{ $user->adresse }}" name="adresse">
-                                                    </div>
                                                 </div>
                                                 <div class="d-grid gap-2 mt-3">
                                                     <button type="submit" class="btn btn-outline-primary btn-block">Editer</button>
@@ -165,7 +141,6 @@
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
-						<td>Aucune donnée</td>
                     </tr>
                     @endif
 
@@ -175,7 +150,7 @@
 	              </table>
                 </div>
                 <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-					<form method="POST" enctype="multipart/form-data" action="{{ route('newAssureAdminAssurance') }}">
+					<form method="POST" enctype="multipart/form-data" action="{{ route('newAyantDroitAdminAssurance') }}">
 						@csrf
 						<div class="card border-0 shadow-none mb-0">
 							<div class="card-body">
@@ -187,42 +162,42 @@
                                     <div class="col-md-12 d-flex flex-column align-content-between">
 										<label class="text-black font-w500">Rôle</label>
 										<select name="role" value="{{old('role')}}" class="form-control">
-                                            <option value="Assure"> Assuré </option>
+                                            <option value="AyantDroit"> Ayant-Droit </option>
 										</select>
 									</div>
                                     <div class="col-md-12 d-flex flex-column align-content-between">
 										<div class="form-group">
-											<label class="form-label">Type Assure</label>
-											<select class="form-control" name="type_assure_id">
-                                                @if(count($typeassures) !=0)
-                                                    @foreach ($typeassures as $typeassure)
-														<option value="{{ $typeassure->id}}">
-															{{ $typeassure->libelle }}
+											<label class="form-label">Numero Assuré</label>
+											<select class="form-select" name="numero_assure" data-live-search="true">
+                                                @if(count($assures) !=0)
+                                                    @foreach ($assures as $assure)
+														<option value="{{ $assure->id}}">
+															{{ $assure->name }}
 														</option>
                                                     @endforeach
                                                 @else
-                                                    <option value="">Aucun Type</option>
+                                                    <option value="">Aucun Numéro</option>
                                                 @endif
                                             </select>
 										</div>
 									</div>
-                                    <div class="col-md-12 d-flex flex-column align-content-between mb-2">
-                                        <label class="form-label fw-bolder">Signature patient</label>
-                                        <input class="form-control mb-1" type="file" id="formFile" name="signature_patient" required>
-                                    </div>
                                     <div class="col-md-12 d-flex flex-column align-content-between">
 
                                         <label class="form-label fw-bolder">Nom Assuré</label>
                                         <input type="text" class="form-control mb-1" value="{{old('name')}}" name="name" required>
 
-                                        <label class="form-label fw-bolder">Numero assure</label>
-                                        <input type="text" class="form-control mb-1" value="{{old('numero_assure')}}" name="numero_assure" required>
+                                        <label class="form-label fw-bolder">Numero patient</label>
+                                        <input type="text" class="form-control mb-1" value="{{old('numero_patient')}}" name="numero_patient" required>
 
                                         <label class="form-label fw-bolder">Telephone</label>
                                         <input type="text" class="form-control mb-1" value="{{old('telephone')}}" name="telephone" required>
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-12 d-flex flex-column align-content-between">
+                                        <label class="form-label fw-bolder">Date Naissance </label>
+                                        <input type="date" class="form-control mb-1" value="{{old('datenaiss')}}" name="datenaiss" required>
+                                    </div>
                                     <div class="col-md-12 d-flex flex-column align-content-between">
                                         <label class="form-label fw-bolder">E-mail</label>
                                         <input type="text" class="form-control mb-1" value="{{old('email')}}" name="email" required>
@@ -231,17 +206,9 @@
                                         <label class="form-label fw-bolder">Mot de Passe</label>
                                         <input type="text" class="form-control mb-1" value="{{old('password')}}" name="password" required>
                                     </div>
-									<div class="col-md-12 d-flex flex-column align-content-between">
+                                    <div class="col-md-12 d-flex flex-column align-content-between">
                                         <label class="form-label fw-bolder">Confirmation Mot de Passe</label>
                                         <input type="text" class="form-control mb-1" value="{{old('confirm_password')}}" name="confirm_password" required>
-                                    </div>
-                                    <div class="col-md-12 d-flex flex-column align-content-between">
-                                        <label class="form-label fw-bolder">Adresse</label>
-                                        <input type="text" class="form-control mb-1" value="{{old('adresse')}}" name="adresse" required>
-                                    </div>
-                                    <div class="col-md-12 d-flex flex-column align-content-between">
-                                        <label class="form-label fw-bolder">Date Naissance </label>
-                                        <input type="date" class="form-control mb-1" value="{{old('datenaiss')}}" name="datenaiss" required>
                                     </div>
                                 </div>
                                 <div class="d-grid gap-2 mt-3">

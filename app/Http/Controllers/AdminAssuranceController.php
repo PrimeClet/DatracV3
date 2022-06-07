@@ -132,19 +132,6 @@ class AdminAssuranceController extends Controller
 
     }
 
-    public function dashAdminAssuranceAssures(Request $request)
-    {
-
-    	$page_title = "Nos Assurés";
-
-        $assures = Assures::all();
-        $typeassures = TypeAssures::all();
-
-        $assurances = Assurance::where('id', Auth::user()->assurance_id);
-
-        return view('backend.adminassurance.dashAdminAssuranceMedicaments', compact('page_title', 'assures', 'typeassures', 'assurances'));
-
-    }
 
      /**
      * Display a listing of the resource.
@@ -241,6 +228,19 @@ class AdminAssuranceController extends Controller
 
     }
 
+    public function dashAdminAssuranceTicketModerateurs(Request $request)
+    {
+
+    	$page_title = "Nos Ticket Modérateurs";
+
+        $ticketmoderateurs = TicketModerateurs::all();
+        $typeassures = TypeAssures::all();
+        $assurances = Assurance::where('id', Auth::user()->assurance_id);
+
+        return view('backend.adminassurance.dashAdminAssuranceTicketModerateurs', compact('page_title', 'ticketmoderateurs', 'typeassures', 'assurances'));
+
+    }
+
     ##############################################################################################
     #                                                                                            #
     #                                  NEW ROUTING                                              #
@@ -290,75 +290,6 @@ class AdminAssuranceController extends Controller
                     $location = '/photos/agents/'. $filename;
                     $file->move($path, $filename);
                     $new_user->photo_url = $location;
-                }
-            }
-
-            if($new_user->save()){
-
-                // Redirection
-                return redirect()->back()->with('success', 'Nouveau compte crée avec succès !');
-            }
-
-            // Redirection
-            return redirect()->back()->with('failed', 'Impossible de créer ce nouveau compte !');
-         }
-    }
-
-    public function newAssureAdminAssurance(Request $request)
-    {
-        // Verifier si les mots de passe sont identiques
-         if($request->input('password') == $request->input('confirm_password')){    
-
-            $new_user = new User();
-
-            // Verification email
-            if($this->checkIfExistsEmail($request->input('email')) && $request->input('email') != $new_user->email){
-
-                // Redirection
-                return redirect()->back()->with('failed', 'Cet email existe déjà dans la base de données !');
-
-            }
-
-            // Get new data 
-            $new_user->name = $request->input('name');
-            $new_user->type_assure_id = $request->input('type_assure_id');
-            $new_user->email = $request->input('email');
-            $new_user->datenaiss = $request->input('datenaiss');
-            $new_user->numero_assure = $request->input('numero_assure'); 
-            $new_user->numero_patient = $request->input('numero_patient'); 
-            $new_user->situation_patient = $request->input('situation_patient'); 
-            $new_user->telephone = $request->input('telephone');
-            $new_user->adresse = $request->input('adresse');
-            $new_user->assurance_id = Auth::user()->assurance_id;    
-            $new_user->password = Hash::make($request->input('password'));
-            $new_user->api_token = Str::random(100);
-            $new_user->active = 1;
-
-            if ($request->file('file') !== null) {
-                $file = $request->file('photo_url');
-    
-                if ($request->hasFile('photo_url')) {
-                    $path = public_path('assets/photos/agents/');
-                    // foreach ($files as $file) {
-                    $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
-    
-                    $location = '/photos/agents/'. $filename;
-                    $file->move($path, $filename);
-                    $new_user->photo_url = $location;
-                }
-            }
-            
-            if ($request->file('signature_patient') !== null) {
-                $file = $request->file('signature_patient');
-
-                if ($request->hasFile('signature_patient')) {
-                    $path = public_path('assets/photos/signature/');
-                    // foreach ($files as $file) {
-                    $filename = strtolower(trim($request->input('name'))). '.' . $file->getClientOriginalExtension();
-
-                    $location = '/photos/signature/'. $filename;
-                    $file->move($path, $filename);
-                    $new_user->signature_patient = $location;
                 }
             }
 
@@ -531,6 +462,29 @@ class AdminAssuranceController extends Controller
 
     }
 
+    public function newTicketModerateurAdminAssurance(Request $request)
+    {
+
+        $new_ticketmoderateur = new TicketModerateurs();
+
+    	// Get new data 
+        $new_ticketmoderateur->pourcentage = $request->input('pourcentage');
+        $new_ticketmoderateur->libelle = $request->input('libelle');
+        $new_ticketmoderateur->typeassure_id = $request->input('typeassure_id');
+
+        $new_ticketmoderateur->assurance_id = Auth::user()->assurance_id;
+
+        if($new_ticketmoderateur->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Nouvel ticket moderateur crée avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de créer cet ticket moderateur !');
+
+    }
+
 
     ##############################################################################################
     #                                                                                            #
@@ -618,6 +572,17 @@ class AdminAssuranceController extends Controller
     	$typeassure = TypeAssures::find($id);
 
         return view('backend.adminAssurance.showTypeAssureAdminAssurance', compact('typeassure', 'page_title'));
+
+    }
+
+    public function showTicketModerateurAdminAssurance(Request $request, $id)
+    {
+
+    	$page_title = "Détails Ticket Moderateur";
+
+    	$ticketmoderateur = TicketModerateurs::find($id);
+
+        return view('backend.adminAssurance.showTicketModerateurAdminAssurance', compact('ticketmoderateur', 'page_title'));
 
     }
 
@@ -709,6 +674,17 @@ class AdminAssuranceController extends Controller
     	$typeassure = TypeAssures::find($id);
 
         return view('backend.adminAssurance.editTypeAssureAdminAssurance', compact('typeassure', 'page_title'));
+
+    }
+
+    public function editTicketModerateurAdminAssurance(Request $request, $id)
+    {
+
+    	$page_title = "Editer Ticket Moderateur";
+
+    	$ticketmoderateur = TicketModerateurs::find($id);
+
+        return view('backend.adminAssurance.editTicketModerateurAdminAssurance', compact('ticketmoderateur', 'page_title'));
 
     }
 
@@ -988,6 +964,30 @@ class AdminAssuranceController extends Controller
         $new_typeassure->assurance_id = Auth::user()->assurance_id;
 
         if($new_typeassure->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'examen modifié avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de modifier cet examen !');
+
+    }
+
+    public function updateTicketModerateurAdminAssurance(Request $request)
+    {
+
+    	$ticketmoderateur_id = $request->input('ticketmoderateur_id');
+    	$new_ticketmoderateur = TypeAssures::find($ticketmoderateur_id);
+
+    	// Get new data 
+        $new_ticketmoderateur->pourcentage = $request->input('pourcentage');
+        $new_ticketmoderateur->libelle = $request->input('libelle');
+        $new_ticketmoderateur->typeassure_id = $request->input('typeassure_id');
+
+        $new_ticketmoderateur->assurance_id = Auth::user()->assurance_id;
+
+        if($new_ticketmoderateur->save()){
 
             // Redirection
             return redirect()->back()->with('success', 'examen modifié avec succès !');

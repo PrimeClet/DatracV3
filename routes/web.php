@@ -238,7 +238,7 @@ Route::middleware(['auth'])->group(function() {
     #                                                                                            #
     ##############################################################################################
 
-     /* Start Routing for AdminEtablissement's User */
+     /* Start Routing for AdminAssurance's User */
      Route::get('dashboard/adminassurance', 'AdminAssuranceController@dashAdminAssurance')->name('dashAdminAssurance');
 
     /* CRUD Agents */
@@ -248,12 +248,19 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/adminassurance/edit-agent/{id}', 'AdminAssuranceController@editAgentAdminAssurance')->name('editAgentAdminAssurance');
     Route::post('dashboard/adminassurance/update-agent', 'AdminAssuranceController@updateAgentAdminAssurance')->name('updateAgentAdminAssurance');
 
+    /* CRUD Ayant-Droits */
+    Route::get('dashboard/adminassurance/nos-ayantdroits', 'AyantDroitController@dashAdminAssuranceAyantDroits')->name('dashAdminAssuranceAyantDroits');
+    Route::post('dashboard/adminassurance/nouvel-ayantdroit', 'AyantDroitController@newAyantDroitAdminAssurance')->name('newAyantDroitAdminAssurance');
+    Route::get('dashboard/adminassurance/show-ayantdroit/{id}', 'AyantDroitController@showAyantDroitAdminAssurance')->name('showAyantDroiteAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-ayantdroit/{id}', 'AyantDroitController@editAyantDroitAdminAssurance')->name('editAyantDroitAdminAssurance');
+    Route::post('dashboard/adminassurance/update-ayantdroit', 'AyantDroitController@updateAyantDroitAdminAssurance')->name('updateAyantDroitAdminAssurance');
+
     /* CRUD Assures */
-    Route::get('dashboard/adminassurance/nos-assures', 'AdminAssuranceController@dashAdminAssuranceAssures')->name('dashAdminAssuranceAssures');
-    Route::post('dashboard/adminassurance/nouvel-assure', 'AdminAssuranceController@newAssureAdminAssurance')->name('newAssureAdminAssurance');
-    Route::get('dashboard/adminassurance/show-assure/{id}', 'AdminAssuranceController@showAssureAdminAssurance')->name('showAssureAdminAssurance');
-    Route::get('dashboard/adminassurance/edit-assure/{id}', 'AdminAssuranceController@editAssureAdminAssurance')->name('editAssureAdminAssurance');
-    Route::post('dashboard/adminassurance/update-assure', 'AdminAssuranceController@updateAssureAdminAssurance')->name('updateAssureAdminAssurance');
+    Route::get('dashboard/adminassurance/nos-assures', 'AssureController@dashAdminAssuranceAssures')->name('dashAdminAssuranceAssures');
+    Route::post('dashboard/adminassurance/nouvel-assure', 'AssureController@newAssureAdminAssurance')->name('newAssureAdminAssurance');
+    Route::get('dashboard/adminassurance/show-assure/{id}', 'AssureController@showAssureAdminAssurance')->name('showAssureAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-assure/{id}', 'AssureController@editAssureAdminAssurance')->name('editAssureAdminAssurance');
+    Route::post('dashboard/adminassurance/update-assure', 'AssureController@updateAssureAdminAssurance')->name('updateAssureAdminAssurance');
 
      /* CRUD Actes */
     Route::get('dashboard/adminassurance/nos-actes', 'AdminAssuranceController@dashAdminAssuranceActes')->name('dashAdminAssuranceActes');
@@ -303,6 +310,13 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/adminassurance/show-typeassure/{id}', 'AdminAssuranceController@showTypeAssureAdminAssurance')->name('showTypeAssureAdminAssurance');
     Route::get('dashboard/adminassurance/edit-typeassure/{id}', 'AdminAssuranceController@editTypeAssureAdminAssurance')->name('editTypeAssureAdminAssurance');
     Route::post('dashboard/adminassurance/update-typeassure', 'AdminAssuranceController@updateTypeAssureAdminAssurance')->name('updateTypeAssureAdminAssurance');
+
+    /* CRUD Ticket Modérateurs */
+    Route::get('dashboard/adminassurance/nos-ticketmoderateurs', 'AdminAssuranceController@dashAdminAssuranceTicketModerateurs')->name('dashAdminAssuranceTicketModerateurs');
+    Route::post('dashboard/adminassurance/nouvel-ticketmoderateur', 'AdminAssuranceController@newTicketModerateurAdminAssurance')->name('newTicketModerateurAdminAssurance');
+    Route::get('dashboard/adminassurance/show-ticketmoderateur/{id}', 'AdminAssuranceController@showTicketModerateurAdminAssurance')->name('showTicketModerateurAdminAssurance');
+    Route::get('dashboard/adminassurance/edit-ticketmoderateur/{id}', 'AdminAssuranceController@editTicketModerateurAdminAssurance')->name('editTicketModerateurAdminAssurance');
+    Route::post('dashboard/adminassurance/update-ticketmoderateur', 'AdminAssuranceController@updateTicketModerateurAdminAssurance')->name('updateTicketModerateurAdminAssurance');
 
     ##############################################################################################
     #                                                                                            #

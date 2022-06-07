@@ -181,7 +181,7 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{{ route('dashAdminAssuranceAyantDroits') }}">
               <i class="bi bi-circle"></i><span>Ayant-Droit</span>
             </a>
           </li>
@@ -236,6 +236,13 @@
         <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceTypeAssures') }}">
           <i class="bi bi-person"></i>
           <span>Type Assure</span>
+        </a>
+      </li><!-- End Blank Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('dashAdminAssuranceTicketModerateurs') }}">
+          <i class="bi bi-bag"></i>
+          <span>Ticket Modérateur</span>
         </a>
       </li><!-- End Blank Page Nav -->
 
