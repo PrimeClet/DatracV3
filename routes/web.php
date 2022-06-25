@@ -233,11 +233,11 @@ Route::middleware(['auth'])->group(function() {
      Route::post('dashboard/adminetablissement/update-prisecharge', 'AdminEtablissementController@updatePriseChargeAdminEtablissement')->name('updatePriseChargeAdminEtablissement');
 
           /* CRUD Prestations de soins Etablissements */
-          Route::get('dashboard/adminetablissement/nos-prestationsoins', 'AdminEtablissementController@dashAdminEtablissementPrestationSoins')->name('dashAdminEtablissementPrestationSoins');
-          Route::post('dashboard/adminetablissement/nouvel-prestationsoin', 'AdminEtablissementController@newPrestationSoinAdminEtablissement')->name('newPrestationSoinAdminEtablissement');
-          Route::get('dashboard/adminetablissement/show-prestationsoin/{id}', 'AdminEtablissementController@showPrestationSoinAdminEtablissement')->name('showPrestationSoinAdminEtablissement');
-          Route::get('dashboard/adminetablissement/edit-prestationsoin/{id}', 'AdminEtablissementController@editPrestationSoinAdminEtablissement')->name('editPrestationSoinAdminEtablissement');
-          Route::post('dashboard/adminetablissement/update-prestationsoin', 'AdminEtablissementController@updatePrestationSoinAdminEtablissement')->name('updatePrestationSoinAdminEtablissement');
+    Route::get('dashboard/adminetablissement/nos-prestationsoins', 'AdminEtablissementController@dashAdminEtablissementPrestationSoins')->name('dashAdminEtablissementPrestationSoins');
+    Route::post('dashboard/adminetablissement/nouvel-prestationsoin', 'AdminEtablissementController@newPrestationSoinAdminEtablissement')->name('newPrestationSoinAdminEtablissement');
+    Route::get('dashboard/adminetablissement/show-prestationsoin/{id}', 'AdminEtablissementController@showPrestationSoinAdminEtablissement')->name('showPrestationSoinAdminEtablissement');
+    Route::get('dashboard/adminetablissement/edit-prestationsoin/{id}', 'AdminEtablissementController@editPrestationSoinAdminEtablissement')->name('editPrestationSoinAdminEtablissement');
+    Route::post('dashboard/adminetablissement/update-prestationsoin', 'AdminEtablissementController@updatePrestationSoinAdminEtablissement')->name('updatePrestationSoinAdminEtablissement');
 
 
     /* End Routing for AdminEtablissement's User */
@@ -247,7 +247,6 @@ Route::middleware(['auth'])->group(function() {
     #                                  AdminEtablissement ROUTING                                #
     #                                                                                            #
     ##############################################################################################
-    ()
 
      ##############################################################################################
     #                                                                                            #

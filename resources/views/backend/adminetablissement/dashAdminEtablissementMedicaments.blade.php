@@ -26,6 +26,7 @@
 
 	                    <th scope="col">Id</th>
 						<th scope="col">Tarif structure</th>
+						<th scope="col">Quantité</th>
 						<th scope="col">Medicament</th>
 						<th scope="col">Etablissement</th>
 						<th scope="col">Actions</th>
@@ -39,6 +40,7 @@
                         <tr>
 							<td>{{ $medicamentEtablissement->id }}</td>
 							<td>{{ $medicamentEtablissement->tarif_structure }}</td>
+							<td>{{ $medicamentEtablissement->quantite }}</td>
                             <td>{{ $medicamentEtablissement->medicament_id }}</td>
 							<td>{{ $medicamentEtablissement->etablissement_id }}</td>
 							<td class="text-center">
@@ -85,6 +87,12 @@
 										<div class="form-group">
 											<label class="form-label">Tarif structure</label>
 											<input type="text" class="form-control" placeholder="Tarif structure" name="tarif_structure">
+										</div>
+									</div>
+									<div class="col-sm-6 col-md-6">
+										<div class="form-group">
+											<label class="form-label">Quantité</label>
+											<input type="number" class="form-control" placeholder="Quantité" name="quantite">
 										</div>
 									</div>
                                     <div class="col-sm-6 col-md-6">

@@ -425,6 +425,7 @@ class AdminEtablissementController extends Controller
 
     	// Get new data 
         $new_medicament->tarif_structure = $request->input('tarif_structure');
+        $new_medicament->quantite = $request->input('quantite');
         $new_medicament->medicament_id = $request->input('medicament_id');
         $new_medicament->etablissement_id = Auth::user()->etablissement_id;
 
@@ -845,6 +846,7 @@ class AdminEtablissementController extends Controller
 
     	// Get new data 
         $new_medicament->tarif_structure = $request->input('tarif_structure');
+        $new_medicament->quantite = $request->input('quantite');
         $new_medicament->medicament_id = $request->input('medicament_id');
         $new_medicament->etablissement_id = Auth::user()->etablissement_id;
 
