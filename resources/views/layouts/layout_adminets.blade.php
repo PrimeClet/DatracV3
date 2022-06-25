@@ -227,6 +227,13 @@
         </a>
       </li><!-- End Blank Page Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('dashAdminEtablissementPriseCharges') }}">
+          <i class="bi bi-bag"></i>
+          <span>Prise en Charges</span>
+        </a>
+      </li><!-- End Blank Page Nav -->
+
     </ul>
 
   </aside><!-- End Sidebar-->

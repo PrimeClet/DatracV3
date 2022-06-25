@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActeAssurances;
+use App\Models\AffectionAssurances;
 use App\User;
 use App\Models\MedicamentEtablissements;
 use App\Models\ExamenEtablissements;
@@ -14,8 +16,11 @@ use App\Models\Medicament;
 use App\Models\Examens;
 use App\Models\Appareillages;
 use App\Models\Assurance;
+use App\Models\Assures;
+use App\Models\PriseCharges;
 use App\Models\Specialites;
-
+use App\Models\TicketModerateurs;
+use App\Models\PrestationSoins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -211,6 +216,58 @@ class AdminEtablissementController extends Controller
         $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
 
         return view('backend.adminetablissement.dashAdminEtablissementAppareillages', compact('page_title', 'appareillageEtablissements','appareillages', 'etablissements'));
+
+    }
+
+    
+    public function dashAdminEtablissementPriseCharges(Request $request)
+    {
+
+    	$page_title = "Nos Prise en Charges";
+
+    	$prisecharges = PriseCharges::all();
+        $ticketmoderateurs = TicketModerateurs::all();
+        $praticiens = User::where('etablissement_id', Auth::user()->etablissement_id)
+                            ->Where(function ($query) {
+                                $query->where('role', 'PharmacienEtablissement')
+                                ->orWhere('role', 'PraticienEtablissement')
+                                ->orWhere('role', 'InfirmierEtablissement')
+                                ->orWhere('role', 'LaborantinEtablissement');
+                            })->get();
+        $assures = User::Where(function ($query) {
+                            $query->where('role', 'Assure');
+                        })->get();
+        $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
+        $assurances = Assurance::all();
+
+        return view('backend.adminetablissement.dashAdminEtablissementPriseCharges', compact('page_title', 'praticiens', 'assurances', 'prisecharges', 'ticketmoderateurs','assures', 'etablissements'));
+
+    }
+
+    public function dashAdminEtablissementPrestationSoins(Request $request)
+    {
+
+    	$page_title = "Nos Prestation de Soins";
+
+    	$prestationsoins = PrestationSoins::all();
+        $ticketmoderateurs = TicketModerateurs::all();
+        $praticiens = User::where('etablissement_id', Auth::user()->etablissement_id)
+                            ->Where(function ($query) {
+                                $query->where('role', 'PharmacienEtablissement')
+                                ->orWhere('role', 'PraticienEtablissement')
+                                ->orWhere('role', 'InfirmierEtablissement')
+                                ->orWhere('role', 'LaborantinEtablissement');
+                            })->get();
+        $assures = User::Where(function ($query) {
+                            $query->where('role', 'Assure');
+                        })->get();
+        $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
+        $assurances = Assurance::all();
+        $acteassurances = ActeAssurances::all();
+        $affectionassurances = AffectionAssurances::all();
+
+        return view('backend.adminetablissement.dashAdminEtablissementPrestationSoins', compact('page_title', 'praticiens', 'assurances', 'prestationsoins', 'ticketmoderateurs','assures', 
+                    'etablissements', 'acteassurances', 'affectionassurances'));
 
     }
 
@@ -445,6 +502,64 @@ class AdminEtablissementController extends Controller
 
     }
 
+    
+    public function newPriseChargeAdminEtablissement(Request $request)
+    {
+
+        $new_prisecharge = new PriseCharges();
+
+    	// Get new data 
+        $new_prisecharge->accident_tiers = $request->input('accident_tiers');
+        $new_prisecharge->date_accident = $request->input('date_accident');
+        $new_prisecharge->soins_grossesse = $request->input('soins_grossesse');
+        $new_prisecharge->debut_grossesse = $request->input('debut_grossesse');
+        $new_prisecharge->date_accouchement = $request->input('date_accouchement');
+        $new_prisecharge->assure_id = $request->input('assure_id');
+        $new_prisecharge->ticket_moderateur_id = $request->input('ticket_moderateur_id');
+        $new_prisecharge->etablissement_id = Auth::user()->etablissement_id;
+
+        if($new_prisecharge->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Nouvel Prise en charge crée avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de créer cette Prise en charge !');
+
+    }
+
+        
+    public function newPrestationSoinAdminEtablissement(Request $request)
+    {
+
+        $new_prestation = new PrestationSoins();
+
+    	// Get new data 
+        $new_prestation->visite_domicile = $request->input('visite_domicile');
+        $new_prestation->montant = $request->input('montant');
+        $new_prestation->forfait_deplacement = $request->input('forfait_deplacement');
+        $new_prestation->montant_payer = $request->input('montant_payer');
+        $new_prestation->total = $request->input('total');
+        $new_prestation->praticien = $request->input('praticien');
+        $new_prestation->affection_assurance_id = $request->input('affection_assurance_id');
+        $new_prestation->acte_assurance_id = $request->input('acte_assurance_id ');
+        $new_prestation->assurance_id = $request->input('assurance_id');
+        $new_prestation->assure = $request->input('assure');
+        $new_prestation->ticket_moderateur_id = $request->input('ticket_moderateur_id');
+        $new_prestation->etablissement_id = Auth::user()->etablissement_id;
+
+        if($new_prestation->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Nouvel Prise en charge crée avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de créer cette Prise en charge !');
+
+    }
+
             	/* Les routes du root seront enumérés ici ! */
 
     ##############################################################################################
@@ -502,6 +617,17 @@ class AdminEtablissementController extends Controller
 
     }
 
+    public function showPrestationSoinAdminEtablissement(Request $request, $id)
+    {
+
+    	$page_title = "Détails Appareillage";
+
+    	$prestationsoin = PrestationSoins::find($id);
+
+        return view('backend.adminetablissement.showPrestationSoinAdminEtablissement', compact('prestationsoin', 'page_title'));
+
+    }
+
             	/* Les routes du root seront enumérés ici ! */
 
     ##############################################################################################
@@ -556,6 +682,28 @@ class AdminEtablissementController extends Controller
     	$appareillageEtablissement = AppareillageEtablissements::find($id);
 
         return view('backend.adminetablissement.editAppareillageAdminEtablissement', compact('appareillageEtablissement', 'page_title'));
+
+    }
+    
+    public function editPriseChargeAdminEtablissement(Request $request, $id)
+    {
+
+    	$page_title = "Editer Prise en Charge";
+
+    	$prisecharge = PriseCharges::find($id);
+
+        return view('backend.adminetablissement.editPriseChargeAdminEtablissement', compact('prisecharge', 'page_title'));
+
+    }
+
+    public function editPrestationSoinAdminEtablissement(Request $request, $id)
+    {
+
+    	$page_title = "Editer Prestation Soins";
+
+    	$prestationsoin = PrestationSoins::find($id);
+
+        return view('backend.adminetablissement.editPrestationSoinAdminEtablissement', compact('prestationsoin', 'page_title'));
 
     }
 
@@ -767,6 +915,64 @@ class AdminEtablissementController extends Controller
         $new_appareillage->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_appareillage->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'appareillage modifié avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de modifier cet appareillage !');
+
+    }
+    
+    public function updatePriseChargeAdminEtablissement(Request $request)
+    {
+
+    	$prisecharge_id = $request->input('prisecharge_id');
+    	$new_prisecharge = AppareillageEtablissements::find($prisecharge_id);
+
+    	// Get new data 
+        $new_prisecharge->accident_tiers = $request->input('accident_tiers');
+        $new_prisecharge->date_accident = $request->input('date_accident');
+        $new_prisecharge->soins_grossesse = $request->input('soins_grossesse');
+        $new_prisecharge->debut_grossesse = $request->input('debut_grossesse');
+        $new_prisecharge->date_accouchement = $request->input('date_accouchement');
+        $new_prisecharge->assure_id = $request->input('assure_id');
+        $new_prisecharge->ticket_moderateur_id = $request->input('ticket_moderateur_id');
+        $new_prisecharge->etablissement_id = Auth::user()->etablissement_id;
+
+        if($new_prisecharge->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'appareillage modifié avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de modifier cet appareillage !');
+
+    }
+
+    public function updatePrestationSoinAdminEtablissement(Request $request)
+    {
+
+    	$prestationsoin_id = $request->input('prestationsoin_id');
+    	$new_prestationsoin = PrestationSoins::find($prestationsoin_id);
+
+    	// Get new data 
+        $new_prestationsoin->visite_domicile = $request->input('visite_domicile');
+        $new_prestationsoin->montant = $request->input('montant');
+        $new_prestationsoin->forfait_deplacement = $request->input('forfait_deplacement');
+        $new_prestationsoin->montant_payer = $request->input('montant_payer');
+        $new_prestationsoin->total = $request->input('total');
+        $new_prestationsoin->praticien = $request->input('praticien');
+        $new_prestationsoin->affection_assurance_id = $request->input('affection_assurance_id');
+        $new_prestationsoin->acte_assurance_id = $request->input('acte_assurance_id');
+        $new_prestationsoin->assurance_id = $request->input('assurance_id');
+        $new_prestationsoin->assure = $request->input('assure');
+        $new_prestationsoin->ticket_moderateur_id = $request->input('ticket_moderateur_id');
+        $new_prestationsoin->etablissement_id = Auth::user()->etablissement_id;
+
+        if($new_prestationsoin->save()){
 
             // Redirection
             return redirect()->back()->with('success', 'appareillage modifié avec succès !');
