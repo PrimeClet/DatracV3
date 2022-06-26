@@ -38,7 +38,7 @@ class CaisseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashCaisseEtablissement(Request $request)
+    public function dashCaisse(Request $request)
     {
 
     	$page_title = "Tableau de bord";
@@ -51,7 +51,7 @@ class CaisseController extends Controller
         // Count prestations
         $count_prestations = PrestationSoins::all()->count();
 
-	    return view('backend.caisse.dashCaisseEtablissement', compact('page_title', 'count_prestations', ));
+	    return view('backend.caisse.dashCaisse', compact('page_title', 'count_prestations', ));
 
     }
 
@@ -63,7 +63,7 @@ class CaisseController extends Controller
     #                                                                                            #
     ##############################################################################################
 
-    public function dashCaisseEtablissementPrestationSoins(Request $request)
+    public function dashCaissePrestationSoins(Request $request)
     {
 
     	$page_title = "Nos Prestation de Soins";
@@ -95,7 +95,7 @@ class CaisseController extends Controller
     #                                                                                            #
     ##############################################################################################
 
-    public function newPrestationSoinCaisseEtablissement(Request $request)
+    public function newPrestationSoinCaisse(Request $request)
     {
 
         $new_prestation = new PrestationSoins();
@@ -133,14 +133,14 @@ class CaisseController extends Controller
     #                                                                                            #
     ##############################################################################################
     
-    public function showPrestationSoinCaisseEtablissement(Request $request, $id)
+    public function showPrestationSoinCaisse(Request $request, $id)
     {
 
     	$page_title = "Détails Appareillage";
 
     	$prestationsoin = PrestationSoins::find($id);
 
-        return view('backend.caisse.showPrestationSoinCaisseEtablissement', compact('prestationsoin', 'page_title'));
+        return view('backend.caisse.showPrestationSoinCaisse', compact('prestationsoin', 'page_title'));
 
     }
 
@@ -152,14 +152,14 @@ class CaisseController extends Controller
     #                                                                                            #
     ##############################################################################################
     
-    public function editPrestationSoinCaisseEtablissement(Request $request, $id)
+    public function editPrestationSoinCaisse(Request $request, $id)
     {
 
     	$page_title = "Editer Prestation Soins";
 
     	$prestationsoin = PrestationSoins::find($id);
 
-        return view('backend.caisse.editPrestationSoinCaisseEtablissement', compact('prestationsoin', 'page_title'));
+        return view('backend.caisse.editPrestationSoinCaisse', compact('prestationsoin', 'page_title'));
 
     }
 
@@ -171,7 +171,7 @@ class CaisseController extends Controller
     #                                                                                            #
     ##############################################################################################
     
-    public function updatePrestationSoinCaisseEtablissement(Request $request)
+    public function updatePrestationSoinCaisse(Request $request)
     {
 
     	$prestationsoin_id = $request->input('prestationsoin_id');
