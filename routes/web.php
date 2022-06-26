@@ -244,9 +244,15 @@ Route::middleware(['auth'])->group(function() {
 
     ##############################################################################################
     #                                                                                            #
-    #                                  AdminEtablissement ROUTING                                #
+    #                                  Caisse ROUTING                                #
     #                                                                                            #
     ##############################################################################################
+    /* CRUD Prestations de soins Caisse */
+    Route::get('dashboard/caisse/nos-prestationsoins', 'CaisseController@dashAdminEtablissementPrestationSoins')->name('dashCaissePrestationSoins');
+    Route::post('dashboard/caisse/nouvel-prestationsoin', 'CaisseController@newPrestationSoinAdminEtablissement')->name('newPrestationSoinCaisse');
+    Route::get('dashboard/caisse/show-prestationsoin/{id}', 'CaisseController@showPrestationSoinAdminEtablissement')->name('showPrestationSoinCaisse');
+    Route::get('dashboard/caisse/edit-prestationsoin/{id}', 'CaisseController@editPrestationSoinAdminEtablissement')->name('editPrestationSoinCaisse');
+    Route::post('dashboard/caisse/update-prestationsoin', 'CaisseController@updatePrestationSoinAdminEtablissement')->name('updatePrestationSoinCaisse');
 
      ##############################################################################################
     #                                                                                            #

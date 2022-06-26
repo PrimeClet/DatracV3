@@ -21,6 +21,7 @@ use App\Models\PriseCharges;
 use App\Models\Specialites;
 use App\Models\TicketModerateurs;
 use App\Models\PrestationSoins;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
