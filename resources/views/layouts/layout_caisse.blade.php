@@ -159,7 +159,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('dashCaisse') }}">
+        <a class="nav-link " href="{{ route('dashCaisseEtablissement') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -170,18 +170,18 @@
           <i class="bi bi-menu-button-wide"></i><span>Comptes</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ route('dashCaissePrestationSoins') }}">
-              <i class="bi bi-circle"></i><span> Prestation de soins </span>
-            </a>
-          </li>
+            <li>
+                <a href="{{ route('dashCaisseEtablissementPrestations') }}">
+                <i class="bi bi-circle"></i><span> Prestations </span>
+                </a>
+            </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="">
-          <i class="bi bi-calendar"></i>
-          <span>Emploi du Temps</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="">
+                <i class="bi bi-calendar"></i>
+                <span>Emploi du Temps</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
 
       </li><!-- End Register Page Nav -->
 

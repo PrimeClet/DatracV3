@@ -247,19 +247,14 @@ Route::middleware(['auth'])->group(function() {
     #                                  Caisse ROUTING                                #
     #                                                                                            #
     ##############################################################################################
-    /* CRUD Prestations de soins Caisse */
-    Route::get('dashboard/caisse/nos-prestationsoins', 'CaisseController@dashCaissePrestationSoins')->name('dashCaissePrestationSoins');
-    Route::post('dashboard/caisse/nouvel-prestationsoin', 'CaisseController@newPrestationSoinCaisse')->name('newPrestationSoinCaisse');
-    Route::get('dashboard/caisse/show-prestationsoin/{id}', 'CaisseController@showPrestationSoinCaisse')->name('showPrestationSoinCaisse');
-    Route::get('dashboard/caisse/edit-prestationsoin/{id}', 'CaisseController@editPrestationSoinCaisse')->name('editPrestationSoinCaisse');
-    Route::post('dashboard/caisse/update-prestationsoin', 'CaisseController@updatePrestationSoinCaisse')->name('updatePrestationSoinCaisse');
-
-    /* CRUD Prestations de soins Caisse */
-    Route::get('dashboard/caisse/nos-prestationhospitalisations', 'CaisseController@dashCaissePrestationHospitalisations')->name('dashCaissePrestationHospitalisation');
-    Route::post('dashboard/caisse/nouvel-prestationhospitalisation', 'CaisseController@newPrestationHospitalisationCaisse')->name('newPrestationHospitalisationCaisse');
-    Route::get('dashboard/caisse/show-prestationhospitalisation/{id}', 'CaisseController@showPrestationHospitalisationCaisse')->name('showPrestationHospitalisationCaisse');
-    Route::get('dashboard/caisse/edit-prestationhospitalisation/{id}', 'CaisseController@editPrestationHospitalisationCaisse')->name('editPrestationHospitalisationCaisse');
-    Route::post('dashboard/caisse/update-prestationhospitalisation', 'CaisseController@updatePrestationHospitalisationCaisse')->name('updatePrestationHospitalisationCaisse');
+     /* Start Routing for AdminEtablissement's User */
+     Route::get('dashboard/caisse', 'CaisseEtablissementController@dashCaisseEtablissement')->name('dashCaisseEtablissement');
+    /* CRUD Prestations */
+    Route::get('dashboard/caisse/nos-prestations', 'CaisseEtablissementController@CaisseEtablissementPrestations')->name('dashCaisseEtablissementPrestations');
+    Route::post('dashboard/caisse/nouvel-prestation', 'CaisseEtablissementController@newPrestationCaisseEtablissement')->name('newPrestationCaisseEtablissement');
+    Route::get('dashboard/caisse/show-prestation/{id}', 'CaisseEtablissementController@showPrestationCaisseEtablissement')->name('showPrestationCaisseEtablissement');
+    Route::get('dashboard/caisse/edit-prestation/{id}', 'CaisseEtablissementController@editPrestationCaisseEtablissement')->name('editPrestationCaisseEtablissement');
+    Route::post('dashboard/caisse/update-prestation', 'CaisseEtablissementController@updatePrestationCaisseEtablissement')->name('updatePrestationCaisseEtablissement');
 
      ##############################################################################################
     #                                                                                            #

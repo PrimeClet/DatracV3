@@ -81,7 +81,7 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">Tarif structure</label>
-											<input type="text" class="form-control" name="tarif_structure">
+											<input type="number" class="form-control" name="tarif_structure">
 										</div>
 									</div>
                                     <div class="col-sm-6 col-md-6">

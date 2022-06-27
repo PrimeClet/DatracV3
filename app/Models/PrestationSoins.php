@@ -10,8 +10,8 @@ class PrestationSoins extends Model
         return $this->hasOne('App\Models\Assurances', 'id', 'assurance_id');
     }
 
-    public function affection_assurances(){
-        return $this->belongsToMany('App\Models\Affections', 'assurance_id', 'affection_assurance_id');
+    public function affections(){
+        return $this->belongsToMany('App\Models\Affections', 'assurance_id', 'affection_id');
     }
 
     public function etablissements(){
@@ -24,9 +24,5 @@ class PrestationSoins extends Model
 
     public function acteassurances(){
         return $this->hasOne('App\Models\ActeAssurances', 'id', 'acte_assurance_id');
-    }
-
-    public function affectionassurances(){
-        return $this->hasOne('App\Models\AffectionAssurances', 'id', 'affection_assurance_id');
     }
 }
