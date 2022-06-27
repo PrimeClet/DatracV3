@@ -265,8 +265,8 @@ Route::middleware(['auth'])->group(function() {
     #                                                                                            #
     ##############################################################################################
 
-     /* Start Routing for PraticienEtablissement's User */
-     Route::get('dashboard/praticienetablissement', 'PraticienEtablissementController@dashPraticienEtablissement')->name('dashPraticienEtablissement');
+    /* Start Routing for PraticienEtablissement's User */
+    Route::get('dashboard/praticienetablissement', 'PraticienEtablissementController@dashPraticienEtablissement')->name('dashPraticienEtablissement');
     
      /* CRUD Prestations soins*/
     Route::get('dashboard/praticienetablissement/nos-prestationsoins', 'PraticienEtablissementController@PraticienEtablissementPrestationSoins')->name('dashPraticienEtablissementPrestationSoins');
@@ -275,12 +275,12 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/praticienetablissement/edit-prestationsoins/{id}', 'PraticienEtablissementController@editPrestationSoinsPraticienEtablissement')->name('editPrestationSoinsPraticienEtablissement');
     Route::post('dashboard/praticienetablissement/update-prestationsoins', 'PraticienEtablissementController@updatePrestationSoinsPraticientablissement')->name('updatePrestationSoinsPraticienEtablissement');
 
-     /* CRUD Prise en Charge */
-     Route::get('dashboard/praticienetablissement/nos-prisecharges', 'PraticienEtablissementController@dashPraticienEtablissementPriseCharges')->name('dashPraticienEtablissementPriseCharges');
-     Route::post('dashboard/praticieetablissementn/nouvel-prisecharge', 'PraticienEtablissementController@newPriseChargePraticienEtablissement')->name('newPriseChargePraticienEtablissement');
-     Route::get('dashboard/praticienetablissement/show-prisecharge/{id}', 'PraticienEtablissementController@showPriseChargePraticienEtablissement')->name('showPriseChargePraticienEtablissement');
-     Route::get('dashboard/praticienetablissement/edit-prisecharge/{id}', 'PraticienEtablissementController@editPriseChargePraticienEtablissement')->name('editPriseChargePraticienEtablissement');
-     Route::post('dashboard/praticienetablissement/update-prisecharge', 'PraticienEtablissementController@updatePriseChargePraticienEtablissement')->name('updatePriseChargePraticienEtablissement');
+    /* CRUD Prise en Charge */
+    Route::get('dashboard/praticienetablissement/nos-prisecharges', 'PraticienEtablissementController@dashPraticienEtablissementPriseCharges')->name('dashPraticienEtablissementPriseCharges');
+    Route::post('dashboard/praticieetablissementn/nouvel-prisecharge', 'PraticienEtablissementController@newPriseChargePraticienEtablissement')->name('newPriseChargePraticienEtablissement');
+    Route::get('dashboard/praticienetablissement/show-prisecharge/{id}', 'PraticienEtablissementController@showPriseChargePraticienEtablissement')->name('showPriseChargePraticienEtablissement');
+    Route::get('dashboard/praticienetablissement/edit-prisecharge/{id}', 'PraticienEtablissementController@editPriseChargePraticienEtablissement')->name('editPriseChargePraticienEtablissement');
+    Route::post('dashboard/praticienetablissement/update-prisecharge', 'PraticienEtablissementController@updatePriseChargePraticienEtablissement')->name('updatePriseChargePraticienEtablissement');
 
     /* CRUD Prestation médicale*/
     Route::get('dashboard/praticienetablissement/nos-prestationmedicales', 'PraticienEtablissementController@PraticienEtablissementPrestationMedicales')->name('dashPraticienEtablissementPrestationMedicales');

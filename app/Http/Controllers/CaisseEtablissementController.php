@@ -45,14 +45,15 @@ class CaisseEtablissementController extends Controller
     	$page_title = "Tableau de bord";
 
     	$user_id = Auth::user()->id;
-        $adminetablissement_id = Auth::user()->etablissement_id;
-    	$adminetablissement = User::find($user_id);
-        $adminetab = Etablissements::find($adminetablissement_id);
+        $caisseetablissement_id = Auth::user()->etablissement_id;
+    	$caisse = User::find($user_id);
+        $caisseetablissement = Etablissements::find($caisseetablissement_id);
 
         // Count prestations
         $count_prestations = PrestationCaisses::all()->count();
 
-	    return view('backend.caisse.dashCaisseEtablissement', compact('page_title', 'count_prestations','adminetab', ));
+	    return view('backend.caisseetablissement.dashCaisseEtablissement', compact('page_title', 'caisseetablissement','        $caisseetablissement = Etablissements::find($caisseetablissement_id);
+        ', ));
 
     }
 
@@ -83,7 +84,7 @@ class CaisseEtablissementController extends Controller
         $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
         $assurances = Assurance::all();
 
-        return view('backend.caisse.dashCaisseEtablissementPrestations', compact('page_title', 'caisses', 'assurances', 'prestation_etablissements', 'ticketmoderateurs','assures', 
+        return view('backend.caisseetablissement.dashCaisseEtablissementPrestations', compact('page_title', 'caisses', 'assurances', 'prestation_etablissements', 'ticketmoderateurs','assures', 
                     'etablissements', 'typeassures','prestation_caisses',));
 
     }
@@ -135,7 +136,7 @@ class CaisseEtablissementController extends Controller
 
     	$prestation = PrestationCaisses::find($id);
 
-        return view('backend.caisse.showPrestationCaisseEtablissement', compact('prestation', 'page_title'));
+        return view('backend.caisseetablissement.showPrestationCaisseEtablissement', compact('prestation', 'page_title'));
 
     }
 
@@ -154,7 +155,7 @@ class CaisseEtablissementController extends Controller
 
     	$prestation = PrestationCaisses::find($id);
 
-        return view('backend.caisse.editPrestationCaisseEtablissement', compact('prestation', 'page_title'));
+        return view('backend.caisseetablissement.editPrestationCaisseEtablissement', compact('prestation', 'page_title'));
 
     }
 

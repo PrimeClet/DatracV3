@@ -8,7 +8,7 @@
     <div class="form-head d-flex mb-3 mb-md-5 align-items-start">
         <div class="mr-auto d-none d-lg-block">
             <h3 class="text-primary font-w600">Bienvenue sur DATRAC 2.0 !</h3>
-            <p class="mb-0">CAISSE : <b>{{ $adminetab->nom_etablissement }}</b></p>
+            <p class="mb-0">CAISSE : <b>{{ $caisseetablissement->nom_etablissement }}</b></p>
         </div>
         
         <div class="input-group search-area ml-auto d-inline-flex">
