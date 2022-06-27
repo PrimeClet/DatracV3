@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Models\MedicamentAssurances;
-use App\Models\ExamenAssurances;
-use App\Models\PrestationAssurances;
-use App\Models\AppareillageAssurances;
+
 use App\Models\ActeAssurances;
 use App\Models\TicketModerateurs;
 use App\Models\Prestations;
@@ -97,11 +94,11 @@ class PraticienEtablissementController extends Controller
                                 $query->where('role', 'PraticienEtablissement');
                             })->get();
         $assures = User::Where(function ($query) {
-                            $query->where('role', 'Assure');
-                        })->get();
+                                $query->where('role', 'Assure');
+                            })->get();
         $ayantdroits = User::Where(function ($query) {
-                            $query->where('role', 'AyantDroit');
-                        })->get();
+                                $query->where('role', 'AyantDroit');
+                            })->get();
         $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
         $assurances = Assurance::all();
         $acteassurances = ActeAssurances::all();

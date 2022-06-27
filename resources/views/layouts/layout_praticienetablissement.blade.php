@@ -172,19 +172,19 @@
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
                 <a href="{{ route('dashPraticienEtablissementPrestationSoins') }}">
-                <i class="bi bi-circle"></i><span> Prestations de soins</span>
+                <i class="bi bi-tag-fill"></i><span> Prestations de soins</span>
                 </a>
             </li>
 
             <li>
                 <a href="{{ route('dashPraticienEtablissementPriseCharges') }}">
-                <i class="bi bi-circle"></i><span> Conditions Prise en Charge </span>
+                <i class="bi bi-tags"></i><span> Conditions Prise en Charge </span>
                 </a>
             </li>
 
             <li>
                 <a href="{{ route('dashPraticienEtablissementPrescriptionMedicales') }}">
-                <i class="bi bi-circle"></i><span> Prescriptions médicales </span>
+                <i class="bi bi-shift"></i><span> Prescriptions médicales </span>
                 </a>
             </li>
 
@@ -196,7 +196,7 @@
 
             <li>
                 <a href="{{ route('dashPraticienEtablissementPrestationHospitalisations') }}">
-                <i class="bi bi-circle"></i><span> Prestations hospitalisations </span>
+                <i class="bi bi-signpost"></i><span> Prestations hospitalisations </span>
                 </a>
             </li>
 
