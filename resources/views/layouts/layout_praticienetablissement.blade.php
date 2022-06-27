@@ -167,7 +167,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Comptes</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-menu-button-wide"></i><span>Prestations</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
@@ -189,13 +189,13 @@
             </li>
 
             <li>
-                <a href="{{ route('PraticienEtablissementPrestationExamens') }}">
+                <a href="{{ route('dashPraticienEtablissementPrestationExamens') }}">
                 <i class="bi bi-circle"></i><span> Prescriptions examens </span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ route('PraticienEtablissementPrestationHospitalisations') }}">
+                <a href="{{ route('dashPraticienEtablissementPrestationHospitalisations') }}">
                 <i class="bi bi-circle"></i><span> Prestations hospitalisations </span>
                 </a>
             </li>

@@ -123,11 +123,11 @@ class PraticienEtablissementController extends Controller
                                 $query->where('role', 'PraticienEtablissement');
                             })->get();
         $assures = User::Where(function ($query) {
-                            $query->where('role', 'Assure');
-                        })->get();
+                                $query->where('role', 'Assure');
+                            })->get();
         $ayantdroits = User::Where(function ($query) {
-                            $query->where('role', 'AyantDroit');
-                        })->get();
+                                $query->where('role', 'AyantDroit');
+                            })->get();
         $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
         $assurances = Assurance::all();
 
@@ -146,11 +146,11 @@ class PraticienEtablissementController extends Controller
                                 $query->where('role', 'PraticienEtablissement');
                             })->get();
         $assures = User::Where(function ($query) {
-                            $query->where('role', 'Assure');
-                        })->get();
+                                $query->where('role', 'Assure');
+                            })->get();
         $ayantdroits = User::Where(function ($query) {
-                            $query->where('role', 'AyantDroit');
-                        })->get();
+                                $query->where('role', 'AyantDroit');
+                            })->get();
         $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
         $assurances = Assurance::all();
         $medicaments = Medicament::all();
@@ -160,7 +160,7 @@ class PraticienEtablissementController extends Controller
                     'etablissements', 'medicaments', 'appareillages', 'ayantdroits'));
     }
 
-    public function PraticienEtablissementPrestationExamens(Request $request)
+    public function dashPraticienEtablissementPrestationExamens(Request $request)
     {
         $page_title = "Nos Prestation Examens";
 
@@ -170,22 +170,22 @@ class PraticienEtablissementController extends Controller
                                 $query->where('role', 'PraticienEtablissement');
                             })->get();
         $assures = User::Where(function ($query) {
-                            $query->where('role', 'Assure');
-                        })->get();
+                                $query->where('role', 'Assure');
+                            })->get();
         $ayantdroits = User::Where(function ($query) {
-                            $query->where('role', 'AyantDroit');
-                        })->get();
+                                $query->where('role', 'AyantDroit');
+                            })->get();
         $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
         $assurances = Assurance::all();
         $examens = Examens::all();
 
-        return view('backend.praticienetablissement.PraticienEtablissementPrestationExamens', compact('page_title', 'praticiens', 'assurances', 'prestationexamens', 'assures', 
+        return view('backend.praticienetablissement.dashPraticienEtablissementPrestationExamens', compact('page_title', 'praticiens', 'assurances', 'prestationexamens', 'assures', 
                     'etablissements', 'examens', 'ayantdroits'));
     }
 
-    public function PraticienEtablissementPrestationHospitalisations(Request $request)
+    public function dashPraticienEtablissementPrestationHospitalisations(Request $request)
     {
-        $page_title = "Nos Prestation Examens";
+        $page_title = "Nos Prestation Hospitalisations";
 
     	$prestationhospitalisations = PrestationHospitalisations::all();
         $praticiens = User::where('etablissement_id', Auth::user()->etablissement_id)
@@ -193,17 +193,17 @@ class PraticienEtablissementController extends Controller
                                 $query->where('role', 'PraticienEtablissement');
                             })->get();
         $assures = User::Where(function ($query) {
-                            $query->where('role', 'Assure');
-                        })->get();
+                                $query->where('role', 'Assure');
+                            })->get();
         $ayantdroits = User::Where(function ($query) {
-                            $query->where('role', 'AyantDroit');
-                        })->get();
+                                $query->where('role', 'AyantDroit');
+                            })->get();
         $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
         $assurances = Assurance::all();
         $prestations = Prestations::all();
         $acteassurances = ActeAssurances::all();
 
-        return view('backend.praticienetablissement.PraticienEtablissementPrestationHospitalisations', compact('page_title', 'praticiens', 'assurances', 'prestationsoins', 'assures', 
+        return view('backend.praticienetablissement.dashPraticienEtablissementPrestationHospitalisations', compact('page_title', 'praticiens', 'assurances', 'prestationsoins', 'assures', 
                     'etablissements', 'acteassurances', 'ayantdroits', 'prestations'));
     }
 
