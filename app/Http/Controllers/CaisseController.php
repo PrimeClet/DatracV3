@@ -6,14 +6,14 @@ use App\Models\ActeAssurances;
 use App\Models\AffectionAssurances;
 use App\User;
 use App\Models\MedicamentEtablissements;
-use App\Models\ExamenEtablissements;
+use App\Models\HospitalisationEtablissements;
 use App\Models\PrestationEtablissements;
 use App\Models\AppareillageEtablissements;
 use App\Models\Prestations;
 use App\Models\Etablissements;
 use App\Models\EtablissementAssurances;
 use App\Models\Medicament;
-use App\Models\Examens;
+use App\Models\Hospitalisations;
 use App\Models\Appareillages;
 use App\Models\Assurance;
 use App\Models\Assures;
@@ -70,7 +70,7 @@ class CaisseController extends Controller
 
     	$prestationsoins = PrestationSoins::all();
         $ticketmoderateurs = TicketModerateurs::all();
-        $praticiens = User::where('etablissement_id', Auth::user()->etablissement_id)
+        $caisses = User::where('etablissement_id', Auth::user()->etablissement_id)
                             ->Where(function ($query) {
                                 $query->where('role', 'Caisse');
                             })->get();
@@ -82,7 +82,31 @@ class CaisseController extends Controller
         $acteassurances = ActeAssurances::all();
         $affectionassurances = AffectionAssurances::all();
 
-        return view('backend.caisse.dashCaisseEtablissementPrestationSoins', compact('page_title', 'praticiens', 'assurances', 'prestationsoins', 'ticketmoderateurs','assures', 
+        return view('backend.caisse.dashCaisseEtablissementPrestationSoins', compact('page_title', 'caisses', 'assurances', 'prestationsoins', 'ticketmoderateurs','assures', 
+                    'etablissements', 'acteassurances', 'affectionassurances'));
+
+    }
+    
+    public function dashCaissePrestationHospitalisations(Request $request)
+    {
+
+    	$page_title = "Nos Prestation d'Hospitalisations";
+
+    	$prestationhospitalisations = PrestationSoins::all();
+        $ticketmoderateurs = TicketModerateurs::all();
+        $caisses = User::where('etablissement_id', Auth::user()->etablissement_id)
+                            ->Where(function ($query) {
+                                $query->where('role', 'Caisse');
+                            })->get();
+        $assures = User::Where(function ($query) {
+                            $query->where('role', 'Assure');
+                        })->get();
+        $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
+        $assurances = Assurance::all();
+        $acteassurances = ActeAssurances::all();
+        $affectionassurances = AffectionAssurances::all();
+
+        return view('backend.caisse.dashCaissePrestationHospitalisations', compact('page_title', 'caisses', 'assurances', 'prestationhospitalisations', 'ticketmoderateurs','assures', 
                     'etablissements', 'acteassurances', 'affectionassurances'));
 
     }

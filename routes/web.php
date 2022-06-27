@@ -254,6 +254,13 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/caisse/edit-prestationsoin/{id}', 'CaisseController@editPrestationSoinCaisse')->name('editPrestationSoinCaisse');
     Route::post('dashboard/caisse/update-prestationsoin', 'CaisseController@updatePrestationSoinCaisse')->name('updatePrestationSoinCaisse');
 
+    /* CRUD Prestations de soins Caisse */
+    Route::get('dashboard/caisse/nos-prestationhospitalisations', 'CaisseController@dashCaissePrestationHospitalisations')->name('dashCaissePrestationHospitalisation');
+    Route::post('dashboard/caisse/nouvel-prestationhospitalisation', 'CaisseController@newPrestationHospitalisationCaisse')->name('newPrestationHospitalisationCaisse');
+    Route::get('dashboard/caisse/show-prestationhospitalisation/{id}', 'CaisseController@showPrestationHospitalisationCaisse')->name('showPrestationHospitalisationCaisse');
+    Route::get('dashboard/caisse/edit-prestationhospitalisation/{id}', 'CaisseController@editPrestationHospitalisationCaisse')->name('editPrestationHospitalisationCaisse');
+    Route::post('dashboard/caisse/update-prestationhospitalisation', 'CaisseController@updatePrestationHospitalisationCaisse')->name('updatePrestationHospitalisationCaisse');
+
      ##############################################################################################
     #                                                                                            #
     #                                  AdminAssurance ROUTING                                #

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActeAssurances extends Model
 {
-    public function actes(){
-        return $this->hasOne('App\Models\Actes', 'id', 'acte_id');
+    public function typeactes(){
+        return $this->hasOne('App\Models\TypeActes', 'id', 'type_acte_id');
     }
 }

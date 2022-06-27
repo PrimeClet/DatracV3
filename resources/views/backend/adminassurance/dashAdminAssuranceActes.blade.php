@@ -23,9 +23,10 @@
                   <table class="table datatable">
 	                <thead>
 	                  <tr>
-
-	                    <th scope="col">Id</th>
-						<th scope="col">Acte</th>
+						<th scope="col">Type Acte</th>
+						<th scope="col">Désignation</th>
+						<th scope="col">Cotation</th>
+						<th scope="col">Tarif</th>
 						<th scope="col">Actions</th>
 
 	                  </tr>
@@ -35,8 +36,10 @@
 	                  @if(count($acteAssurances) != 0)
                     	@foreach($acteAssurances as $acteAssurance)
                         <tr>
-							<td>{{ $acteAssurance->id }}</td>
-                            <td>{{ $acteAssurance->acte_id }}</td>
+                            <td>{{ $acteAssurance->type_acte_id }}</td>
+							<td>{{ $acteAssurance->designation }}</td>
+							<td>{{ $acteAssurance->cotation }}</td>
+							<td>{{ $acteAssurance->tarif_conventionne }}</td>
 							<td class="text-center">
 								<button class="btn btn-xs btn-primary">
 									<a href="{{ URL::to('dashboard/adminAssurance/show-acte') }}/{{ $acteAssurance->id }}">
@@ -60,7 +63,9 @@
                     <tr>
                         <td>Aucune donnée</td>
                         <td>Aucune donnée</td>
-                        <td>Aucune donnée</td>											
+                        <td>Aucune donnée</td>
+						<td>Aucune donnée</td>
+						<td>Aucune donnée</td>											
                     </tr>
                     @endif
 
@@ -78,18 +83,36 @@
 								<div class="row">
                                     <div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">Acte</label>
-											<select class="form-control" name="acte_id">
-                                                @if(count($actes) !=0)
-                                                    @foreach ($actes as $acte)
-														<option value="{{ $acte->id}}">
-															{{ $acte->designation }}
+											<label class="form-label">Type Acte</label>
+											<select class="form-select" name="type_acte_id">
+                                                @if(count($typeactes) !=0)
+                                                    @foreach ($typeactes as $typeacte)
+														<option value="{{ $typeacte->id}}">
+															{{ $typeacte->libelle }}
 														</option>
                                                     @endforeach
                                                 @else
                                                     <option value="">Aucun Acte</option>
                                                 @endif
                                             </select>
+										</div>
+									</div>
+									<div class="col-sm-6 col-md-6">
+										<div class="form-group">
+											<label class="form-label">Désignation</label>
+											<input type="text" class="form-control" placeholder="Désignation" name="designation">
+										</div>
+									</div>
+									<div class="col-sm-6 col-md-6">
+										<div class="form-group">
+											<label class="form-label">Cotation de l'acte</label>
+											<input type="text" class="form-control" placeholder="Cotation" name="cotation">
+										</div>
+									</div>
+									<div class="col-sm-6 col-md-6">
+										<div class="form-group">
+											<label class="form-label">Tarif Conventionné</label>
+											<input type="number" class="form-control" placeholder="Tarif" name="tarif_conventionne">
 										</div>
 									</div>
 								</div>

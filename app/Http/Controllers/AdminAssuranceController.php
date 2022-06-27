@@ -18,7 +18,9 @@ use App\Models\Actes;
 use App\Models\Affections;
 use App\Models\Assurance;
 use App\Models\TypeAssures;
+use App\Models\TypeActes;
 use App\Models\Assures;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -183,10 +185,10 @@ class AdminAssuranceController extends Controller
     	$page_title = "Nos Actes";
 
     	$acteAssurances = ActeAssurances::all();
-        $actes = Actes::all();
+        $typeactes = TypeActes::all();
         $assurances = Assurance::where('id', Auth::user()->assurance_id);
 
-        return view('backend.adminassurance.dashAdminAssuranceActes', compact('page_title', 'acteAssurances', 'actes', 'assurances'));
+        return view('backend.adminassurance.dashAdminAssuranceActes', compact('page_title', 'acteAssurances', 'typeactes', 'assurances'));
 
     }
 
@@ -381,8 +383,10 @@ class AdminAssuranceController extends Controller
         $new_acte = new ActeAssurances();
 
     	// Get new data 
-        $new_acte->acte_id = $request->input('acte_id');
-
+        $new_acte->designation = $request->input('designation');
+        $new_acte->cotation = $request->input('cotation');
+        $new_acte->tarif_conventionne = $request->input('tarif_conventionne');
+        $new_acte->type_acte_id = $request->input('type_acte_id');
         $new_acte->assurance_id = Auth::user()->assurance_id;
 
         if($new_acte->save()){
@@ -891,8 +895,10 @@ class AdminAssuranceController extends Controller
     	$new_acte = ActeAssurances::find($acteAssurance_id);
 
     	// Get new data 
-        $new_acte->acte_id = $request->input('acte_id');
-
+        $new_acte->type_acte_id = $request->input('type_acte_id');
+        $new_acte->designation = $request->input('designation');
+        $new_acte->cotation = $request->input('cotation');
+        $new_acte->tarif_conventionne = $request->input('tarif_conventionne');
         $new_acte->assurance_id = Auth::user()->assurance_id;
 
         if($new_acte->save()){
