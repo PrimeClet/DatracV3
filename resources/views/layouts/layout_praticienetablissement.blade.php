@@ -183,7 +183,7 @@
             </li>
 
             <li>
-                <a href="{{ route('dashPraticienEtablissementPrestationMedicales') }}">
+                <a href="{{ route('dashPraticienEtablissementPrescriptionMedicales') }}">
                 <i class="bi bi-circle"></i><span> Prescriptions médicales </span>
                 </a>
             </li>

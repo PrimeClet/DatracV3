@@ -35,8 +35,60 @@
 									<i class="flaticon-381-heart"></i>
 								</span>
 								<div class="media-body text-white text-right">
-									<p class="mb-1">Prestation</p>
-									<h3 class="text-white">{{ $count_prestations }}</h3>
+									<p class="mb-1">Prestation Soins</p>
+									<h3 class="text-white">{{ $count_prestationsoins }}</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="widget-stat card bg-info">
+						<div class="card-body p-4">
+							<div class="media">
+								<span class="mr-3">
+									<i class="flaticon-381-heart"></i>
+								</span>
+								<div class="media-body text-white text-right">
+									<p class="mb-1">Prestation Examen</p>
+									<h3 class="text-white">{{ $count_prestationexamens }}</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="widget-stat card bg-info">
+						<div class="card-body p-4">
+							<div class="media">
+								<span class="mr-3">
+									<i class="flaticon-381-heart"></i>
+								</span>
+								<div class="media-body text-white text-right">
+									<p class="mb-1">Prestation Hospitalisation</p>
+									<h3 class="text-white">{{ $count_prestationhospitalisations }}</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="widget-stat card bg-info">
+						<div class="card-body p-4">
+							<div class="media">
+								<span class="mr-3">
+									<i class="flaticon-381-heart"></i>
+								</span>
+								<div class="media-body text-white text-right">
+									<p class="mb-1">Prescription Médicale</p>
+									<h3 class="text-white">{{ $count_prescriptionmedicales }}</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="widget-stat card bg-info">
+						<div class="card-body p-4">
+							<div class="media">
+								<span class="mr-3">
+									<i class="flaticon-381-heart"></i>
+								</span>
+								<div class="media-body text-white text-right">
+									<p class="mb-1">Prise en charge</p>
+									<h3 class="text-white">{{ $count_prisecharges }}</h3>
 								</div>
 							</div>
 						</div>

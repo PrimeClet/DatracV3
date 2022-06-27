@@ -932,7 +932,7 @@ class AdminEtablissementController extends Controller
     {
 
     	$prisecharge_id = $request->input('prisecharge_id');
-    	$new_prisecharge = AppareillageEtablissements::find($prisecharge_id);
+    	$new_prisecharge = PriseCharges::find($prisecharge_id);
 
     	// Get new data 
         $new_prisecharge->accident_tiers = $request->input('accident_tiers');
