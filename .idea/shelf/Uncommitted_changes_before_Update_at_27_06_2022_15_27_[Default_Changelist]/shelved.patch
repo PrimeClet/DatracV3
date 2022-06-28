@@ -1,0 +1,617 @@
+Index: routes/web.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nuse Illuminate\\Support\\Facades\\Route;\r\n\r\n/*\r\n|--------------------------------------------------------------------------\r\n| Web Routes\r\n|--------------------------------------------------------------------------\r\n|\r\n| Here is where you can register web routes for your application. These\r\n| routes are loaded by the RouteServiceProvider within a group which\r\n| contains the \"web\" middleware group. Now create something great!\r\n|\r\n*/\r\n\r\n\r\n//Auth::routes();\r\n\r\n/* route vers page d'accueil du système */\r\nRoute::get('/', function () {\r\n    return view('auth.login');\r\n});\r\n/* Fin routage vers accueil */\r\n\r\n/* Lien pour se déconnecter */\r\nRoute::get('/logout', '\\App\\Http\\Controllers\\Auth\\LoginController@logout');\r\n\r\n/* route du site */\r\n\r\nRoute::get('/', 'SiteController@home')->name('home');\r\nRoute::post('deconnexion/', 'SiteController@logout')->name('logout');\r\n\r\n/* Fin routage du site */\r\n\r\n\r\nRoute::middleware(['auth'])->group(function() {\r\n\r\n    \t/* Les routes du système seront enumérés ici ! */\r\n\r\n\t/* Les routes du root seront enumérés ici ! */\r\n\r\n    ##############################################################################################\r\n    #                                                                                            #\r\n    #                                  ROOT ROUTING                                              #\r\n    #                                                                                            #\r\n    ##############################################################################################\r\n\r\n    /* Start Routing for Root's User */\r\n    Route::get('dashboard/superadmin', 'SuperAdminController@dashboardSuperAdmin')->name('dashboardSuperAdmin');\r\n\r\n    // Gestion du compte\r\n    Route::get('dashboard/superadmin/profil', 'SuperAdminController@profilSuperAdmin')->name('profilSuperAdmin');\r\n    Route::post('dashboard/superadmin/modifier-profil', 'SuperAdminController@updateProfilSuperAdmin')->name('updateProfilSuperAdmin');\r\n    Route::post('dashboard/superadmin/modifier-mot-de-passe', 'SuperAdminController@updateMotDePasseSuperAdmin')->name('updateMotDePasseSuperAdmin');\r\n\r\n\r\n     // Gestion des Super Administrateurs\r\n    Route::get('dashboard/superadmin/superadmins', 'SuperAdminController@dashSuperAdminSuper')->name('dashSuperAdminSuper');\r\n    Route::post('dashboard/superadmin/update-superadmin/', 'SuperAdminController@updateSuperAdminSuper')->name('updateSuperAdminSuper');\r\n    Route::post('dashboard/superadmin/nouvel-superadmin', 'SuperAdminController@newSuperAdminSuper')->name('newSuperAdminSuper');\r\n    Route::get('dashboard/superadmin/show-superadmin/{id}', 'SuperAdminController@showSuperSuperAdmin')->name('showSuperSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-superadmin/{id}', 'SuperAdminController@editSuperSuperAdmin')->name('editSuperSuperAdmin');\r\n    Route::post('dashboard/superadmin/delete-superadmin/{id}', 'SuperAdminController@deleteSuperSuperAdmin')->name('deleteSuperSuperAdmin');\r\n\r\n    // Gestion des Administrateurs Etablissement\r\n    Route::get('dashboard/superadmin/adminetablissements', 'SuperAdminController@dashSuperAdminEtab')->name('dashSuperAdminEtab');\r\n    Route::post('dashboard/superadmin/update-adminetablissement/', 'SuperAdminController@updateSuperAdminEtab')->name('updateSuperAdminEtab');\r\n    Route::post('dashboard/superadmin/nouvel-adminetablissement', 'SuperAdminController@newSuperAdminEtab')->name('newSuperAdminEtab');\r\n    Route::get('dashboard/superadmin/show-adminetablissement/{id}', 'SuperAdminController@showEtabSuperAdmin')->name('showEtabSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-adminetablissement/{id}', 'SuperAdminController@editEtabSuperAdmin')->name('editEtabSuperAdmin');\r\n    Route::post('dashboard/superadmin/delete-adminetablissement/{id}', 'SuperAdminController@deleteEtabSuperAdmin')->name('deleteEtabSuperAdmin');\r\n\r\n    // Gestion des Administrateurs Assurance\r\n    Route::get('dashboard/superadmin/adminassurances', 'SuperAdminController@dashSuperAdminAssu')->name('dashSuperAdminAssu');\r\n    Route::post('dashboard/superadmin/update-adminassurance/', 'SuperAdminController@updateSuperAdminAssu')->name('updateSuperAdminAssu');\r\n    Route::post('dashboard/superadmin/nouvel-adminassurance', 'SuperAdminController@newSuperAdminAssu')->name('newSuperAdminAssu');\r\n    Route::get('dashboard/superadmin/show-adminassurance/{id}', 'SuperAdminController@showAssuSuperAdmin')->name('showAssuSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-adminassurance/{id}', 'SuperAdminController@editAssuSuperAdmin')->name('editEtabSuperAdmin');\r\n    Route::post('dashboard/superadmin/delete-adminassurance/{id}', 'SuperAdminController@deleteAssuSuperAdmin')->name('deleteAssuSuperAdmin');\r\n\r\n\r\n    ##############################################################################################\r\n    #                                                                                            #\r\n    #                                  SuperAdmin ROUTING                                        #\r\n    #                                                                                            #\r\n    ##############################################################################################\r\n\r\n    /* Start Routing for SuperAdmin's User */\r\n    Route::get('dashboard/superadmin', 'SuperAdminController@dashSuperAdmin')->name('dashSuperAdmin');\r\n\r\n    /* CRUD Actes */\r\n    Route::get('dashboard/superadmin/nos-actes', 'SuperAdminController@dashSuperAdminActes')->name('dashSuperAdminActes');\r\n    Route::post('dashboard/superadmin/nouvel-acte', 'SuperAdminController@newActeSuperAdmin')->name('newActeSuperAdmin');\r\n    Route::get('dashboard/superadmin/show-acte/{id}', 'SuperAdminController@showActeSuperAdmin')->name('showActeSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-acte/{id}', 'SuperAdminController@editActeSuperAdmin')->name('editActeSuperAdmin');\r\n    Route::post('dashboard/superadmin/update-acte', 'SuperAdminController@updateActeSuperAdmin')->name('updateActeSuperAdmin');\r\n\r\n    /* CRUD ASSURANCES */\r\n    Route::get('dashboard/superadmin/assurances', 'AssuranceController@dashSuperAdminAssurances')->name('dashSuperAdminAssurance');\r\n    Route::post('dashboard/superadmin/nouvel-assurance', 'AssuranceController@newAssuranceSuperAdmin')->name('newAssuranceSuperAdmin');\r\n    Route::get('dashboard/superadmin/show-assurance/{id}', 'AssuranceController@showAssuranceSuperAdmin')->name('showAssuranceSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-assurance/{id}', 'AssuranceController@editAssuranceSuperAdmin')->name('editAssuranceSuperAdmin');\r\n    Route::post('dashboard/superadmin/update-assurance', 'AssuranceController@updateAssuranceSuperAdmin')->name('updateAssuranceSuperAdmin');\r\n\r\n    /* CRUD Etablissement */\r\n    Route::get('dashboard/superadmin/etablissements', 'EtablissementsController@dashSuperAdminEtablissements')->name('dashSuperAdminEtablissement');\r\n    Route::post('dashboard/superadmin/nouvel-etablissement', 'EtablissementsController@newEtablissementSuperAdmin')->name('newEtablissementSuperAdmin');\r\n    Route::get('dashboard/superadmin/show-etablissement/{id}', 'EtablissementsController@showEtablissementSuperAdmin')->name('showEtablissementSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-etablissement/{id}', 'EtablissementsController@editEtablissementSuperAdmin')->name('editEtablissementSuperAdmin');\r\n    Route::post('dashboard/superadmin/update-etablissement', 'EtablissementsController@updateEtablissementSuperAdmin')->name('updateEtablissementSuperAdmin');\r\n\r\n    /* CRUD Medicaments */\r\n    Route::get('dashboard/superadmin/medicaments', 'MedicamentController@dashSuperAdminMedicament')->name('dashSuperAdminMedicament');\r\n    Route::post('dashboard/superadmin/nouvel-medicament', 'MedicamentController@newMedicamentSuperAdmin')->name('newMedicamentSuperAdmin');\r\n    Route::get('dashboard/superadmin/show-medicament/{id}', 'MedicamentController@showMedicamentSuperAdmin')->name('showMedicamentSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-medicament/{id}', 'MedicamentController@editMedicamentSuperAdmin')->name('editMedicamentSuperAdmin');\r\n    Route::post('dashboard/superadmin/update-medicament', 'MedicamentController@updateMedicamentSuperAdmin')->name('updateMedicamentSuperAdmin');\r\n\r\n    /* CRUD Examens */\r\n    Route::get('dashboard/superadmin/nos-examens', 'SuperAdminController@dashSuperAdminExamens')->name('dashSuperAdminExamens');\r\n    Route::post('dashboard/superadmin/nouvel-examen', 'SuperAdminController@newExamenSuperAdmin')->name('newExamenSuperAdmin');\r\n    Route::get('dashboard/superadmin/show-examen/{id}', 'SuperAdminController@showExamenSuperAdmin')->name('showExamenSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-examen/{id}', 'SuperAdminController@editExamenSuperAdmin')->name('editExamenSuperAdmin');\r\n    Route::post('dashboard/superadmin/update-examen', 'SuperAdminController@updateExamenSuperAdmin')->name('updateExamenSuperAdmin');\r\n\r\n    /* CRUD Villes */\r\n    Route::get('dashboard/superadmin/nos-villes', 'SuperAdminController@dashSuperAdminVilles')->name('dashSuperAdminVilles');\r\n    Route::post('dashboard/superadmin/nouvel-ville', 'SuperAdminController@newVilleSuperAdmin')->name('newVilleSuperAdmin');\r\n    Route::get('dashboard/superadmin/show-ville/{id}', 'SuperAdminController@showVilleSuperAdmin')->name('showVilleSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-ville/{id}', 'SuperAdminController@editVilleSuperAdmin')->name('editVilleSuperAdmin');\r\n    Route::post('dashboard/superadmin/update-ville', 'SuperAdminController@updateVilleSuperAdmin')->name('updateVilleSuperAdmin');\r\n\r\n    /* CRUD Specialites */\r\n    Route::get('dashboard/superadmin/nos-specialites', 'SuperAdminController@dashSuperAdminSpecialites')->name('dashSuperAdminSpecialites');\r\n    Route::post('dashboard/superadmin/nouvel-specialite', 'SuperAdminController@newSpecialiteSuperAdmin')->name('newSpecialiteSuperAdmin');\r\n    Route::get('dashboard/superadmin/show-specialite/{id}', 'SuperAdminController@showSpecialiteSuperAdmin')->name('showSpecialiteSuperAdmin');\r\n    Route::get('dashboard/superadmin/edit-specialite/{id}', 'SuperAdminController@editSpecialiteSuperAdmin')->name('editSpecialiteSuperAdmin');\r\n    Route::post('dashboard/superadmin/update-specialite', 'SuperAdminController@updateSpecialiteSuperAdmin')->name('updateSpecialiteSuperAdmin');\r\n\r\n     /* CRUD Affections */\r\n     Route::get('dashboard/superadmin/nos-affections', 'SuperAdminController@dashSuperAdminAffections')->name('dashSuperAdminAffections');\r\n     Route::post('dashboard/superadmin/nouvel-affection', 'SuperAdminController@newAffectionSuperAdmin')->name('newAffectionSuperAdmin');\r\n     Route::get('dashboard/superadmin/show-affection/{id}', 'SuperAdminController@showAffectionSuperAdmin')->name('showAffectionSuperAdmin');\r\n     Route::get('dashboard/superadmin/edit-affection/{id}', 'SuperAdminController@editAffectionSuperAdmin')->name('editAffectionSuperAdmin');\r\n     Route::post('dashboard/superadmin/update-affection', 'SuperAdminController@updateAffectionSuperAdmin')->name('updateAffectionSuperAdmin');\r\n\r\n     /* CRUD Appareillages */\r\n     Route::get('dashboard/superadmin/nos-appareillages', 'SuperAdminController@dashSuperAdminAppareillages')->name('dashSuperAdminAppareillages');\r\n     Route::post('dashboard/superadmin/nouvel-appareillage', 'SuperAdminController@newAppareillageSuperAdmin')->name('newAppareillageSuperAdmin');\r\n     Route::get('dashboard/superadmin/show-appareillage/{id}', 'SuperAdminController@showAppareillageSuperAdmin')->name('showAppareillageSuperAdmin');\r\n     Route::get('dashboard/superadmin/edit-appareillage/{id}', 'SuperAdminController@editAppareillageSuperAdmin')->name('editAppareillageSuperAdmin');\r\n     Route::post('dashboard/superadmin/update-appareillage', 'SuperAdminController@updateAppareillageSuperAdmin')->name('updateAppareillageSuperAdmin');\r\n\r\n      /* CRUD Prestations */\r\n      Route::get('dashboard/superadmin/nos-prestations', 'SuperAdminController@dashSuperAdminPrestations')->name('dashSuperAdminPrestations');\r\n      Route::post('dashboard/superadmin/nouvel-prestation', 'SuperAdminController@newPrestationSuperAdmin')->name('newPrestationSuperAdmin');\r\n      Route::get('dashboard/superadmin/show-prestation/{id}', 'SuperAdminController@showPrestationSuperAdmin')->name('showPrestationSuperAdmin');\r\n      Route::get('dashboard/superadmin/edit-prestation/{id}', 'SuperAdminController@editPrestationSuperAdmin')->name('editPrestationSuperAdmin');\r\n      Route::post('dashboard/superadmin/update-prestation', 'SuperAdminController@updatePrestationSuperAdmin')->name('updatePrestationSuperAdmin');\r\n\r\n    /* End Routing for SuperAdmin's User */\r\n\r\n    ##############################################################################################\r\n    #                                                                                            #\r\n    #                                  SUPERADMIN ROUTING                                        #\r\n    #                                                                                            #\r\n    ##############################################################################################\r\n\r\n    ##############################################################################################\r\n    #                                                                                            #\r\n    #                                  AdminEtablissement ROUTING                                #\r\n    #                                                                                            #\r\n    ##############################################################################################\r\n\r\n    /* Start Routing for AdminEtablissement's User */\r\n    Route::get('dashboard/adminetablissement', 'AdminEtablissementController@dashAdminEtablissement')->name('dashAdminEtablissement');\r\n\r\n    /* CRUD Agents */\r\n    Route::get('dashboard/adminetablissement/nos-agents', 'AdminEtablissementController@dashAdminEtablissementAgents')->name('dashAdminEtablissementAgents');\r\n    Route::post('dashboard/adminetablissement/nouvel-agent', 'AdminEtablissementController@newAgentAdminEtablissement')->name('newAgentAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/show-agent/{id}', 'AdminEtablissementController@showAgentAdminEtablissement')->name('showAgentAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/edit-agent/{id}', 'AdminEtablissementController@editAgentAdminEtablissement')->name('editAgentAdminEtablissement');\r\n    Route::post('dashboard/adminetablissement/update-agent', 'AdminEtablissementController@updateAgentAdminEtablissement')->name('updateAgentAdminEtablissement');\r\n\r\n    /* CRUD Praticiens */\r\n    Route::get('dashboard/adminetablissement/nos-praticiens', 'AdminEtablissementController@dashAdminEtablissementPraticiens')->name('dashAdminEtablissementPraticiens');\r\n    Route::post('dashboard/adminetablissement/nouvel-praticien', 'AdminEtablissementController@newPraticienAdminEtablissement')->name('newPraticienAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/show-praticien/{id}', 'AdminEtablissementController@showPraticienAdminEtablissement')->name('showPraticienAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/edit-praticien/{id}', 'AdminEtablissementController@editPraticienAdminEtablissement')->name('editPraticienAdminEtablissement');\r\n    Route::post('dashboard/adminetablissement/update-praticien', 'AdminEtablissementController@updatePraticienAdminEtablissement')->name('updatePraticienAdminEtablissement');\r\n\r\n    /* CRUD Assurances */\r\n    Route::get('dashboard/adminetablissement/nos-assurances', 'AdminEtablissementController@dashAdminEtablissementAssurances')->name('dashAdminEtablissementAssurances');\r\n    Route::post('dashboard/adminetablissement/nouvel-assurance', 'AdminEtablissementController@newAssuranceAdminEtablissement')->name('newAssuranceAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/show-assurance/{id}', 'AdminEtablissementController@showAssuranceAdminEtablissement')->name('showAssuranceAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/edit-assurance/{id}', 'AdminEtablissementController@editAssuranceAdminEtablissement')->name('editAssuranceAdminEtablissement');\r\n    Route::post('dashboard/adminetablissement/update-assurance', 'AdminEtablissementController@updateAssuranceAdminEtablissement')->name('updateAssuranceAdminEtablissement');\r\n\r\n    /* CRUD Medicaments */\r\n    Route::get('dashboard/adminetablissement/nos-medicaments', 'AdminEtablissementController@dashAdminEtablissementMedicaments')->name('dashAdminEtablissementMedicaments');\r\n    Route::post('dashboard/adminetablissement/nouvel-medicament', 'AdminEtablissementController@newMedicamentAdminEtablissement')->name('newMedicamentAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/show-medicament/{id}', 'AdminEtablissementController@showMedicamentAdminEtablissement')->name('showMedicamentAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/edit-medicament/{id}', 'AdminEtablissementController@editMedicamentAdminEtablissement')->name('editMedicamentAdminEtablissement');\r\n    Route::post('dashboard/adminetablissement/update-medicament', 'AdminEtablissementController@updateMedicamentAdminEtablissement')->name('updateMedicamentAdminEtablissement');\r\n\r\n     /* CRUD Prestations */\r\n     Route::get('dashboard/adminetablissement/nos-prestations', 'AdminEtablissementController@dashAdminEtablissementPrestations')->name('dashAdminEtablissementPrestations');\r\n     Route::post('dashboard/adminetablissement/nouvel-prestation', 'AdminEtablissementController@newPrestationAdminEtablissement')->name('newPrestationAdminEtablissement');\r\n     Route::get('dashboard/adminetablissement/show-prestation/{id}', 'AdminEtablissementController@showPrestationAdminEtablissement')->name('showPrestationAdminEtablissement');\r\n     Route::get('dashboard/adminetablissement/edit-prestation/{id}', 'AdminEtablissementController@editPrestationAdminEtablissement')->name('editPrestationAdminEtablissement');\r\n     Route::post('dashboard/adminetablissement/update-prestation', 'AdminEtablissementController@updatePrestationAdminEtablissement')->name('updatePrestationAdminEtablissement');\r\n\r\n     /* CRUD Examens */\r\n     Route::get('dashboard/adminetablissement/nos-examens', 'AdminEtablissementController@dashAdminEtablissementExamens')->name('dashAdminEtablissementExamens');\r\n     Route::post('dashboard/adminetablissement/nouvel-examen', 'AdminEtablissementController@newExamenAdminEtablissement')->name('newExamenAdminEtablissement');\r\n     Route::get('dashboard/adminetablissement/show-examen/{id}', 'AdminEtablissementController@showExamenAdminEtablissement')->name('showExamenAdminEtablissement');\r\n     Route::get('dashboard/adminetablissement/edit-examen/{id}', 'AdminEtablissementController@editExamenAdminEtablissement')->name('editExamenAdminEtablissement');\r\n     Route::post('dashboard/adminetablissement/update-examen', 'AdminEtablissementController@updateExamenAdminEtablissement')->name('updateExamenAdminEtablissement');\r\n\r\n     /* CRUD Appareillages */\r\n     Route::get('dashboard/adminetablissement/nos-appareillages', 'AdminEtablissementController@dashAdminEtablissementAppareillages')->name('dashAdminEtablissementAppareillages');\r\n     Route::post('dashboard/adminetablissement/nouvel-appareillage', 'AdminEtablissementController@newAppareillageAdminEtablissement')->name('newAppareillageAdminEtablissement');\r\n     Route::get('dashboard/adminetablissement/show-appareillage/{id}', 'AdminEtablissementController@showAppareillageAdminEtablissement')->name('showAppareillageAdminEtablissement');\r\n     Route::get('dashboard/adminetablissement/edit-appareillage/{id}', 'AdminEtablissementController@editAppareillageAdminEtablissement')->name('editAppareillageAdminEtablissement');\r\n     Route::post('dashboard/adminetablissement/update-appareillage', 'AdminEtablissementController@updateAppareillageAdminEtablissement')->name('updateAppareillageAdminEtablissement');\r\n\r\n     \r\n     /* CRUD Prise en Charge */\r\n     Route::get('dashboard/adminetablissement/nos-prisecharges', 'AdminEtablissementController@dashAdminEtablissementPriseCharges')->name('dashAdminEtablissementPriseCharges');\r\n     Route::post('dashboard/adminetablissement/nouvel-prisecharge', 'AdminEtablissementController@newPriseChargeAdminEtablissement')->name('newPriseChargeAdminEtablissement');\r\n     Route::get('dashboard/adminetablissement/show-prisecharge/{id}', 'AdminEtablissementController@showPriseChargeAdminEtablissement')->name('showPriseChargeAdminEtablissement');\r\n     Route::get('dashboard/adminetablissement/edit-prisecharge/{id}', 'AdminEtablissementController@editPriseChargeAdminEtablissement')->name('editPriseChargeAdminEtablissement');\r\n     Route::post('dashboard/adminetablissement/update-prisecharge', 'AdminEtablissementController@updatePriseChargeAdminEtablissement')->name('updatePriseChargeAdminEtablissement');\r\n\r\n          /* CRUD Prestations de soins Etablissements */\r\n    Route::get('dashboard/adminetablissement/nos-prestationsoins', 'AdminEtablissementController@dashAdminEtablissementPrestationSoins')->name('dashAdminEtablissementPrestationSoins');\r\n    Route::post('dashboard/adminetablissement/nouvel-prestationsoin', 'AdminEtablissementController@newPrestationSoinAdminEtablissement')->name('newPrestationSoinAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/show-prestationsoin/{id}', 'AdminEtablissementController@showPrestationSoinAdminEtablissement')->name('showPrestationSoinAdminEtablissement');\r\n    Route::get('dashboard/adminetablissement/edit-prestationsoin/{id}', 'AdminEtablissementController@editPrestationSoinAdminEtablissement')->name('editPrestationSoinAdminEtablissement');\r\n    Route::post('dashboard/adminetablissement/update-prestationsoin', 'AdminEtablissementController@updatePrestationSoinAdminEtablissement')->name('updatePrestationSoinAdminEtablissement');\r\n\r\n\r\n    /* End Routing for AdminEtablissement's User */\r\n\r\n    ##############################################################################################\r\n    #                                                                                            #\r\n    #                                  AdminEtablissement ROUTING                                #\r\n    #                                                                                            #\r\n    ##############################################################################################\r\n\r\n     ##############################################################################################\r\n    #                                                                                            #\r\n    #                                  AdminAssurance ROUTING                                #\r\n    #                                                                                            #\r\n    ##############################################################################################\r\n\r\n     /* Start Routing for AdminAssurance's User */\r\n     Route::get('dashboard/adminassurance', 'AdminAssuranceController@dashAdminAssurance')->name('dashAdminAssurance');\r\n\r\n    /* CRUD Agents */\r\n    Route::get('dashboard/adminassurance/nos-agents', 'AdminAssuranceController@dashAdminAssuranceAgents')->name('dashAdminAssuranceAgents');\r\n    Route::post('dashboard/adminassurance/nouvel-agent', 'AdminAssuranceController@newAgentAdminAssurance')->name('newAgentAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-agent/{id}', 'AdminAssuranceController@showAgentAdminAssurance')->name('showAgentAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-agent/{id}', 'AdminAssuranceController@editAgentAdminAssurance')->name('editAgentAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-agent', 'AdminAssuranceController@updateAgentAdminAssurance')->name('updateAgentAdminAssurance');\r\n\r\n    /* CRUD Ayant-Droits */\r\n    Route::get('dashboard/adminassurance/nos-ayantdroits', 'AyantDroitController@dashAdminAssuranceAyantDroits')->name('dashAdminAssuranceAyantDroits');\r\n    Route::post('dashboard/adminassurance/nouvel-ayantdroit', 'AyantDroitController@newAyantDroitAdminAssurance')->name('newAyantDroitAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-ayantdroit/{id}', 'AyantDroitController@showAyantDroitAdminAssurance')->name('showAyantDroiteAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-ayantdroit/{id}', 'AyantDroitController@editAyantDroitAdminAssurance')->name('editAyantDroitAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-ayantdroit', 'AyantDroitController@updateAyantDroitAdminAssurance')->name('updateAyantDroitAdminAssurance');\r\n\r\n    /* CRUD Assures */\r\n    Route::get('dashboard/adminassurance/nos-assures', 'AssureController@dashAdminAssuranceAssures')->name('dashAdminAssuranceAssures');\r\n    Route::post('dashboard/adminassurance/nouvel-assure', 'AssureController@newAssureAdminAssurance')->name('newAssureAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-assure/{id}', 'AssureController@showAssureAdminAssurance')->name('showAssureAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-assure/{id}', 'AssureController@editAssureAdminAssurance')->name('editAssureAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-assure', 'AssureController@updateAssureAdminAssurance')->name('updateAssureAdminAssurance');\r\n\r\n     /* CRUD Actes */\r\n    Route::get('dashboard/adminassurance/nos-actes', 'AdminAssuranceController@dashAdminAssuranceActes')->name('dashAdminAssuranceActes');\r\n    Route::post('dashboard/adminassurance/nouvel-acte', 'AdminAssuranceController@newActeAdminAssurance')->name('newActeAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-acte/{id}', 'AdminAssuranceController@showActeAdminAssurance')->name('showActeAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-acte/{id}', 'AdminAssuranceController@editActeAdminAssurance')->name('editActeAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-acte', 'AdminAssuranceController@updateActeAdminAssurance')->name('updateActeAdminAssurance');\r\n\r\n    /* CRUD Affections */\r\n    Route::get('dashboard/adminassurance/nos-affections', 'AdminAssuranceController@dashAdminAssuranceAffections')->name('dashAdminAssuranceAffections');\r\n    Route::post('dashboard/adminassurance/nouvel-affection', 'AdminAssuranceController@newAffectionAdminAssurance')->name('newAffectionAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-affection/{id}', 'AdminAssuranceController@showAffectionAdminAssurance')->name('showAffectionAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-affection/{id}', 'AdminAssuranceController@editAffectionAdminAssurance')->name('editAffectionAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-affection', 'AdminAssuranceController@updateAffectionAdminAssurance')->name('updateAffectionAdminAssurance');\r\n\r\n    /* CRUD Appareillages */\r\n    Route::get('dashboard/adminassurance/nos-appareillages', 'AdminAssuranceController@dashAdminAssuranceAppareillages')->name('dashAdminAssuranceAppareillages');\r\n    Route::post('dashboard/adminassurance/nouvel-appareillage', 'AdminAssuranceController@newAppareillageAdminAssurance')->name('newAppareillageAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-appareillage/{id}', 'AdminAssuranceController@showAppareillageAdminAssurance')->name('showAppareillageAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-appareillage/{id}', 'AdminAssuranceController@editAppareillageAdminAssurance')->name('editAppareillageAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-appareillage', 'AdminAssuranceController@updateAppareillageAdminAssurance')->name('updateAppareillageAdminAssurance');\r\n\r\n    /* CRUD Medicaments */\r\n    Route::get('dashboard/adminassurance/nos-medicaments', 'AdminAssuranceController@dashAdminAssuranceMedicaments')->name('dashAdminAssuranceMedicaments');\r\n    Route::post('dashboard/adminassurance/nouvel-medicament', 'AdminAssuranceController@newMedicamentAdminAssurance')->name('newMedicamentAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-medicament/{id}', 'AdminAssuranceController@showMedicamentAdminAssurance')->name('showMedicamentAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-medicament/{id}', 'AdminAssuranceController@editMedicamentAdminAssurance')->name('editMedicamentAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-medicament', 'AdminAssuranceController@updateMedicamentAdminAssurance')->name('updateMedicamentAdminAssurance');\r\n\r\n    /* CRUD Examens */\r\n    Route::get('dashboard/adminassurance/nos-examens', 'AdminAssuranceController@dashAdminAssuranceExamens')->name('dashAdminAssuranceExamens');\r\n    Route::post('dashboard/adminassurance/nouvel-examen', 'AdminAssuranceController@newExamenAdminAssurance')->name('newExamenAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-examen/{id}', 'AdminAssuranceController@showExamenAdminAssurance')->name('showExamenAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-examen/{id}', 'AdminAssuranceController@editExamenAdminAssurance')->name('editExamenAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-examen', 'AdminAssuranceController@updateExamenAdminAssurance')->name('updateExamenAdminAssurance');\r\n\r\n    /* CRUD Prestations */\r\n    Route::get('dashboard/adminassurance/nos-prestations', 'AdminAssuranceController@dashAdminAssurancePrestations')->name('dashAdminAssurancePrestations');\r\n    Route::post('dashboard/adminassurance/nouvel-prestation', 'AdminAssuranceController@newPrestationAdminAssurance')->name('newPrestationAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-prestation/{id}', 'AdminAssuranceController@showPrestationAdminAssurance')->name('showPrestationAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-prestation/{id}', 'AdminAssuranceController@editPrestationAdminAssurance')->name('editPrestationAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-prestation', 'AdminAssuranceController@updatePrestationAdminAssurance')->name('updatePrestationAdminAssurance');\r\n\r\n    /* CRUD TypeAssures */\r\n    Route::get('dashboard/adminassurance/nos-typeassures', 'AdminAssuranceController@dashAdminAssuranceTypeAssures')->name('dashAdminAssuranceTypeAssures');\r\n    Route::post('dashboard/adminassurance/nouvel-typeassure', 'AdminAssuranceController@newTypeAssureAdminAssurance')->name('newTypeAssureAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-typeassure/{id}', 'AdminAssuranceController@showTypeAssureAdminAssurance')->name('showTypeAssureAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-typeassure/{id}', 'AdminAssuranceController@editTypeAssureAdminAssurance')->name('editTypeAssureAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-typeassure', 'AdminAssuranceController@updateTypeAssureAdminAssurance')->name('updateTypeAssureAdminAssurance');\r\n\r\n    /* CRUD Ticket Modérateurs */\r\n    Route::get('dashboard/adminassurance/nos-ticketmoderateurs', 'AdminAssuranceController@dashAdminAssuranceTicketModerateurs')->name('dashAdminAssuranceTicketModerateurs');\r\n    Route::post('dashboard/adminassurance/nouvel-ticketmoderateur', 'AdminAssuranceController@newTicketModerateurAdminAssurance')->name('newTicketModerateurAdminAssurance');\r\n    Route::get('dashboard/adminassurance/show-ticketmoderateur/{id}', 'AdminAssuranceController@showTicketModerateurAdminAssurance')->name('showTicketModerateurAdminAssurance');\r\n    Route::get('dashboard/adminassurance/edit-ticketmoderateur/{id}', 'AdminAssuranceController@editTicketModerateurAdminAssurance')->name('editTicketModerateurAdminAssurance');\r\n    Route::post('dashboard/adminassurance/update-ticketmoderateur', 'AdminAssuranceController@updateTicketModerateurAdminAssurance')->name('updateTicketModerateurAdminAssurance');\r\n\r\n    ##############################################################################################\r\n    #                                                                                            #\r\n    #                           GENERERATION FEUILLE DE SOINS                                    #\r\n    #                                                                                            #\r\n    ##############################################################################################\r\n\r\n\r\n});\r\n\r\nRoute::get('/feuille-de-soin', 'feuilleController@feuilleSoins')->name('feuilleSoin');\r\nRoute::get('/feuille-de-soin/download', 'feuilleController@getPostPdf')->name('feuilleSoinDownload');\r\n\r\n//Clear Cache facade value:\r\nRoute::get('/clear-cache', function() {\r\n    $exitCode = Artisan::call('cache:clear');\r\n    return '<h1>Cache facade value cleared</h1>';\r\n});\r\n\r\n//Reoptimized class loader:\r\nRoute::get('/optimize', function() {\r\n    $exitCode = Artisan::call('optimize');\r\n    return '<h1>Reoptimized class loader</h1>';\r\n});\r\n\r\n//Route cache:\r\nRoute::get('/route-cache', function() {\r\n    $exitCode = Artisan::call('route:cache');\r\n    return '<h1>Routes cached</h1>';\r\n});\r\n\r\n//Clear Route cache:\r\nRoute::get('/route-clear', function() {\r\n    $exitCode = Artisan::call('route:clear');\r\n    return '<h1>Route cache cleared</h1>';\r\n});\r\n\r\n//Clear View cache:\r\nRoute::get('/view-clear', function() {\r\n    $exitCode = Artisan::call('view:clear');\r\n    return '<h1>View cache cleared</h1>';\r\n});\r\n\r\n//Clear Config cache:\r\nRoute::get('/config-cache', function() {\r\n    $exitCode = Artisan::call('config:cache');\r\n    return '<h1>Clear Config cache cleared</h1>';\r\n});\r\n\r\n//Clear Config cache:\r\nRoute::get('/proc-open-error', function() {\r\n    $exitCode = Artisan::call('vendor:publish', ['--tag' => 'flare-config']);\r\n    return '<h1>Proc open error resolved -> Think to change parameters in config/flare.php !!!</h1>';\r\n});\r\n\r\n//Storage route link\r\nRoute::get('/any-route', function () {\r\n\t$exitCode = Artisan::call('storage:link');\r\n    echo $exitCode; // 0 exit code for no errors.\r\n});\r\n\r\nAuth::routes();\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- routes/web.php	(revision d5d3a8834c31daa1709dd1c0c877ccb0a4a7c625)
++++ routes/web.php	(date 1656299512371)
+@@ -224,7 +224,7 @@
+      Route::get('dashboard/adminetablissement/edit-appareillage/{id}', 'AdminEtablissementController@editAppareillageAdminEtablissement')->name('editAppareillageAdminEtablissement');
+      Route::post('dashboard/adminetablissement/update-appareillage', 'AdminEtablissementController@updateAppareillageAdminEtablissement')->name('updateAppareillageAdminEtablissement');
+ 
+-     
++
+      /* CRUD Prise en Charge */
+      Route::get('dashboard/adminetablissement/nos-prisecharges', 'AdminEtablissementController@dashAdminEtablissementPriseCharges')->name('dashAdminEtablissementPriseCharges');
+      Route::post('dashboard/adminetablissement/nouvel-prisecharge', 'AdminEtablissementController@newPriseChargeAdminEtablissement')->name('newPriseChargeAdminEtablissement');
+@@ -341,6 +341,19 @@
+     ##############################################################################################
+ 
+ 
++    ##############################################################################################
++    #                                                                                            #
++    #                           GESTION DE LA CAISSE ETABLISSEMENT                               #
++    #                                                                                            #
++    ##############################################################################################
++    Route::get('dashboard/caisseetablissement', 'caisseController@index')->name('dashboardCaisseInterface');
++    Route::get('dashboard/caisseetablissements', 'caisseController@store')->name('dashboardCaisseRdv');
++    Route::get('dashboard/caisseetablissemente', 'caisseController@create')->name('dashboardCaissePaiements');
++    Route::get('dashboard/caisseetablissementa', 'caisseController@destroy')->name('dashboardCaissePaimentAdd');
++    Route::get('dashboard/caisseetablissementr', 'caisseController@lol')->name('dashboardCaissePaimentFA');
++
++
++
+ });
+ 
+ Route::get('/feuille-de-soin', 'feuilleController@feuilleSoins')->name('feuilleSoin');
+Index: app/Http/Controllers/Auth/LoginController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Http\\Controllers\\Auth;\r\n\r\nuse App\\Http\\Controllers\\Controller;\r\nuse App\\Providers\\RouteServiceProvider;\r\nuse Illuminate\\Foundation\\Auth\\AuthenticatesUsers;\r\nuse Illuminate\\Support\\Facades\\Auth;\r\n\r\nclass LoginController extends Controller\r\n{\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Login Controller\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | This controller handles authenticating users for the application and\r\n    | redirecting them to your home screen. The controller uses a trait\r\n    | to conveniently provide its functionality to your applications.\r\n    |\r\n    */\r\n\r\n    use AuthenticatesUsers;\r\n\r\n    /**\r\n     * Where to redirect users after login.\r\n     *\r\n     * @var string\r\n     */\r\n    public function redirectTo() {\r\n\r\n        $role = Auth::user()->role; \r\n\r\n        switch ($role) {\r\n\r\n          case 'SuperAdmin':\r\n            return '/dashboard/superadmin';\r\n            break;\r\n          \r\n          case 'AdminEtablissement':\r\n            return '/dashboard/adminetablissement';\r\n            break;\r\n          case 'ManagerEtablissement':\r\n            return '/dashboard/manageretablissement';\r\n            break;\r\n          case 'ComptableEtablissement':\r\n            return '/dashboard/comptableetablissement';\r\n            break;\r\n          case 'TiersPayantEtablissement':\r\n            return '/dashboard/tierspayantetablissement';\r\n            break;\r\n          case 'CaisseEtablissement':\r\n            return '/dashboard/caisseetablissement';\r\n            break;\r\n          case 'PharmacienEtablissement':\r\n            return '/dashboard/caisseetablissement';\r\n            break;\r\n          case 'PraticienEtablissement':\r\n            return '/dashboard/praticienetablissement';\r\n            break;\r\n          case 'InfirmierEtablissement':\r\n            return '/dashboard/infirmieretablissement';\r\n            break;\r\n          case 'LaborantinEtablissement':\r\n            return '/dashboard/laborantinetablissement';\r\n            break;\r\n\r\n          case 'AdminAssurance':\r\n            return '/dashboard/adminassurance';\r\n            break;\r\n          case 'ManagerAssurance':\r\n            return '/dashboard/managerassurance';\r\n            break;\r\n          case 'ComptableAssurance':\r\n            return '/dashboard/comptableassurance';\r\n            break;\r\n          case 'TiersPayantAssurance':\r\n            return '/dashboard/tierspayantassurance';\r\n            break;\r\n          case 'MedecinAssurance':\r\n            return '/dashboard/medecinassurance';\r\n            break;\r\n\r\n            \r\n          case 'Assure':\r\n            return '/dashboard/assure';\r\n            break;\r\n          case 'AyantDroit':\r\n            return '/dashboard/ayantdroit';\r\n            break;\r\n        /*case 'Operateur':\r\n            return '/dashboard/operateur';\r\n            break;\r\n          case 'Client':\r\n            return '/dashboard/client';\r\n             break;*/\r\n\r\n          default:\r\n            return '/'; \r\n            break;\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Create a new controller instance.\r\n     *\r\n     * @return void\r\n     */\r\n    public function __construct()\r\n    {\r\n        $this->middleware('guest')->except('logout');\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Controllers/Auth/LoginController.php	(revision d5d3a8834c31daa1709dd1c0c877ccb0a4a7c625)
++++ app/Http/Controllers/Auth/LoginController.php	(date 1656262052218)
+@@ -29,14 +29,14 @@
+      */
+     public function redirectTo() {
+ 
+-        $role = Auth::user()->role; 
++        $role = Auth::user()->role;
+ 
+         switch ($role) {
+ 
+           case 'SuperAdmin':
+             return '/dashboard/superadmin';
+             break;
+-          
++
+           case 'AdminEtablissement':
+             return '/dashboard/adminetablissement';
+             break;
+@@ -53,7 +53,7 @@
+             return '/dashboard/caisseetablissement';
+             break;
+           case 'PharmacienEtablissement':
+-            return '/dashboard/caisseetablissement';
++            return '/dashboard/pharmacieetablissement';
+             break;
+           case 'PraticienEtablissement':
+             return '/dashboard/praticienetablissement';
+@@ -81,7 +81,7 @@
+             return '/dashboard/medecinassurance';
+             break;
+ 
+-            
++
+           case 'Assure':
+             return '/dashboard/assure';
+             break;
+@@ -96,7 +96,7 @@
+              break;*/
+ 
+           default:
+-            return '/'; 
++            return '/';
+             break;
+         }
+     }
+Index: resources/views/layouts/layout_caisse.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/layouts/layout_caisse.blade.php	(revision d5d3a8834c31daa1709dd1c0c877ccb0a4a7c625)
++++ resources/views/layouts/layout_caisse.blade.php	(date 1656261815330)
+@@ -1,0 +1,258 @@
++
++<!DOCTYPE html>
++<html lang="fr">
++
++<head>
++    <meta charset="utf-8">
++    <meta content="width=device-width, initial-scale=1.0" name="viewport">
++
++    <title>Dashboard - DATRAC</title>
++    <meta content="" name="description">
++    <meta content="" name="keywords">
++
++    <!-- Favicons -->
++    <link href="{{ URL::to('assets/img/favicon.png') }}" rel="icon">
++    <link href="{{ URL::to('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
++
++    <!-- Google Fonts -->
++    <link href="{{ URL::to('https://fonts.gstatic.com') }}" rel="preconnect">
++    <link href="{{ URL::to('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i') }}" rel="stylesheet">
++
++    <!-- Vendor CSS Files -->
++    <link href="{{ URL::to('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
++    <link href="{{ URL::to('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
++    <link href="{{ URL::to('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
++    <link href="{{ URL::to('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
++    <link href="{{ URL::to('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
++    <link href="{{ URL::to('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
++    <link href="{{ URL::to('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
++
++    <!-- Template Main CSS File -->
++    <link href="{{ URL::to('assets/css/style.css') }}" rel="stylesheet">
++
++    <!-- =======================================================
++    * Template Name: NiceAdmin - v2.1.0
++    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
++    * Author: BootstrapMade.com
++    * License: https://bootstrapmade.com/license/
++    ======================================================== -->
++</head>
++
++<body>
++
++<!-- ======= Header ======= -->
++<header id="header" class="header fixed-top d-flex align-items-center">
++
++    <div class="d-flex align-items-center justify-content-between">
++        <a href="{{ route('dashAdminAssurance') }}" class="logo d-flex align-items-center">
++            <img src="{{ URL::to('assets/img/logo.png') }}" alt="">
++            <span class="d-none d-lg-block">DATRAC</span>
++        </a>
++        <i class="bi bi-list toggle-sidebar-btn"></i>
++    </div><!-- End Logo -->
++
++    <div class="search-bar">
++        <form class="search-form d-flex align-items-center" method="POST" action="#">
++        </form>
++    </div><!-- End Search Bar -->
++
++    <nav class="header-nav ms-auto">
++        <ul class="d-flex align-items-center">
++
++            <li class="nav-item d-block d-lg-none">
++                <a class="nav-link nav-icon search-bar-toggle " href="#">
++                    <i class="bi bi-search"></i>
++                </a>
++            </li><!-- End Search Icon-->
++
++
++
++            <li class="nav-item dropdown pe-3">
++
++                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
++
++                    @if(!empty(Auth::user()->photo_url) || Auth::user()->photo_url != NULL)
++                        <img src="{{ Auth::user()->photo_url }}" alt="Profile" class="rounded-circle">
++                    @else
++                        <img src="{{ URL::to('assets/photos/avatar.png') }}" alt="Profile" class="rounded-circle">
++                    @endif
++
++                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
++                </a><!-- End Profile Iamge Icon -->
++
++                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
++                    <li class="dropdown-header">
++                        <h6>{{ Auth::user()->name }}</h6>
++                        <span>{{ Auth::user()->role }}</span>
++                    </li>
++                    <li>
++                        <hr class="dropdown-divider">
++                    </li>
++
++                    <li>
++                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
++                            <i class="bi bi-person"></i>
++                            <span>Mon Profil</span>
++                        </a>
++                    </li>
++                    <li>
++                        <hr class="dropdown-divider">
++                    </li>
++
++                    <li>
++                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
++                            <i class="bi bi-gear"></i>
++                            <span>Notifications</span>
++                        </a>
++                    </li>
++                    <li>
++                        <hr class="dropdown-divider">
++                    </li>
++
++                    <li>
++                        <hr class="dropdown-divider">
++                    </li>
++
++                    <li>
++                        <a class="dropdown-item d-flex align-items-center"href="{{ route('logout') }}">
++                            <i class="bi bi-box-arrow-right"></i>
++                            <span>Déconnexion</span>
++                        </a>
++                    </li>
++
++                </ul><!-- End Profile Dropdown Items -->
++            </li><!-- End Profile Nav -->
++
++        </ul>
++    </nav><!-- End Icons Navigation -->
++
++    <!-- Modal -->
++    <div class="modal fade" id="basicModal">
++        <div class="modal-dialog" role="document">
++            <div class="modal-content">
++                <div class="modal-header">
++                    <h5 class="modal-title">DATRAC</h5>
++                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
++                    </button>
++                </div>
++                <div class="modal-body">Souhaitez-vous fermer votre session ?</div>
++                <div class="modal-footer">
++                    <button type="button" class="btn btn-danger light" data-dismiss="modal">
++                        Non
++                    </button>
++                    <form method="post" action="{{ route('logout') }}">
++                        @csrf
++                        <button type="submit" class="btn btn-primary">
++                            Oui
++                        </button>
++                    </form>
++                </div>
++            </div>
++        </div>
++    </div>
++
++</header><!-- End Header -->
++
++<!-- ======= Sidebar ======= -->
++<aside id="sidebar" class="sidebar">
++
++    <ul class="sidebar-nav" id="sidebar-nav">
++
++        <li class="nav-item">
++            <a class="nav-link " href="{{ route('dashboardCaisseInterface') }}">
++                <i class="bi bi-grid"></i>
++                <span>Dashboard - Caisse</span>
++            </a>
++        </li><!-- End Dashboard Nav -->
++
++        <li class="nav-item">
++            <a class="nav-link collapsed active" href="{{ route('dashboardCaisseInterface') }}">
++                <i class="bi bi-person"></i>
++                <span>Identification Patient</span>
++            </a>
++        </li>
++        <li class="nav-item">
++            <a class="nav-link collapsed" href="{{ route('dashboardCaisseRdv') }}">
++                <i class="bi bi-person"></i>
++                <span>Rendez-vous</span>
++            </a>
++        </li>
++
++        <li class="nav-item">
++            <a class="nav-link collapsed" data-bs-target="#paiement" data-bs-toggle="collapse" href="#">
++                <i class="bi bi-menu-button-wide"></i><span>Paiements</span><i class="bi bi-chevron-down ms-auto"></i>
++            </a>
++            <ul id="paiement" class="nav-content collapse " data-bs-parent="#sidebar-nav">
++                <li>
++                    <a href="{{ route('dashboardCaissePaiements') }}">
++                        <i class="bi bi-circle"></i><span>Paiements</span>
++                    </a>
++                </li>
++                <li>
++                    <a href="{{ route('dashboardCaissePaimentAdd') }}">
++                        <i class="bi bi-circle"></i><span>Ajouter un paiement</span>
++                    </a>
++                </li>
++                <li>
++                    <a href="{{ route('dashboardCaissePaimentFA') }}">
++                        <i class="bi bi-circle"></i><span>Facture d'achat</span>
++                    </a>
++                </li>
++            </ul>
++        </li><!-- End Components Nav -->
++    </ul>
++
++</aside><!-- End Sidebar-->
++
++<main id="main" class="main">
++
++    <div class="pagetitle">
++        <h1>Dashboard - Caisse</h1>
++        <nav>
++            <ol class="breadcrumb">
++                <li class="breadcrumb-item"><a href="">Accueil</a></li>
++                <li class="breadcrumb-item active">{{ $page_title }}</li>
++            </ol>
++        </nav>
++    </div><!-- End Page Title -->
++
++    <section class="section dashboard">
++        <div class="row">
++            @yield('page-content')
++        </div>
++    </section>
++
++</main><!-- End #main -->
++
++<!-- ======= Footer ======= -->
++<footer id="footer" class="footer">
++    <div class="copyright">
++        &copy; Copyright <strong><span>DATRAC</span></strong>. Tous droits réservés
++    </div>
++    <div class="credits">
++        <!-- All the links in the footer should remain intact. -->
++        <!-- You can delete the links only if you purchased the pro version. -->
++        <!-- Licensing information: https://bootstrapmade.com/license/ -->
++        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
++        Designed by <a href="https://tinsid.com/">TINSID</a>
++    </div>
++</footer><!-- End Footer -->
++
++<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
++
++<!-- Vendor JS Files -->
++<script src="{{ URL::to('assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
++<script src="{{ URL::to('assets/vendor/php-email-form/validate.js') }}"></script>
++<script src="{{ URL::to('assets/vendor/quill/quill.min.js') }}"></script>
++<script src="{{ URL::to('assets/vendor/tinymce/tinymce.min.js') }}"></script>
++<script src="{{ URL::to('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
++<script src="{{ URL::to('assets/vendor/chart.js/chart.min.js') }}"></script>
++<script src="{{ URL::to('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
++<script src="{{ URL::to('assets/vendor/echarts/echarts.min.js') }}"></script>
++
++<!-- Template Main JS File -->
++<script src="{{ URL::to('assets/js/main.js') }}"></script>
++
++</body>
++
++</html>
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06__Default_Changelist_.xml
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06__Default_Changelist_.xml	(revision d5d3a8834c31daa1709dd1c0c877ccb0a4a7c625)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06__Default_Changelist_.xml	(revision d5d3a8834c31daa1709dd1c0c877ccb0a4a7c625)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_23_05_2022_19_06_[Default_Changelist]" date="1653329171224" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 23/05/2022 19:06 [Default Changelist]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06_[Default_Changelist]/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06_[Default_Changelist]/shelved.patch	(revision d5d3a8834c31daa1709dd1c0c877ccb0a4a7c625)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06_[Default_Changelist]/shelved.patch	(revision d5d3a8834c31daa1709dd1c0c877ccb0a4a7c625)
+@@ -1,18 +0,0 @@
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"63a6dfcf-102d-4168-a291-f39717ebb98d\" name=\"Default Changelist\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\" doNotAsk=\"true\" synchronizationState=\"SYNCHRONIZE\">\r\n    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>\r\n    <execution />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"PhpWorkspaceProjectConfiguration\">\r\n    <include_path>\r\n      <path value=\"$PROJECT_DIR$/vendor/vlucas/phpdotenv\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/inflector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/lexer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/instantiator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/monolog/monolog\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/fideloper/proxy\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpspec/prophecy\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/fruitcake/laravel-cors\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/composer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/filp/whoops\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/egulias/email-validator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpoption/phpoption\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/ralouphie/getallheaders\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php80\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nunomaduro/collision\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-foundation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/error-handler\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/routing\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/global-state\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/css-selector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/diff\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-ctype\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/resource-operations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-mbstring\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/recursion-context\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/mime\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/environment\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/service-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/comparator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/string\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/exporter\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/finder\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/object-enumerator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/deprecation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/type\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/simple-cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/object-reflector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/process\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/version\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/container\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-kernel\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/http-message\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php72\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/log\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/asm89/stack-cors\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/console\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/dragonmantank/cron-expression\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php73\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-iconv\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/var-dumper\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php81\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/brick/math\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/ramsey/uuid\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/ramsey/collection\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/swiftmailer/swiftmailer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/type-resolver\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/hamcrest/hamcrest-php\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/opis/closure\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-common\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/league/commonmark\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/league/mime-type-detection\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nikic/php-parser\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/league/flysystem\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/voku/portable-ascii\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laravel/ui\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laravel/framework\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laravel/tinker\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/mockery/mockery\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/webmozart/assert\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psy/psysh\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/facade/ignition\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/facade/flare-client-php\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/facade/ignition-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/fzaninotto/faker\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-token-stream\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-timer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-text-template\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-code-coverage\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/myclabs/deep-copy\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-file-iterator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/phpunit\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nesbot/carbon\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/guzzlehttp/psr7\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/guzzlehttp/guzzle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/guzzlehttp/promises\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phar-io/version\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phar-io/manifest\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/theseer/tokenizer\" />\r\n    </include_path>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"27jnE56DvxUWhHMrfxfNICWnKKZ\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/resources/views/layouts\" />\r\n    <property name=\"nodejs_interpreter_path.stuck_in_default_project\" value=\"undefined stuck path\" />\r\n    <property name=\"nodejs_npm_path_reset_for_default_project\" value=\"true\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"vcs.Git\" />\r\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\public\\assets\\img\\assets\\images\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\public\\assets\\img\\images\\assurance\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\app\\Models\" />\r\n    </key>\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\resources\\views\\layouts\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\resources\\views\\backend\\superadmin\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\resources\\views\\backend\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\config\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\app\\Models\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"phpunit.xml\" type=\"PHPUnitRunConfigurationType\" factoryName=\"PHPUnit\">\r\n      <TestRunner scope=\"XML\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"63a6dfcf-102d-4168-a291-f39717ebb98d\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1649842280517</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1649842280517</updated>\r\n      <workItem from=\"1649842283977\" duration=\"45920000\" />\r\n      <workItem from=\"1650227241420\" duration=\"2183000\" />\r\n      <workItem from=\"1650453282790\" duration=\"1190000\" />\r\n      <workItem from=\"1653303585250\" duration=\"1207000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"530\" y=\"204\" key=\"#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog\" timestamp=\"1650019430565\">\r\n      <screen x=\"0\" y=\"0\" width=\"1600\" height=\"900\" />\r\n    </state>\r\n    <state x=\"530\" y=\"204\" key=\"#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.900@0.0.1600.900\" timestamp=\"1650019430565\" />\r\n    <state x=\"392\" y=\"182\" key=\"Vcs.Push.Dialog.v2\" timestamp=\"1650170060820\">\r\n      <screen x=\"0\" y=\"0\" width=\"1600\" height=\"900\" />\r\n    </state>\r\n    <state x=\"392\" y=\"182\" key=\"Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900\" timestamp=\"1650170060820\" />\r\n    <state x=\"617\" y=\"363\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2\" timestamp=\"1650169997771\">\r\n      <screen x=\"0\" y=\"0\" width=\"1600\" height=\"900\" />\r\n    </state>\r\n    <state x=\"617\" y=\"363\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900@0.0.1600.900\" timestamp=\"1650169997771\" />\r\n    <state x=\"456\" y=\"205\" key=\"run.anything.popup\" timestamp=\"1650020858116\">\r\n      <screen x=\"0\" y=\"0\" width=\"1600\" height=\"900\" />\r\n    </state>\r\n    <state x=\"456\" y=\"205\" key=\"run.anything.popup/0.0.1600.900@0.0.1600.900\" timestamp=\"1650020858116\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- .idea/workspace.xml	(revision fa2dd367bae8009d34e25ac3f753f3184f81325b)
+-+++ .idea/workspace.xml	(date 1653329139839)
+-@@ -169,7 +169,7 @@
+-       <workItem from="1649842283977" duration="45920000" />
+-       <workItem from="1650227241420" duration="2183000" />
+-       <workItem from="1650453282790" duration="1190000" />
+--      <workItem from="1653303585250" duration="1207000" />
+-+      <workItem from="1653303585250" duration="2458000" />
+-     </task>
+-     <servers />
+-   </component>
+Index: resources/views/backend/caisse/index.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/backend/caisse/index.blade.php	(date 1656264837306)
++++ resources/views/backend/caisse/index.blade.php	(date 1656264837306)
+@@ -0,0 +1,138 @@
++@extends('layouts.layout_caisse')
++
++@section('page-content')
++
++    <!--User Dashboard-->
++
++    <div class="container-fluid">
++        <div class="form-head d-flex mb-3 mb-md-5 align-items-start">
++            <div class="mr-auto d-none d-lg-block">
++                <h3 class="text-primary font-w600">Bienvenue sur DATRAC 2.0 !</h3>
++                <p class="mb-0">ADMINISTRATION : <b>{{ $adminetab->nom_etablissement }}</b></p>
++            </div>
++
++            <div class="input-group search-area ml-auto d-inline-flex">
++                <!--input type="text" class="form-control" placeholder="Search here">
++                <div class="input-group-append">
++                    <a href="javascript:void(0)" class="input-group-text"><i class="flaticon-381-search-2"></i></a>
++                </div-->
++            </div>
++            <a class="btn btn-sm btn-primary ml-3">
++                <?php
++                \Carbon\Carbon::setLocale('fr');
++                echo \Carbon\Carbon::now()->translatedFormat('l jS F Y');
++                ?>
++            </a>
++        </div>
++        <div class="row">
++            <div class="row clearfix">
++                <div class="col-lg-12 col-md-12 col-sm-12 ">
++                    <div class="card">
++                        <div class="header">
++                            <h2>Informations pour les patients</h2>
++                        </div>
++                        <div class="body">
++                            <div class="row clearfix">
++                                <div class="col-sm-12">
++                                    <div class="form-group">
++                                        <input type="number" class="form-control" placeholder="Numéro de facture">
++                                    </div>
++                                </div>
++                                <div class="col-sm-12">
++                                    <div class="form-group">
++                                        <input type="text" class="form-control" placeholder="Nom du patient">
++                                    </div>
++                                </div>
++                                <div class="col-sm-12 ">
++                                    <div class="form-group">
++                                        <select class="form-control show-tick">
++                                            <option value="">- Praticien -</option>
++                                            <option>Dr. John Smith</option>
++                                            <option>Dr. Maryam Amiri</option>
++                                            <option>Dr. Hossein Shams </option>
++                                        </select>
++                                    </div>
++                                </div>
++                                <div class="col-sm-12 ">
++                                    <select class="form-control show-tick">
++                                        <option value="">- Assurance -</option>
++                                        <option>CNAMGS</option>
++                                        <option>ASCOMA</option>
++                                        <option>SANLAM</option>
++                                    </select>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                    <div class="card">
++                        <div class="header">
++                            <h2>Informations de paiement</h2>
++                        </div>
++                        <div class="body">
++                            <p>
++                                <img src="../assets/images/mastercard.png" class="m-r-5" alt="">
++                                <img src="../assets/images/visa-card.png" class="m-r-5" alt="">
++                                <img src="../assets/images/paypal.png" alt="">
++                            </p>
++                            <p class="alert alert-success">Succès ou erreur de texte</p>
++                            <form>
++                                <div class="form-group">
++                                    <label>Nom complet (sur la carte)</label>
++                                    <div class="input-group">
++                                        <div class="input-group-prepend">
++                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
++                                        </div>
++                                        <input type="text" class="form-control" name="username" placeholder="" required="">
++                                    </div>
++                                </div>
++
++                                <div class="form-group">
++                                    <label>Card number</label>
++                                    <div class="input-group">
++                                        <div class="input-group-prepend">
++                                            <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
++                                        </div>
++                                        <input type="text" class="form-control" name="cardNumber" placeholder="">
++                                    </div>
++                                </div>
++
++                                <div class="row">
++                                    <div class="col-sm-8">
++                                        <div class="form-group">
++                                            <label><span class="hidden-xs">Expiration</span> </label>
++                                            <div class="form-inline">
++                                                <select class="form-control" style="width:45%">
++                                                    <option>MM</option>
++                                                    <option>01 - Janiary</option>
++                                                    <option>02 - February</option>
++                                                    <option>03 - February</option>
++                                                </select>
++                                                <span style="width:10%; text-align: center"> / </span>
++                                                <select class="form-control" style="width:45%">
++                                                    <option>YY</option>
++                                                    <option>2018</option>
++                                                    <option>2019</option>
++                                                </select>
++                                            </div>
++                                        </div>
++                                    </div>
++                                    <div class="col-sm-4">
++                                        <div class="form-group">
++                                            <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
++                                            <input class="form-control" required="" type="text">
++                                        </div>
++                                    </div>
++                                </div>
++                                <button class="subscribe btn btn-primary btn-block" type="button"> Confirm  </button>
++                            </form>
++                        </div>
++                    </div>
++                </div>
++            </div>
++        </div>
++    </div>
++
++    <!--/User Dashboard-->
++
++
++@endsection
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"63a6dfcf-102d-4168-a291-f39717ebb98d\" name=\"Default Changelist\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/public/assets/img/images/assurance/cnamgspic.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/resources/views/feuilleSoin/fileHealth.blade.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/DatracV3.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/DatracV3.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/php.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/php.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/composer.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/composer.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/composer.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/composer.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/config/app.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/config/app.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/database/migrations/2022_04_17_141853_create_specialites.php\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/routes/web.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/routes/web.php\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\" doNotAsk=\"true\" synchronizationState=\"SYNCHRONIZE\">\r\n    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>\r\n    <execution />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"PhpWorkspaceProjectConfiguration\">\r\n    <include_path>\r\n      <path value=\"$PROJECT_DIR$/vendor/vlucas/phpdotenv\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/inflector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/lexer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/instantiator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/monolog/monolog\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/fideloper/proxy\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpspec/prophecy\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/fruitcake/laravel-cors\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/composer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/filp/whoops\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/egulias/email-validator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpoption/phpoption\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/ralouphie/getallheaders\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php80\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nunomaduro/collision\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-foundation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/error-handler\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/routing\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/global-state\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/css-selector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/diff\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-ctype\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/resource-operations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-mbstring\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/recursion-context\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/mime\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/environment\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/service-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/comparator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/string\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/exporter\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/finder\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/object-enumerator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/deprecation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/type\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/simple-cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/object-reflector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/process\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sebastian/version\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/container\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-kernel\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/http-message\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php72\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/log\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/asm89/stack-cors\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/console\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/dragonmantank/cron-expression\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php73\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-iconv\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/var-dumper\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php81\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/brick/math\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/ramsey/uuid\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/ramsey/collection\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/swiftmailer/swiftmailer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/type-resolver\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/hamcrest/hamcrest-php\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/opis/closure\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-common\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/league/commonmark\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/league/mime-type-detection\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nikic/php-parser\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/league/flysystem\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/voku/portable-ascii\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laravel/ui\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laravel/framework\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laravel/tinker\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/mockery/mockery\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/webmozart/assert\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psy/psysh\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/facade/ignition\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/facade/flare-client-php\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/facade/ignition-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/fzaninotto/faker\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-token-stream\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-timer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-text-template\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-code-coverage\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/myclabs/deep-copy\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/php-file-iterator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpunit/phpunit\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nesbot/carbon\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/guzzlehttp/psr7\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/guzzlehttp/guzzle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/guzzlehttp/promises\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phar-io/version\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phar-io/manifest\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/theseer/tokenizer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phenx/php-font-lib\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phenx/php-svg-lib\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/dompdf/dompdf\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sabberworm/php-css-parser\" />\r\n    </include_path>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"27jnE56DvxUWhHMrfxfNICWnKKZ\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/resources/views/layouts\" />\r\n    <property name=\"nodejs_interpreter_path.stuck_in_default_project\" value=\"undefined stuck path\" />\r\n    <property name=\"nodejs_npm_path_reset_for_default_project\" value=\"true\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"vcs.Git\" />\r\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\public\\assets\\img\\images\\assurance\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\resources\\views\\layouts\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\resources\\views\\backend\\superadmin\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\resources\\views\\backend\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\config\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\public\\assets\\img\\assets\\images\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\public\\assets\\img\\images\\assurance\" />\r\n      <recent name=\"G:\\BOULOT\\CNAMGS\\DatracV3\\app\\Models\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"phpunit.xml\" type=\"PHPUnitRunConfigurationType\" factoryName=\"PHPUnit\">\r\n      <TestRunner scope=\"XML\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"63a6dfcf-102d-4168-a291-f39717ebb98d\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1649842280517</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1649842280517</updated>\r\n      <workItem from=\"1649842283977\" duration=\"45920000\" />\r\n      <workItem from=\"1650227241420\" duration=\"2183000\" />\r\n      <workItem from=\"1650453282790\" duration=\"1190000\" />\r\n      <workItem from=\"1653303585250\" duration=\"6796000\" />\r\n      <workItem from=\"1653363839506\" duration=\"33076000\" />\r\n      <workItem from=\"1653598494969\" duration=\"18373000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"530\" y=\"204\" key=\"#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog\" timestamp=\"1650019430565\">\r\n      <screen x=\"0\" y=\"0\" width=\"1600\" height=\"900\" />\r\n    </state>\r\n    <state x=\"530\" y=\"204\" key=\"#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.900@0.0.1600.900\" timestamp=\"1650019430565\" />\r\n    <state x=\"392\" y=\"182\" key=\"Vcs.Push.Dialog.v2\" timestamp=\"1650170060820\">\r\n      <screen x=\"0\" y=\"0\" width=\"1600\" height=\"900\" />\r\n    </state>\r\n    <state x=\"392\" y=\"182\" key=\"Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900\" timestamp=\"1650170060820\" />\r\n    <state x=\"617\" y=\"363\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2\" timestamp=\"1653329217208\">\r\n      <screen x=\"0\" y=\"0\" width=\"1600\" height=\"900\" />\r\n    </state>\r\n    <state x=\"617\" y=\"363\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900/1600.0.1600.900@0.0.1600.900\" timestamp=\"1653329217208\" />\r\n    <state x=\"617\" y=\"363\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900@0.0.1600.900\" timestamp=\"1650169997771\" />\r\n    <state x=\"456\" y=\"205\" key=\"run.anything.popup\" timestamp=\"1650020858116\">\r\n      <screen x=\"0\" y=\"0\" width=\"1600\" height=\"900\" />\r\n    </state>\r\n    <state x=\"456\" y=\"205\" key=\"run.anything.popup/0.0.1600.900@0.0.1600.900\" timestamp=\"1650020858116\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"php\">\r\n          <url>file://$PROJECT_DIR$/resources/views/feuilleSoin/fileHealth.blade.php</url>\r\n          <line>174</line>\r\n          <option name=\"timeStamp\" value=\"2\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision d5d3a8834c31daa1709dd1c0c877ccb0a4a7c625)
++++ .idea/workspace.xml	(date 1656339982424)
+@@ -2,15 +2,12 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="63a6dfcf-102d-4168-a291-f39717ebb98d" name="Default Changelist" comment="">
+-      <change afterPath="$PROJECT_DIR$/public/assets/img/images/assurance/cnamgspic.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/resources/views/feuilleSoin/fileHealth.blade.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/DatracV3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DatracV3.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/resources/views/backend/caisse/index.blade.php" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06_[Default_Changelist]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06__Default_Changelist_.xml" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_04_17_141853_create_specialites.php" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/resources/views/layouts/layout_caisse.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/layout_caisse.blade.php" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -23,6 +20,11 @@
+     <execution />
+   </component>
+   <component name="Git.Settings">
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="main" />
++      </map>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="PhpWorkspaceProjectConfiguration">
+@@ -186,6 +188,9 @@
+       <workItem from="1653303585250" duration="6796000" />
+       <workItem from="1653363839506" duration="33076000" />
+       <workItem from="1653598494969" duration="18373000" />
++      <workItem from="1654176874011" duration="10765000" />
++      <workItem from="1655677603431" duration="1314000" />
++      <workItem from="1656254946634" duration="12071000" />
+     </task>
+     <servers />
+   </component>
+@@ -193,22 +198,24 @@
+     <option name="version" value="3" />
+   </component>
+   <component name="WindowStateProjectService">
+-    <state x="530" y="204" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1650019430565">
++    <state x="530" y="204" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1656265102485">
+       <screen x="0" y="0" width="1600" height="900" />
+     </state>
++    <state x="530" y="204" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1656265102485" />
+     <state x="530" y="204" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.900@0.0.1600.900" timestamp="1650019430565" />
+     <state x="392" y="182" key="Vcs.Push.Dialog.v2" timestamp="1650170060820">
+       <screen x="0" y="0" width="1600" height="900" />
+     </state>
+     <state x="392" y="182" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1650170060820" />
+-    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1653329217208">
++    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1656339980177">
+       <screen x="0" y="0" width="1600" height="900" />
+     </state>
+-    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1653329217208" />
++    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1656339980177" />
+     <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900@0.0.1600.900" timestamp="1650169997771" />
+-    <state x="456" y="205" key="run.anything.popup" timestamp="1650020858116">
++    <state x="456" y="205" key="run.anything.popup" timestamp="1656260688104">
+       <screen x="0" y="0" width="1600" height="900" />
+     </state>
++    <state x="456" y="205" key="run.anything.popup/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1656260688104" />
+     <state x="456" y="205" key="run.anything.popup/0.0.1600.900@0.0.1600.900" timestamp="1650020858116" />
+   </component>
+   <component name="XDebuggerManager">

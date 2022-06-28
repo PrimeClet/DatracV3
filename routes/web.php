@@ -224,7 +224,7 @@ Route::middleware(['auth'])->group(function() {
      Route::get('dashboard/adminetablissement/edit-appareillage/{id}', 'AdminEtablissementController@editAppareillageAdminEtablissement')->name('editAppareillageAdminEtablissement');
      Route::post('dashboard/adminetablissement/update-appareillage', 'AdminEtablissementController@updateAppareillageAdminEtablissement')->name('updateAppareillageAdminEtablissement');
 
-     
+
      /* CRUD Prise en Charge */
      Route::get('dashboard/adminetablissement/nos-prisecharges', 'AdminEtablissementController@dashAdminEtablissementPriseCharges')->name('dashAdminEtablissementPriseCharges');
      Route::post('dashboard/adminetablissement/nouvel-prisecharge', 'AdminEtablissementController@newPriseChargeAdminEtablissement')->name('newPriseChargeAdminEtablissement');
@@ -256,7 +256,8 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/caisseetablissement/show-prestation/{id}', 'CaisseEtablissementController@showPrestationCaisseEtablissement')->name('showPrestationCaisseEtablissement');
     Route::get('dashboard/caisseetablissement/edit-prestation/{id}', 'CaisseEtablissementController@editPrestationCaisseEtablissement')->name('editPrestationCaisseEtablissement');
     Route::post('dashboard/caisseetablissement/update-prestation', 'CaisseEtablissementController@updatePrestationCaisseEtablissement')->name('updatePrestationCaisseEtablissement');
-        
+    Route::get('/assures/search', 'CaisseEtablissementController@search');
+    Route::post('/assures/creer-fiche-soin', 'CaisseEtablissementController@createFicheSoin');
     /* End Routing for CaisseEtablissement's User */
 
     ##############################################################################################
@@ -267,7 +268,7 @@ Route::middleware(['auth'])->group(function() {
 
     /* Start Routing for PraticienEtablissement's User */
     Route::get('dashboard/praticienetablissement', 'PraticienEtablissementController@dashPraticienEtablissement')->name('dashPraticienEtablissement');
-    
+
      /* CRUD Prestations soins*/
     Route::get('dashboard/praticienetablissement/nos-prestationsoins', 'PraticienEtablissementController@PraticienEtablissementPrestationSoins')->name('dashPraticienEtablissementPrestationSoins');
     Route::post('dashboard/praticienetablissement/nouvel-prestationsoins', 'PraticienEtablissementController@newPrestationSoinsPraticienEtablissement')->name('newPrestationSoinsPraticienEtablissement');

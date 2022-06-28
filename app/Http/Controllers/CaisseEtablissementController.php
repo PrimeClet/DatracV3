@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ActeAssurances;
 use App\Models\Affections;
+use App\Models\feuilleSoins;
 use App\User;
 use App\Models\MedicamentEtablissements;
 use App\Models\PrestationCaisses;
@@ -50,10 +51,13 @@ class CaisseEtablissementController extends Controller
         $caisseetablissement = Etablissements::find($caisseetablissement_id);
 
         // Count prestations
-        $count_prestations = PrestationCaisses::all()->count();
+        $count_prestations = 0;
+        $assurances = Assurance::all();
+        $prestation_etablissements = PrestationEtablissements::where('etablissement_id', $caisseetablissement_id)->get();
+//        $count_prestations = PrestationCaisses::all()->count();
 
-	    return view('backend.caisseetablissement.dashCaisseEtablissement', compact('page_title', 'caisseetablissement','        $caisseetablissement = Etablissements::find($caisseetablissement_id);
-        ', ));
+	    return view('backend.caisseetablissement.dashCaisseEtablissement', compact('page_title', 'assurances',
+            'prestation_etablissements', 'caisseetablissement', 'count_prestations'));
 
     }
 
@@ -64,7 +68,38 @@ class CaisseEtablissementController extends Controller
     #                                  DASH ROUTING                                              #
     #                                                                                            #
     ##############################################################################################
-    
+
+    public function createFicheSoin(Request $request){
+        $caissier = Auth::user();
+        $assure = User::where('id', $request['assure_id'])->first();
+        $assurance = Assurance::where('id', $request['assurance_id'])->first();
+        $assureId = null;
+        $ayantId = null;
+        if ($assure->role == 'Assure')
+            $assureId = $assure->id;
+        if ($assure->role == 'AyantDroit')
+            $ayantId =  $assure->role;
+
+        $CreateFeuille = feuilleSoins::create([
+            'n_feuille'=> $request['n_feuille'],
+            'date_caissier'=> Carbon::now(),
+            'typeAssure'=> $assure->role,
+            'nom_prenomP'=> $assure->name,
+            'telephoneP'=> $assure->telephone,
+            'date_naisP'=> $assure->datenaiss,
+            'n_matriculeP'=> $assure->matricule,
+            'signatureP' => $assure->name,
+            'etablissement_id' => $caissier->etablissement_id,
+            'nomEtablissement' => (Etablissements::where('id', $caissier->etablissement_id)->first())->nom_etablissement,
+            'assure_id' => $assureId,
+            'ayant_droit_id' => $ayantId,
+        ]);
+
+        Session::flash('alert-class', 'alert-primary');
+        return response()->json('Complete', 200);
+    }
+
+
     public function dashCaisseEtablissementPrestations(Request $request)
     {
 
@@ -84,8 +119,31 @@ class CaisseEtablissementController extends Controller
         $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
         $assurances = Assurance::all();
 
-        return view('backend.caisseetablissement.dashCaisseEtablissementPrestations', compact('page_title', 'caisses', 'assurances', 'prestation_etablissements', 'ticketmoderateurs','assures', 
+        return view('backend.caisseetablissement.dashCaisseEtablissementPrestations', compact('page_title', 'caisses', 'assurances', 'prestation_etablissements', 'ticketmoderateurs','assures',
                     'etablissements', 'typeassures','prestation_caisses',));
+
+    }
+
+    /**
+     * @param Request $request
+     * @return false|string
+     */
+    public function search(Request $request)
+    {
+        $member = $request->get('name');
+        $data =  DB::table('users')->where('name','LIKE','%'.$member.'%')
+            ->get();
+        if ($data->count() > 0) {
+            return json_encode([
+                'status' => 200,
+                'assures' => $data
+            ]);
+        } else {
+            return json_encode([
+                'status' => 202,
+                'assures' => $data
+            ]);
+        }
 
     }
 
@@ -96,13 +154,13 @@ class CaisseEtablissementController extends Controller
     #                                  NEW ROUTING                                              #
     #                                                                                            #
     ##############################################################################################
-    
+
     public function newPrestationCaisseEtablissement(Request $request)
     {
 
         $new_prestation = new PrestationCaisses();
 
-    	// Get new data 
+    	// Get new data
         $new_prestation->prestation_id = $request->input('prestation_id');
         $new_prestation->montant = $request->input('montant');
         $new_prestation->type_assure_id = $request->input('type_assure_id');
@@ -128,7 +186,7 @@ class CaisseEtablissementController extends Controller
     #                                  UPDATE ROUTING                                              #
     #                                                                                            #
     ##############################################################################################
-        
+
     public function showPrestationCaisseEtablissement(Request $request, $id)
     {
 
@@ -147,7 +205,7 @@ class CaisseEtablissementController extends Controller
     #                                  UPDATE ROUTING                                            #
     #                                                                                            #
     ##############################################################################################
-        
+
     public function editPrestationCaisseEtablissement(Request $request, $id)
     {
 
@@ -166,14 +224,14 @@ class CaisseEtablissementController extends Controller
     #                                  UPDATE ROUTING                                            #
     #                                                                                            #
     ##############################################################################################
-        
+
     public function updatePrestationCaisseEtablissement(Request $request)
     {
 
     	$prestation_id = $request->input('prestation_id');
     	$new_prestation = PrestationSoins::find($prestation_id);
 
-    	// Get new data 
+    	// Get new data
         $new_prestation->prestation_id = $request->input('prestation_id');
         $new_prestation->montant = $request->input('montant');
         $new_prestation->type_assure_id = $request->input('type_assure_id');

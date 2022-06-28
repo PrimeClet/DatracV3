@@ -29,14 +29,14 @@ class LoginController extends Controller
      */
     public function redirectTo() {
 
-        $role = Auth::user()->role; 
+        $role = Auth::user()->role;
 
         switch ($role) {
 
           case 'SuperAdmin':
             return '/dashboard/superadmin';
             break;
-          
+
           case 'AdminEtablissement':
             return '/dashboard/adminetablissement';
             break;
@@ -53,7 +53,7 @@ class LoginController extends Controller
             return '/dashboard/caisseetablissement';
             break;
           case 'PharmacienEtablissement':
-            return '/dashboard/caisseetablissement';
+            return '/dashboard/pharmacieetablissement';
             break;
           case 'PraticienEtablissement':
             return '/dashboard/praticienetablissement';
@@ -81,7 +81,7 @@ class LoginController extends Controller
             return '/dashboard/medecinassurance';
             break;
 
-            
+
           case 'Assure':
             return '/dashboard/assure';
             break;
@@ -96,7 +96,7 @@ class LoginController extends Controller
              break;*/
 
           default:
-            return '/'; 
+            return '/';
             break;
         }
     }
