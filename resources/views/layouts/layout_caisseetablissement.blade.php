@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{ route('dashCaisse') }}" class="logo d-flex align-items-center">
+      <a href="{{ route('dashCaisseEtablissement') }}" class="logo d-flex align-items-center">
         <img src="{{ URL::to('assets/img/logo.png') }}" alt="">
         <span class="d-none d-lg-block">DATRAC</span>
       </a>
@@ -65,7 +65,7 @@
           </a>
         </li><!-- End Search Icon-->
 
-        
+
 
         <li class="nav-item dropdown pe-3">
 
@@ -161,7 +161,7 @@
       <li class="nav-item">
         <a class="nav-link " href="{{ route('dashCaisseEtablissement') }}">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Dashboard - Caisse</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
@@ -225,7 +225,7 @@
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://tinsid.com/">TINSID</a>
+      Designed by <a href="https://tinsid.com/">LICABO</a>
     </div>
   </footer><!-- End Footer -->
 
@@ -240,9 +240,116 @@
   <script src="{{ URL::to('assets/vendor/chart.js/chart.min.js') }}"></script>
   <script src="{{ URL::to('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
   <script src="{{ URL::to('assets/vendor/echarts/echarts.min.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
   <!-- Template Main JS File -->
   <script src="{{ URL::to('assets/js/main.js') }}"></script>
+  <script language="JavaScript">
+      function choix(choix){
+          document.getElementById('choice').value = choix;
+          $('#prestationI').removeClass('d-none');
+      };
+
+      $(document).ready(function () {
+
+          $('#paid_box').change(function(){
+              let selected_value = $("input[name='paid']:checked").val()
+              if (selected_value == 2)
+                  $('#carteCred').removeClass('d-none');
+              if (selected_value == 1)
+                  $('#carteCred').addClass('d-none');
+              if (selected_value == 3)
+                  $('#carteCred').addClass('d-none');
+
+          });
+
+
+          $(document).on('click', '#searchAss', function (e) {
+              e.preventDefault();
+
+              // alert('ok')
+              // var branchid = $(this).data('branch');
+              let data =  $('#searchValue').val();
+
+              if(!data)
+                  alert("Empty Value");
+              else {
+                  $.ajax({
+                      'url': '/assures/search?name='+data,
+                      'type': 'GET',
+                      'data': {},
+                      'dataType': 'json',
+
+                      success: function(response){ // What to do if we
+                          let htmlView = '';
+                          if(response.assures.length <= 0){
+                              htmlView += `<tr><td colspan="6" class="text-center text-18">No data.</td></tr>`
+                          } else {
+
+                          }
+                          for(let i = 0; i < response.assures.length; i++){
+                              htmlView += `<tr><td>`+ response.assures[i].id + `</td><td>`
+                                  +response.assures[i].name+`</td><td>`
+                                  +response.assures[i].email+`</td><td>`
+                                  +response.assures[i].telephone+`</td><td>`
+                                  +response.assures[i].adresse+`</td><td>`
+                                  +`<a href="/dashboard/assure/`+response.assures[i].id+`">
+                                                    <button type="button" class="btn btn-sm btn-success"><i class="bi bi-eye-fill"></i> Voir Profil</button>
+                                                </a><button type="button" class="btn btn-sm pl-2 btn-success" data-value="`+response.assures[i].id+`" id="`+response.assures[i].id+`" onclick="choix(`+response.assures[i].id+`);"> Choisir</button>
+                                              </td></tr>`;
+                          }
+                          $('#assureTrouve').html(htmlView);
+                          // $('#typePatient').val('0');
+                      },
+                      error: function(response){
+                          alert('Error'+response);
+                      }
+                  });
+              }
+          });
+
+          $(document).on('change', '#presId', function (e) {
+              e.preventDefault();
+              $(this).find(':selected').data('value')
+
+              $('#price').val($(this).find(':selected').data('value'))
+          });
+
+          $(document).on('click', '#addPaiement', function (e) {
+              e.preventDefault();
+              $('#paiements').removeClass('d-none');
+              $('#nFeuille').val("CNAMGS"+ $('#choice').val());
+              $('#valid').removeClass('d-none');
+              $('#fei').removeClass('d-none');
+          });
+
+          $(document).on('click', '#valid', function (e) {
+              e.preventDefault();
+
+              let data = {
+                  "_token": "{{ csrf_token() }}",
+                  'n_feuille' : $("#nFeuille").val(),
+                  'assure_id' : $("#choice").val(),
+                  'assurance_id': $("#inputState").find(':selected').val()
+              }
+              $.ajax({
+                  'url': '/assures/creer-fiche-soin',
+                  'type': 'POST',
+                  'data': data,
+                  'dataType': 'json',
+
+                  success: function(response){ // What to do if we
+                      location.reload();
+                  },
+                  error: function(response){
+                      alert('Error'+response);
+                  }
+          });
+
+      })
+      });
+  </script>
+
 
 </body>
 

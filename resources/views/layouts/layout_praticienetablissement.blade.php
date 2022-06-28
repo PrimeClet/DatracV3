@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{ route('dashPraticien') }}" class="logo d-flex align-items-center">
+      <a href="{{ route('dashPraticienEtablissement') }}" class="logo d-flex align-items-center">
         <img src="{{ URL::to('assets/img/logo.png') }}" alt="">
         <span class="d-none d-lg-block">DATRAC</span>
       </a>

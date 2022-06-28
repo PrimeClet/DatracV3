@@ -42,9 +42,9 @@ class PraticienEtablissementController extends Controller
         $page_title = "Tableau de bord";
 
         $user_id = Auth::user()->id;
-        $praticien_id = Auth::user()->etablissement_id;
+        $praticienetablissement_id = Auth::user()->etablissement_id;
         $praticien = User::find($user_id);
-        $praticienetablissement = Etablissements::find($praticien_id);
+        $praticienetablissement = Etablissements::find($praticienetablissement_id);
 
         // Count prestations de soins
         $count_prestationsoins = PrestationSoins::all()->count();
@@ -195,7 +195,7 @@ class PraticienEtablissementController extends Controller
         $prestations = Prestations::all();
         $acteassurances = ActeAssurances::all();
 
-        return view('backend.praticienetablissement.dashPraticienEtablissementPrestationHospitalisations', compact('page_title', 'praticiens', 'assurances', 'prestationsoins', 'assures', 
+        return view('backend.praticienetablissement.dashPraticienEtablissementPrestationHospitalisations', compact('page_title', 'praticiens', 'assurances', 'assures', 
                     'etablissements', 'acteassurances', 'ayantdroits', 'prestations'));
     }
 

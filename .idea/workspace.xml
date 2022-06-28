@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63a6dfcf-102d-4168-a291-f39717ebb98d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/assets/img/images/assurance/cnamgspic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/feuilleSoin/fileHealth.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DatracV3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DatracV3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Caisse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/feuilleSoins.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2022_19_06__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_04_17_141853_create_specialites.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CaisseEtablissementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CaisseEtablissementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/caisseetablissement/dashCaisseEtablissement.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/caisseetablissement/dashCaisseEtablissement.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/layout_caisseetablissement.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/layout_caisseetablissement.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +23,11 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
@@ -143,6 +148,7 @@
     <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/layouts" />
@@ -186,29 +192,41 @@
       <workItem from="1653303585250" duration="6796000" />
       <workItem from="1653363839506" duration="33076000" />
       <workItem from="1653598494969" duration="18373000" />
+      <workItem from="1654176874011" duration="10765000" />
+      <workItem from="1655677603431" duration="1314000" />
+      <workItem from="1656254946634" duration="49276000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="530" y="204" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1650019430565">
+    <state x="530" y="204" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1656265102485">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
+    <state x="530" y="204" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1656265102485" />
     <state x="530" y="204" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.900@0.0.1600.900" timestamp="1650019430565" />
+    <state x="580" y="204" key="FileChooserDialogImpl" timestamp="1656417454419">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="580" y="204" key="FileChooserDialogImpl/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1656417454419" />
     <state x="392" y="182" key="Vcs.Push.Dialog.v2" timestamp="1650170060820">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="392" y="182" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1650170060820" />
-    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1653329217208">
+    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1656339980177">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1653329217208" />
+    <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1656339980177" />
     <state x="617" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.900@0.0.1600.900" timestamp="1650169997771" />
-    <state x="456" y="205" key="run.anything.popup" timestamp="1650020858116">
+    <state x="456" y="205" key="run.anything.popup" timestamp="1656360243246">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
+    <state x="456" y="205" key="run.anything.popup/0.0.1600.900/1600.0.1600.900@0.0.1600.900" timestamp="1656360243246" />
     <state x="456" y="205" key="run.anything.popup/0.0.1600.900@0.0.1600.900" timestamp="1650020858116" />
   </component>
   <component name="XDebuggerManager">

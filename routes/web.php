@@ -224,7 +224,7 @@ Route::middleware(['auth'])->group(function() {
      Route::get('dashboard/adminetablissement/edit-appareillage/{id}', 'AdminEtablissementController@editAppareillageAdminEtablissement')->name('editAppareillageAdminEtablissement');
      Route::post('dashboard/adminetablissement/update-appareillage', 'AdminEtablissementController@updateAppareillageAdminEtablissement')->name('updateAppareillageAdminEtablissement');
 
-     
+
      /* CRUD Prise en Charge */
      Route::get('dashboard/adminetablissement/nos-prisecharges', 'AdminEtablissementController@dashAdminEtablissementPriseCharges')->name('dashAdminEtablissementPriseCharges');
      Route::post('dashboard/adminetablissement/nouvel-prisecharge', 'AdminEtablissementController@newPriseChargeAdminEtablissement')->name('newPriseChargeAdminEtablissement');
@@ -275,7 +275,7 @@ Route::middleware(['auth'])->group(function() {
 
     /* Start Routing for PraticienEtablissement's User */
     Route::get('dashboard/praticienetablissement', 'PraticienEtablissementController@dashPraticienEtablissement')->name('dashPraticienEtablissement');
-    
+
      /* CRUD Prestations soins*/
     Route::get('dashboard/praticienetablissement/nos-prestationsoins', 'PraticienEtablissementController@dashPraticienEtablissementPrestationSoins')->name('dashPraticienEtablissementPrestationSoins');
     Route::post('dashboard/praticienetablissement/nouvel-prestationsoin', 'PraticienEtablissementController@newPrestationSoinPraticienEtablissement')->name('newPrestationSoinPraticienEtablissement');
