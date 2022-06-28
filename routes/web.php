@@ -247,15 +247,23 @@ Route::middleware(['auth'])->group(function() {
     #                                  Caisse ROUTING                                #
     #                                                                                            #
     ##############################################################################################
-     /* Start Routing for CaisseEtablissement's User */
+     
+    /* Start Routing for CaisseEtablissement's User */
+    Route::get('dashboard/caisseetablissement', 'CaisseEtablissementController@dashCaisseEtablissement')->name('dashCaisseEtablissement');
 
-     Route::get('dashboard/caisseetablissement', 'CaisseEtablissementController@dashCaisseEtablissement')->name('dashCaisseEtablissement');
     /* CRUD Prestations */
     Route::get('dashboard/caisseetablissement/nos-prestations', 'CaisseEtablissementController@CaisseEtablissementPrestations')->name('dashCaisseEtablissementPrestations');
     Route::post('dashboard/caisseetablissement/nouvel-prestation', 'CaisseEtablissementController@newPrestationCaisseEtablissement')->name('newPrestationCaisseEtablissement');
     Route::get('dashboard/caisseetablissement/show-prestation/{id}', 'CaisseEtablissementController@showPrestationCaisseEtablissement')->name('showPrestationCaisseEtablissement');
     Route::get('dashboard/caisseetablissement/edit-prestation/{id}', 'CaisseEtablissementController@editPrestationCaisseEtablissement')->name('editPrestationCaisseEtablissement');
     Route::post('dashboard/caisseetablissement/update-prestation', 'CaisseEtablissementController@updatePrestationCaisseEtablissement')->name('updatePrestationCaisseEtablissement');
+
+    /* CRUD Prestations hospitalisations */
+    Route::get('dashboard/caisseetablissement/nos-prestationhospitalisations', 'CaisseEtablissementController@CaisseEtablissementPrestationHospitalisations')->name('CaisseEtablissementPrestationHospitalisations');
+    Route::post('dashboard/caisseetablissement/nouvel-prestationhospitalisation', 'CaisseEtablissementController@newPrestationHospitalisationCaisseEtablissement')->name('newPrestationHospitalisationCaisseEtablissement');
+    Route::get('dashboard/caisseetablissement/show-prestationhospitalisation/{id}', 'CaisseEtablissementController@showPrestationHospitalisationCaisseEtablissement')->name('showPrestationHospitalisationCaisseEtablissement');
+    Route::get('dashboard/caisseetablissement/edit-prestationhospitalisation/{id}', 'CaisseEtablissementController@editPrestationHospitalisationCaisseEtablissement')->name('editPrestationHospitalisationCaisseEtablissement');
+    Route::post('dashboard/caisseetablissement/update-prestationhospitalisation', 'CaisseEtablissementController@updatePrestationHospitalisationCaisseEtablissement')->name('updatePrestationHospitalisationCaisseEtablissement');
         
     /* End Routing for CaisseEtablissement's User */
 
@@ -275,7 +283,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/praticienetablissement/edit-prestationsoin/{id}', 'PraticienEtablissementController@editPrestationSoinPraticienEtablissement')->name('editPrestationSoinPraticienEtablissement');
     Route::post('dashboard/praticienetablissement/update-prestationsoin', 'PraticienEtablissementController@updatePrestationSoinPraticientablissement')->name('updatePrestationSoinPraticienEtablissement');
 
-    /* CRUD Prise en Charge */
+    /* CRUD Prise en Charge*/
     Route::get('dashboard/praticienetablissement/nos-prisecharges', 'PraticienEtablissementController@dashPraticienEtablissementPriseCharges')->name('dashPraticienEtablissementPriseCharges');
     Route::post('dashboard/praticieetablissementn/nouvel-prisecharge', 'PraticienEtablissementController@newPriseChargePraticienEtablissement')->name('newPriseChargePraticienEtablissement');
     Route::get('dashboard/praticienetablissement/show-prisecharge/{id}', 'PraticienEtablissementController@showPriseChargePraticienEtablissement')->name('showPriseChargePraticienEtablissement');
@@ -303,6 +311,43 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard/praticienetablissement/edit-prestationhospitalisation/{id}', 'PraticienEtablissementController@editPrestationHospitalisationPraticienEtablissement')->name('editPrestationHospitalisationPraticienEtablissement');
     Route::post('dashboard/praticienetablissement/update-prestationhospitalisation', 'PraticienEtablissementController@updatePrestationHospitalisationPraticientablissement')->name('updatePrestationHospitalisationPraticienEtablissement');
 
+            
+    /* End Routing for CaisseEtablissement's User */
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  Praticien ROUTING                                #
+    #                                                                                            #
+    ##############################################################################################
+    
+    /* Start Routing for PraticienEtablissement's User */
+    Route::get('dashboard/pharmacienetablissement', 'PharmacienEtablissementController@dashPharmacienEtablissement')->name('dashPharmacienEtablissement');
+
+    
+    /* CRUD Prescription médicale*/
+    Route::get('dashboard/pharmacienetablissement/nos-prescriptionnmedicales', 'PharmacienEtablissementController@dashPharmacienEtablissementPrescriptionMedicales')->name('dashPharmacienEtablissementPrescriptionMedicales');
+    Route::post('dashboard/pharmacienetablissement/nouvel-prescriptiomedicale', 'PharmacienEtablissementController@newPrescriptionMedicalePharmacienEtablissement')->name('newPrescriptionMedicalePharmacienEtablissement');
+    Route::get('dashboard/pharmacienetablissement/show-prescriptiomedicale/{id}', 'PharmacienEtablissementController@showPrescriptionMedicalePharmacienEtablissement')->name('showPrescriptionMedicalePharmacienEtablissement');
+    Route::get('dashboard/pharmacienetablissement/edit-prescriptiomedicale/{id}', 'PharmacienEtablissementController@editPrescriptionMedicalePharmacienEtablissement')->name('editPrescriptionMedicalePharmacienEtablissement');
+    Route::post('dashboard/pharmacienetablissement/update-prescriptiomedicale', 'PharmacienEtablissementController@updatePrescriptionMedicalePharmacienEtablissement')->name('updatePrescriptionMedicalePharmacienEtablissement');
+
+        /* End Routing for PharmacienEtablissement's User */
+
+    ##############################################################################################
+    #                                                                                            #
+    #                                  Laboratoire ROUTING                                #
+    #                                                                                            #
+    ##############################################################################################
+    
+    /* Start Routing for PraticienEtablissement's User */
+    Route::get('dashboard/laboetablissement', 'LaboratoireEtablissementController@dashLaboratoireEtablissement')->name('dashLaboratoireEtablissement');
+
+    /* CRUD Prestation examen*/
+    Route::get('dashboard/laboetablissement/nos-prestationexamens', 'LaboratoireEtablissementController@dashLaboratoireEtablissementPrestationExamens')->name('dashLaboratoireEtablissementPrestationExamens');
+    Route::post('dashboard/laboetablissement/nouvel-prestationexamen', 'LaboratoireEtablissementController@newPrestationExamenLaboratoireEtablissement')->name('newPrestationExamenLaboratoireEtablissement');
+    Route::get('dashboard/laboetablissement/show-prestationexamen/{id}', 'LaboratoireEtablissementController@showPrestationExamenLaboratoireEtablissement')->name('showPrestationExamenLaboratoireEtablissement');
+    Route::get('dashboard/laboetablissement/edit-prestationexamen/{id}', 'LaboratoireEtablissementController@editPrestationExamenLaboratoireEtablissement')->name('editPrestationExamenLaboratoireEtablissement');
+    Route::post('dashboard/laboetablissement/update-prestationexamen', 'LaboratoireEtablissementController@updatePrestationExamenLaboratoiretablissement')->name('updatePrestationExamenLaboratoiretablissement');
 
      ##############################################################################################
     #                                                                                            #

@@ -10,12 +10,8 @@ use App\Models\Prestations;
 use App\Models\Medicament;
 use App\Models\Examens;
 use App\Models\Appareillages;
-use App\Models\Actes;
 use App\Models\Affections;
 use App\Models\Assurance;
-use App\Models\TypeAssures;
-use App\Models\TypeActes;
-use App\Models\Assures;
 use App\Models\Etablissements;
 use App\Models\PrestationSoins;
 use App\Models\PriseCharges;
@@ -88,7 +84,6 @@ class PraticienEtablissementController extends Controller
         $page_title = "Nos Prestation de Soins";
 
     	$prestationsoins = PrestationSoins::all();
-        $ticketmoderateurs = TicketModerateurs::all();
         $praticiens = User::where('etablissement_id', Auth::user()->etablissement_id)
                             ->Where(function ($query) {
                                 $query->where('role', 'PraticienEtablissement');
@@ -104,7 +99,7 @@ class PraticienEtablissementController extends Controller
         $acteassurances = ActeAssurances::all();
         $affections = Affections::all();
 
-        return view('backend.praticienetablissement.dashPraticienEtablissementPrestationSoins', compact('page_title', 'praticiens', 'assurances', 'prestationsoins', 'ticketmoderateurs','assures', 
+        return view('backend.praticienetablissement.dashPraticienEtablissementPrestationSoins', compact('page_title', 'praticiens', 'assurances', 'prestationsoins', 'assures', 
                     'etablissements', 'acteassurances', 'affections', 'ayantdroits'));
     }
 
@@ -221,16 +216,11 @@ class PraticienEtablissementController extends Controller
 
     	// Get new data 
         $new_prestation->visite_domicile = $request->input('visite_domicile');
-        $new_prestation->montant = $request->input('montant');
-        $new_prestation->forfait_deplacement = $request->input('forfait_deplacement');
-        $new_prestation->montant_payer = $request->input('montant_payer');
-        $new_prestation->total = $request->input('total');
         $new_prestation->praticien = $request->input('praticien');
         $new_prestation->affection_assurance_id = $request->input('affection_assurance_id');
         $new_prestation->acte_assurance_id = $request->input('acte_assurance_id ');
         $new_prestation->assurance_id = $request->input('assurance_id');
         $new_prestation->assure = $request->input('assure');
-        $new_prestation->ticket_moderateur_id = $request->input('ticket_moderateur_id');
         $new_prestation->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_prestation->save()){

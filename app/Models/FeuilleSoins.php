@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PrestationCaisses extends Model
+class FeuilleSoins extends Model
 {
-    public function prestationsoins(){
-        return $this->hasOne('App\Models\PrestationSoins', 'id', 'prestation_id');
+    public function prestationmedicales(){
+        return $this->hasOne('App\Models\PrescriptionMedicales', 'id', 'prescription_medicale_id');
     }
 
-    public function typeassures(){
-        return $this->hasOne('App\Models\TypeAssures', 'id', 'type_assure_id');
+    public function appareillages(){
+        return $this->hasOne('App\Models\AppareillageAssurances', 'id', 'appareillageid');
     }
 
     public function ticketmoderateurs(){

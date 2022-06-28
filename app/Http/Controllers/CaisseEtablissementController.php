@@ -3,24 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActeAssurances;
-use App\Models\Affections;
 use App\User;
 use App\Models\MedicamentEtablissements;
 use App\Models\PrestationCaisses;
 use App\Models\PrestationEtablissements;
-use App\Models\AppareillageEtablissements;
-use App\Models\Prestations;
 use App\Models\Etablissements;
 use App\Models\EtablissementAssurances;
 use App\Models\Medicament;
 use App\Models\Hospitalisations;
-use App\Models\Appareillages;
+use App\Models\FeuilleSoins;
 use App\Models\Assurance;
-use App\Models\Assures;
-use App\Models\PriseCharges;
-use App\Models\Specialites;
 use App\Models\TicketModerateurs;
 use App\Models\PrestationSoins;
+use App\Models\PrestationHospitalisations;
+use App\Models\PrestationHospitalisationCaisses;
 use App\Models\TypeAssures;
 
 use Illuminate\Http\Request;
@@ -88,6 +84,33 @@ class CaisseEtablissementController extends Controller
                     'etablissements', 'typeassures','prestation_caisses',));
 
     }
+        
+    public function CaisseEtablissementPrestationHospitalisations(Request $request)
+    {
+
+    	$page_title = "Nos Prestations";
+
+    	$prestation_hospitalisations = PrestationHospitalisationCaisses::all();
+        $prestations = PrestationHospitalisations::all();
+        $feuillesoins = FeuilleSoins::all();
+        $ticketmoderateurs = TicketModerateurs::all();
+        $caisses = User::where('etablissement_id', Auth::user()->etablissement_id)
+                            ->Where(function ($query) {
+                                $query->where('role', 'CaisseEtablissement');
+                            })->get();
+        $assures = User::Where(function ($query) {
+                            $query->where('role', 'Assure');
+                        })->get();
+        $ayantdroits = User::Where(function ($query) {
+                            $query->where('role', 'AyantDroit');
+                        })->get();
+        $etablissements = Etablissements::where('id', Auth::user()->etablissement_id);
+        $assurances = Assurance::all();
+
+        return view('backend.caisseetablissement.CaisseEtablissementPrestationHospitalisations', compact('page_title', 'caisses', 'assurances', 'ticketmoderateurs','assures', 
+                    'etablissements', 'prestations','prestation_hospitalisations', 'feuillesoins'));
+
+    }
 
         	/* Les routes du root seront enumérés ici ! */
 
@@ -105,9 +128,45 @@ class CaisseEtablissementController extends Controller
     	// Get new data 
         $new_prestation->prestation_id = $request->input('prestation_id');
         $new_prestation->montant = $request->input('montant');
-        $new_prestation->type_assure_id = $request->input('type_assure_id');
+        $new_prestation->ticketmoderateur = $request->input('ticketmoderateur');
+        $new_prestation->forfaitdeplacement = $request->input('forfaitdeplacement');
+        $new_prestation->montantpayer = $request->input('montantpayer');
+        $new_prestation->total = $request->input('total');
         $new_prestation->assure = $request->input('assure');
         $new_prestation->assurance_id = $request->input('assurance_id');
+        $new_prestation->caisse = Auth::user();
+        $new_prestation->etablissement_id = Auth::user()->etablissement_id;
+
+        if($new_prestation->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Nouvel Prise en charge crée avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de créer cette Prise en charge !');
+
+    }
+        
+    public function newPrestationHospitalisationCaisseEtablissement(Request $request)
+    {
+
+        $new_prestation = new PrestationHospitalisationCaisses();
+
+    	// Get new data 
+        $new_prestation->feuillesoins_id = $request->input('feuillesoins_id');
+        $new_prestation->prestation_id = $request->input('prestation_id');
+        $new_prestation->tarifstructure = $request->input('tarifstructure');
+        $new_prestation->tarifconventionne = $request->input('tarifconventionne');
+        $new_prestation->depassement = $request->input('depassement');
+        $new_prestation->ticketmoderateur = $request->input('ticketmoderateur');
+        $new_prestation->forfaitdeplacement = $request->input('forfaitdeplacement');
+        $new_prestation->montantpayer = $request->input('montantpayer');
+        $new_prestation->total = $request->input('total');
+        $new_prestation->assure_id = $request->input('assure_id');
+        $new_prestation->ayantdroit_id = $request->input('ayantdroit_id');
+        $new_prestation->assurance_id = $request->input('assurance_id');
+        $new_prestation->caisse_id = Auth::user();
         $new_prestation->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_prestation->save()){
@@ -139,6 +198,17 @@ class CaisseEtablissementController extends Controller
         return view('backend.caisseetablissement.showPrestationCaisseEtablissement', compact('prestation', 'page_title'));
 
     }
+            
+    public function showPrestationHospitalisationCaisseEtablissement(Request $request, $id)
+    {
+
+    	$page_title = "Détails Prestation";
+
+    	$prestation = PrestationHospitalisationCaisses::find($id);
+
+        return view('backend.caisseetablissement.showPrestationHospitalisationCaisseEtablissement', compact('prestation', 'page_title'));
+
+    }
 
             	/* Les routes du root seront enumérés ici ! */
 
@@ -156,6 +226,17 @@ class CaisseEtablissementController extends Controller
     	$prestation = PrestationCaisses::find($id);
 
         return view('backend.caisseetablissement.editPrestationCaisseEtablissement', compact('prestation', 'page_title'));
+
+    }
+            
+    public function editPrestationHospitalisationCaisseEtablissement(Request $request, $id)
+    {
+
+    	$page_title = "Editer Prestation Soins";
+
+    	$prestation = PrestationHospitalisationCaisses::find($id);
+
+        return view('backend.caisseetablissement.editPrestationHospitalisationCaisseEtablissement', compact('prestation', 'page_title'));
 
     }
 
@@ -176,9 +257,13 @@ class CaisseEtablissementController extends Controller
     	// Get new data 
         $new_prestation->prestation_id = $request->input('prestation_id');
         $new_prestation->montant = $request->input('montant');
-        $new_prestation->type_assure_id = $request->input('type_assure_id');
+        $new_prestation->ticketmoderateur = $request->input('ticketmoderateur');
+        $new_prestation->forfaitdeplacement = $request->input('forfaitdeplacement');
+        $new_prestation->montantpayer = $request->input('montantpayer');
+        $new_prestation->total = $request->input('total');
         $new_prestation->assure = $request->input('assure');
         $new_prestation->assurance_id = $request->input('assurance_id');
+        $new_prestation->caisse = Auth::user();
         $new_prestation->etablissement_id = Auth::user()->etablissement_id;
 
         if($new_prestation->save()){
@@ -189,6 +274,39 @@ class CaisseEtablissementController extends Controller
 
         // Redirection
         return redirect()->back()->with('failed', 'Impossible de modifier cet appareillage !');
+
+    }
+            
+    public function updatePrestationHospitalisationCaisseEtablissement(Request $request)
+    {
+
+        $prestation_id = $request->input('prestation_id');
+    	$new_prestation = PrestationHospitalisationCaisses::find($prestation_id);
+
+    	// Get new data 
+        $new_prestation->feuillesoins_id = $request->input('feuillesoins_id');
+        $new_prestation->prestation_id = $request->input('prestation_id');
+        $new_prestation->tarifstructure = $request->input('tarifstructure');
+        $new_prestation->tarifconventionne = $request->input('tarifconventionne');
+        $new_prestation->depassement = $request->input('depassement');
+        $new_prestation->ticketmoderateur = $request->input('ticketmoderateur');
+        $new_prestation->forfaitdeplacement = $request->input('forfaitdeplacement');
+        $new_prestation->montantpayer = $request->input('montantpayer');
+        $new_prestation->total = $request->input('total');
+        $new_prestation->assure_id = $request->input('assure_id');
+        $new_prestation->ayantdroit_id = $request->input('ayantdroit_id');
+        $new_prestation->assurance_id = $request->input('assurance_id');
+        $new_prestation->caisse_id = Auth::user();
+        $new_prestation->etablissement_id = Auth::user()->etablissement_id;
+
+        if($new_prestation->save()){
+
+            // Redirection
+            return redirect()->back()->with('success', 'Nouvel Prise en charge crée avec succès !');
+        }
+
+        // Redirection
+        return redirect()->back()->with('failed', 'Impossible de créer cette Prise en charge !');
 
     }
 

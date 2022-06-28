@@ -167,12 +167,18 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Comptes</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-menu-button-wide"></i><span>Prestations</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
                 <a href="{{ route('dashCaisseEtablissementPrestations') }}">
                 <i class="bi bi-circle"></i><span> Prestations </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('CaisseEtablissementPrestationHospitalisations') }}">
+                <i class="bi bi-square"></i><span> Prestations Hospitalisations </span>
                 </a>
             </li>
 

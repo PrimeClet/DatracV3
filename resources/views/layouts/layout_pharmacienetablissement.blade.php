@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{ route('dashPraticien') }}" class="logo d-flex align-items-center">
+      <a href="{{ route('dashCaisse') }}" class="logo d-flex align-items-center">
         <img src="{{ URL::to('assets/img/logo.png') }}" alt="">
         <span class="d-none d-lg-block">DATRAC</span>
       </a>
@@ -100,7 +100,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-gear"></i>
                 <span>Notifications</span>
               </a>
@@ -159,7 +159,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('dashPraticienEtablissement') }}">
+        <a class="nav-link " href="{{ route('dashPharamacienEtablissement') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -171,35 +171,10 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-                <a href="{{ route('dashPraticienEtablissementPrestationSoins') }}">
-                <i class="bi bi-tag-fill"></i><span> Prestations de soins</span>
+                <a href="{{ route('dashPharmacienEtablissementPrescriptionMedicales') }}">
+                <i class="bi bi-circle"></i><span> Prestations </span>
                 </a>
             </li>
-
-            <li>
-                <a href="{{ route('dashPraticienEtablissementPriseCharges') }}">
-                <i class="bi bi-tags"></i><span> Conditions Prise en Charge </span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('dashPraticienEtablissementPrescriptionMedicales') }}">
-                <i class="bi bi-shift"></i><span> Prescriptions médicales </span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('dashPraticienEtablissementPrestationExamens') }}">
-                <i class="bi bi-circle"></i><span> Prescriptions examens </span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('dashPraticienEtablissementPrestationHospitalisations') }}">
-                <i class="bi bi-signpost"></i><span> Prestations hospitalisations </span>
-                </a>
-            </li>
-
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="">
